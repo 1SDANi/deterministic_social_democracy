@@ -60,6 +60,24 @@ Q.dues = 5;
 Q.dissent = 0.05;
 Q.dissent_percent = 5;
 
+Q.kpd_dissent = 0.05;
+Q.kpd_dissent_percent = 5;
+
+Q.ddp_dissent = 0.05;
+Q.ddp_dissent_percent = 5;
+
+Q.z_dissent = 0.05;
+Q.z_dissent_percent = 5;
+
+Q.dvp_dissent = 0.05;
+Q.dvp_dissent_percent = 5;
+
+Q.dnvp_dissent = 0.05;
+Q.dnvp_dissent_percent = 5;
+
+Q.nsdap_dissent = 0.05;
+Q.nsdap_dissent_percent = 5;
+
 // factions
 Q.factions = ['left', 'center', 'labor', 'reformist', 'neorevisionist', 'social_patriot'];
 // should this be normalized to 100%?
@@ -76,11 +94,151 @@ Q.neorevisionist_dissent = 10;
 Q.social_patriot_strength = 0
 Q.social_patriot_dissent = 0;
 
+Q.kpd_factions = ['weddinger', 'stalinist', 'conciliator', 'brandlerite'];
+Q.kpd_weddinger_strength = 10;
+Q.kpd_weddinger_dissent = 20;
+Q.kpd_stalinist_strength = 60;
+Q.kpd_stalinist_dissent = 0;
+Q.kpd_conciliator_strength = 20;
+Q.kpd_conciliator_dissent = 10;
+Q.kpd_brandlerite_strength = 10;
+Q.kpd_brandlerite_dissent = 20;
+
+Q.sapd_factions = ['brandlerite', 'left', 'center', 'labor'];
+Q.sapd_brandlerite_strength = 0;
+Q.sapd_brandlerite_dissent = 0;
+Q.sapd_left_strength = 0;
+Q.sapd_left_dissent = 0;
+Q.sapd_center_strength = 0;
+Q.sapd_center_dissent = 0;
+Q.sapd_labor_strength = 0;
+Q.sapd_labor_dissent = 0;
+
+Q.aspd_factions = ['labor', 'reformist', 'neorevisionist', 'liberal'];
+Q.aspd_labor_strength = 0;
+Q.aspd_labor_dissent = 0;
+Q.aspd_reformist_strength = 0;
+Q.aspd_reformist_dissent = 0;
+Q.aspd_neorevisionist_strength = 0;
+Q.aspd_neorevisionist_dissent = 0;
+Q.aspd_progressive_strength = 0;
+Q.aspd_progressive_dissent = 0;
+
+Q.ddp_factions = ['labor', 'liberal', 'bourgeois', 'business'];
+Q.ddp_labor_strength = 20;
+Q.ddp_labor_dissent = 20;
+Q.ddp_liberal_strength = 30;
+Q.ddp_liberal_dissent = 0;
+Q.ddp_bourgeois_strength = 25;
+Q.ddp_bourgeois_dissent = 5;
+Q.ddp_business_strength = 25;
+Q.ddp_business_dissent = 5;
+
+Q.lvp_factions = ['labor', 'liberal', 'bourgeois', 'nationalist'];
+Q.lvp_labor_strength = 0;
+Q.lvp_labor_dissent = 0;
+Q.lvp_liberal_strength = 0;
+Q.lvp_liberal_dissent = 0;
+Q.lvp_bourgeois_strength = 0;
+Q.lvp_bourgeois_dissent = 0;
+Q.lvp_nationalist_strength = 0;
+Q.lvp_nationalist_dissent = 0;
+
+Q.z_factions = ['left', 'labor', 'center', 'conservative'];
+Q.z_strength = 20;
+Q.z_dissent = 20;
+Q.z_labor_strength = 25;
+Q.z_labor_dissent = 5;
+Q.z_center_strength = 30;
+Q.z_center_dissent = 0;
+Q.z_conservative_strength = 25;
+Q.z_conservative_dissent = 5;
+
+Q.dvp_factions = ['labor', 'liberal', 'industrialist', 'nationalist'];
+Q.dvp_labor_strength = 20;
+Q.dvp_labor_dissent = 20;
+Q.dvp_liberal_strength = 30;
+Q.dvp_liberal_dissent = 0;
+Q.dvp_industrialist_strength = 25;
+Q.dvp_industrialist_dissent = 5;
+Q.dvp_nationalist_strength = 25;
+Q.dvp_nationalist_dissent = 5;
+
+Q.kvp_factions = ['tory_democratic', 'christian_social', 'volkskonservativ', 'nationalist'];
+Q.kvp_tory_democratic_strength = 0;
+Q.kvp_tory_democratic_dissent = 0;
+Q.kvp_christian_social_strength = 0;
+Q.kvp_christian_social_dissent = 0;
+Q.kvp_volkskonservativ_strength = 0;
+Q.kvp_volkskonservativ_dissent = 0;
+Q.kvp_nationalist_strength = 0;
+Q.kvp_nationalist_dissent = 0;
+
+Q.dnvp_factions = ['christian_social', 'volkskonservativ', 'agrarian', 'authoritarian'];
+Q.dnvp_christian_social_strength = 20;
+Q.dnvp_christian_social_dissent = 20;
+Q.dnvp_volkskonservativ_strength = 20;
+Q.dnvp_volkskonservativ_dissent = 20;
+Q.dnvp_agrarian_strength = 20;
+Q.dnvp_agrarian_dissent = 5;
+Q.dnvp_authoritarian_strength = 50;
+Q.dnvp_authoritarian_dissent = 0;
+
+Q.dnf_factions = ['nationalist', 'authoritarian', 'paramilitary', 'volkisch']
+Q.dnf_nationalist_strength = 0;
+Q.dnf_nationalist_dissent = 0;
+Q.dnf_authoritarian_strength = 0;
+Q.dnf_authoritarian_dissent = 0;
+Q.dnf_paramilitary_strength = 0;
+Q.dnf_paramilitary_dissent = 0;
+Q.dnf_volkisch_strength = 0;
+Q.dnf_volkisch_dissent = 0
+
+Q.nsdap_factions = ['strasserite', 'paramilitary', 'hitlerite', 'volkisch'];
+Q.nsdap_strasserite_strength = 15;
+Q.nsdap_strasserite_dissent = 5;
+Q.nsdap_paramilitary_strength = 5;
+Q.nsdap_paramilitary_dissent = 5;
+Q.nsdap_hitlerite_strength = 75;
+Q.nsdap_hitlerite_dissent = 0;
+Q.nsdap_volkisch_strength = 5;
+Q.nsdap_volkisch_dissent = 20
+
 // secret events...
 Q.unions_independent = 0;
 Q.centrists_resign = 0;
 Q.left_split = 0;
 Q.reformists_resigned = 0;
+
+Q.kpd_weddinger_split = 0;
+Q.kdp_stalinist_split = 0;
+Q.kpd_conciliators_split = 0;
+Q.kpd_brandlerites_split = 0;
+
+Q.ddp_labor_split = 0;
+Q.ddp_liberal_split = 0;
+Q.ddp_bourgeois_split = 0;
+Q.ddp_business_split = 0;
+
+Q.z_left_split = 0;
+Q.z_labor_split = 0;
+Q.z_center_split = 0;
+Q.z_conservative_split = 0;
+
+Q.dvp_labor_split = 0;
+Q.dvp_liberal_split = 0;
+Q.dvp_industrialist_split = 0;
+Q.dvp_nationalist_split = 0;
+
+Q.dnvp_social_split = 0;
+Q.dnvp_volkskonservativ_split = 0;
+Q.dnvp_agrarian_split = 0;
+Q.dnvp_authoritarian_split = 0;
+
+Q.nsdap_strasserite_split = 0;
+Q.nsdap_paramilitary_split = 0;
+Q.nsdap_hitlerite_split = 0;
+Q.nsdap_volkisch_split = 0;
 
 // have we discovered neorevisionism?
 Q.neorevisionism = 0;
@@ -89,23 +247,65 @@ Q.social_patriot = 0;
 
 // crisis_urgency indicates how seriously the SPD is taking the economic crisis - scale from 0 to 10.
 Q.crisis_urgency = 0;
+Q.ddp_crisis_urgency = 0;
+Q.z_crisis_urgency = 0;
+Q.dvp_crisis_urgency = 0;
+Q.dnvp_crisis_urgency = 0;
 // nazi_urgency indicates how seriously the SPD takes the nazis - scale from 0 to 10.
 Q.nazi_urgency = 0;
+Q.kpd_nazi_urgency = 0;
+Q.ddp_nazi_urgency = 0;
+Q.z_nazi_urgency = 0;
+Q.dvp_nazi_urgency = 0;
+Q.dnvp_nazi_urgency = 0;
 // radicalization indicates how radical the SPD's rhetoric is - scale from 0 to 10.
 Q.radicalization = 0;
+Q.kpd_radicalization = 5;
+Q.ddp_radicalization = 0;
+Q.z_radicalization = 0;
+Q.dvp_radicalization = 0;
+Q.dnvp_radicalization = 5;
 // Support for the WTB plan and proto-Keynesian works creation plans in general
 Q.wtb_support = 0;
+Q.ddp_lautenbach_support = 0;
+Q.z_lautenbach_support = 0;
+Q.dvp_corporatist_support = 0;
+Q.dvp_lautenbach_support = 0;
+Q.dnvp_lautenbach_support = 0;
+Q.dnvp_corporatist_support = 0;
 // Support for Pacifism within the SPD relative to 1928
 Q.pacifism = 0;
+Q.ddp_pacifism = 0;
+Q.z_pacifism = 0;
+Q.dvp_nationalism = 0;
+Q.dnvp_nationalism = 0;
 // Support for democratic reform within the SPD relative to 1928
 Q.democratization = 0;
+Q.ddp_autocratization = 0;
+Q.z_democratization = 0;
+Q.dvp__democratization = 0;
+Q.dnvp_democratization = 0;
 // Support for a communist coalition relative to 1928
 Q.communist_coalition = 0;
 // economic_plan: have we adopted *any* economic plan?
 // 1 - WTB plan, 2 - AfA-bund plan, 3 - radical plan (mass nationalization of industries)
 Q.economic_plan = 0;
+// 1 - AfA-bund plan, 2 - Lautenbach plan, 3 - austerity plan
+Q.ddp_economic_plan = 0;
+// 1 - AfA-bund plan, 2 - Lautenbach plan, 3 - austerity plan
+Q.z_economic_plan = 0;
+// 1 - Schacht plan, 2 - Lautenbach plan, 3 - austerity plan
+Q.dvp_economic_plan = 0;
+// 1 = Lautenbach plan, 2 - corporatist plan, 3 - austerity plan
+Q.dnvp_economic_plan = 0;
 // have we officially adopted the WTB plan?
 Q.wtb_adopted = 0;
+Q.ddp_lautenbach_adopted = 0;
+Q.z_lautenbach_adopted = 0;
+Q.dvp_corporatist_adopted = 0;
+Q.dvp_lautenbach_adopted = 0;
+Q.dnvp_lautenbach_adopted = 0;
+Q.dnvp_corporatist_adopted = 0;
 // have we formed the iron front?
 Q.iron_front_formed = 0;
 // people's party support
@@ -118,6 +318,24 @@ Q.nationalization_adopted = 0;
 Q.moderate_plan_support = 0;
 Q.moderate_plan_adopted = 0;
 
+Q.ddp_austerity_support = 0;
+Q.ddp_austerity_adopted = 0;
+
+Q.z_austerity_support = 0;
+Q.z_austerity_adopted = 0;
+
+Q.dvp_austerity_support = 0;
+Q.dvp_austerity_adopted = 0;
+
+Q.ddp_moderate_plan_support = 0;
+Q.ddp_moderate_plan_adopted = 0;
+
+Q.z_moderate_plan_support = 0;
+Q.z_moderate_plan_adopted = 0;
+
+Q.dvp_schacht_plan_support = 0;
+Q.dvp_schacht_plan_adopted = 0;
+
 // organizations
 
 // inter-party relations
@@ -125,10 +343,29 @@ Q.z_relation = 50;
 Q.kpd_relation = 25;
 Q.ddp_relation = 60;
 Q.dvp_relation = 35;
+
 // DNVP and NSDAP are invariably hostile
 Q.dnvp_relation = 5;
 Q.nsdap_relation = 0;
 Q.lvp_relation = 0;
+
+Q.ddp_kpd_relation = 0;
+Q.ddp_dvp_relation = 60;
+Q.ddp_z_relation = 50;
+Q.ddp_dnvp_relation = 50;
+Q.ddp_nsdap_relation = 5;
+
+Q.z_kpd_relation = 0;
+Q.z_dvp_relation = 50;
+Q.z_dnvp_relation = 35;
+Q.z_nsdap_relation = 5;
+
+Q.dvp_kpd_relation = 0;
+Q.dvp_dnvp_relation = 50;
+Q.dvp_nsdap_relation = 25;
+
+Q.dnvp_kpd_relation = 0;
+Q.dnvp_nsdap_relation = 35;
 
 Q.kpd_leader = "Thälmann";
 Q.z_leader = "Marx";
@@ -725,7 +962,7 @@ Q.timers = ['advisor_action', 'confronting_nazis', 'crisis_program',
     'bruning_event', 'lvp_merger', 'lvp_merger_1', 'lvp_merger_2', 'bourgeois_merger',
     'bourgeois_negotiations_1930', 'bourgeois_negotiations_1930_aftermath', 'schleichers_schemes',
     'bourgeois_negotiations_elections_1930', 'nazi_decay', 'stegerwald_transformation', 'emergency_fundraising', 'red_general', 'weimar_rally', 'nazi_funds',
-    'dsu_policy'];
+    'dsu_policy', 'kpd_affairs_timer', 'ddp_affairs_timer', 'dvp_affairs_timer', 'dnvp_affairs_timer'];
 Q.rubicon_timers = ['advisor_action', 'confronting_nazis', 'crisis_program',
     'fundraising', 'ideology',
     'inter_party_relationships', 'international_relations',
@@ -809,6 +1046,11 @@ Q.womens_rights_timer = 0;
 Q.homosexual_rights_timer = 0;
 Q.economic_democracy_timer = 0;
 Q.coalition_affairs_timer = 0;
+Q.kdp_action_timer = 0;
+Q.ddp_action_timer = 0;
+Q.z_action_timer = 0;
+Q.dvp_action_timer = 0;
+Q.dnvp_action_timer = 0;
 // event timers
 Q.emergency_cuts_timer = 0;
 Q.unemployment_insurance_timer = 0;

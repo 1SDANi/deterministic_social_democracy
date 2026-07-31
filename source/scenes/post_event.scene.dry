@@ -289,6 +289,210 @@ if (Q.dissent < 0) {
     Q.dissent = 0.95;
 }
 
+// kpd
+// set faction strength/dissent to 0
+for (var c of Q.kpd_factions) {
+    if (Q['kpd_'+c+'_dissent'] < 0) {
+        Q['kpd_'+c+'_dissent'] = 0;
+    } else if (Q['kpd_'+c+'_dissent'] >= 100) {
+        Q['kpd_'+c+'_dissent'] = 99;
+    }
+    if (Q['kpd_'+c+'_strength'] < 0) {
+        Q['kpd_'+c+'_strength'] = 0;
+    }
+}
+
+// re-calculate dissent.
+var kpd_total_strength = Q.kpd_weddinger_strength + Q.kpd_stalinist_strength + Q.kpd_conciliator_strength + Q.kpd_brandlerite_strength;
+
+// normalize strength for the different factions
+Q.kpd_weddinger_strength = 100*Q.kpd_weddinger_strength/kpd_total_strength;
+Q.kpd_stalinist_strength = 100*Q.kpd_stalinist_strength/kpd_total_strength;
+Q.kpd_conciliator_strength = 100*Q.kpd_conciliator_strength/kpd_total_strength;
+Q.kpd_brandlerite_strength = 100*Q.kpd_brandlerite_strength/kpd_total_strength;
+
+var kpd_total_dissent = Q.kpd_weddinger_strength*Q.kpd_weddinger_dissent + Q.kpd_stalinist_strength*Q.kpd_stalinist_dissent + Q.kpd_conciliator_strength*Q.kpd_conciliator_dissent + Q.kpd_brandlerite_strength*Q.kpd_brandlerite_dissent;
+
+Q.kpd_dissent = 0.01*kpd_total_dissent/kpd_total_strength;
+Q.kpd_dissent_percent = Q.kpd_dissent*100;
+console.log('new kpd dissent: ' + Q.kpd_dissent);
+
+if (Q.kpd_dissent < 0) {
+    Q.kpd_dissent = 0;
+} else if (Q.kpd_dissent > 0.95) {
+    Q.kpd_dissent = 0.95;
+}
+
+// ddp
+// set faction strength/dissent to 0
+for (var c of Q.ddp_factions) {
+    if (Q['ddp_'+c+'_dissent'] < 0) {
+        Q['ddp_'+c+'_dissent'] = 0;
+    } else if (Q['ddp_'+c+'_dissent'] >= 100) {
+        Q['ddp_'+c+'_dissent'] = 99;
+    }
+    if (Q['ddp_'+c+'_strength'] < 0) {
+        Q['ddp_'+c+'_strength'] = 0;
+    }
+}
+
+// re-calculate dissent.
+var ddp_total_strength = Q.ddp_labor_strength + Q.ddp_liberal_strength + Q.ddp_bourgeois_strength + Q.ddp_business_strength;
+
+// normalize strength for the different factions
+Q.ddp_labor_strength = 100*Q.ddp_labor_strength/ddp_total_strength;
+Q.ddp_liberal_strength = 100*Q.ddp_liberal_strength/ddp_total_strength;
+Q.ddp_bourgeois_strength = 100*Q.ddp_bourgeois_strength/ddp_total_strength;
+Q.ddp_business_strength = 100*Q.ddp_business_strength/ddp_total_strength;
+
+var ddp_total_dissent = Q.ddp_labor_strength*Q.ddp_labor_dissent + Q.ddp_liberal_strength*Q.ddp_liberal_dissent + Q.ddp_bourgeois_strength*Q.ddp_bourgeois_dissent + Q.ddp_business_strength*Q.ddp_business_dissent;
+
+Q.ddp_dissent = 0.01*ddp_total_dissent/ddp_total_strength;
+Q.ddp_dissent_percent = Q.ddp_dissent*100;
+console.log('new ddp dissent: ' + Q.ddp_dissent);
+
+if (Q.ddp_dissent < 0) {
+    Q.ddp_dissent = 0;
+} else if (Q.ddp_dissent > 0.95) {
+    Q.ddp_dissent = 0.95;
+}
+
+// z
+// set faction strength/dissent to 0
+for (var c of Q.z_factions) {
+    if (Q['z_'+c+'_dissent'] < 0) {
+        Q['z_'+c+'_dissent'] = 0;
+    } else if (Q['z_'+c+'_dissent'] >= 100) {
+        Q['z_'+c+'_dissent'] = 99;
+    }
+    if (Q['z_'+c+'_strength'] < 0) {
+        Q['z_'+c+'_strength'] = 0;
+    }
+}
+
+// re-calculate dissent.
+var z_total_strength = Q.z_left_strength + Q.z_labor_strength + Q.z_center_strength + Q.z_conservative_strength;
+
+// normalize strength for the different factions
+Q.z_left_strength = 100*Q.z_left_strength/z_total_strength;
+Q.z_labor_strength = 100*Q.z_labor_strength/z_total_strength;
+Q.z_center_strength = 100*Q.z_center_strength/z_total_strength;
+Q.z_conservative_strength = 100*Q.z_conservative_strength/z_total_strength;
+
+var z_total_dissent = Q.z_left_strength*Q.z_left_dissent + Q.z_labor_strength*Q.z_labor_dissent + Q.z_center_strength*Q.z_center_dissent + Q.z_conservative_strength*Q.z_conservative_dissent;
+
+Q.z_dissent = 0.01*z_total_dissent/z_total_strength;
+Q.z_dissent_percent = Q.z_dissent*100;
+console.log('new z dissent: ' + Q.z_dissent);
+
+if (Q.z_dissent < 0) {
+    Q.z_dissent = 0;
+} else if (Q.z_dissent > 0.95) {
+    Q.z_dissent = 0.95;
+}
+
+// dvp
+// set faction strength/dissent to 0
+for (var c of Q.dvp_factions) {
+    if (Q['dvp_'+c+'_dissent'] < 0) {
+        Q['dvp_'+c+'_dissent'] = 0;
+    } else if (Q['dvp_'+c+'_dissent'] >= 100) {
+        Q['dvp_'+c+'_dissent'] = 99;
+    }
+    if (Q['dvp_'+c+'_strength'] < 0) {
+        Q['dvp_'+c+'_strength'] = 0;
+    }
+}
+
+// re-calculate dissent.
+var dvp_total_strength = Q.dvp_labor_strength + Q.dvp_liberal_strength + Q.dvp_nationalist_strength + Q.dvp_industrialist_strength;
+
+// normalize strength for the different factions
+Q.dvp_labor_strength = 100*Q.dvp_labor_strength/dvp_total_strength;
+Q.dvp_liberal_strength = 100*Q.dvp_liberal_strength/dvp_total_strength;
+Q.dvp_industrial_strength = 100*Q.dvp_industrial_strength/dvp_total_strength;
+Q.dvp_nationalist_strength = 100*Q.dvp_nationalist_strength/dvp_total_strength;
+
+var dvp_total_dissent = Q.dvp_labor_strength*Q.dvp_labor_dissent + Q.dvp_liberal_strength*Q.dvp_liberal_dissent + Q.dvp_industrial_strength*Q.dvp_industrial_dissent + Q.dvp_industrialist_strength*Q.dvp_industrialist_dissent;
+
+Q.dvp_dissent = 0.01*dvp_total_dissent/dvp_total_strength;
+Q.dvp_dissent_percent = Q.dvp_dissent*100;
+console.log('new dvp dissent: ' + Q.dvp_dissent);
+
+if (Q.dvp_dissent < 0) {
+    Q.dvp_dissent = 0;
+} else if (Q.dvp_dissent > 0.95) {
+    Q.dvp_dissent = 0.95;
+}
+
+// dnvp
+// set faction strength/dissent to 0
+for (var c of Q.dnvp_factions) {
+    if (Q['dnvp_'+c+'_dissent'] < 0) {
+        Q['dnvp_'+c+'_dissent'] = 0;
+    } else if (Q['dnvp_'+c+'_dissent'] >= 100) {
+        Q['dnvp_'+c+'_dissent'] = 99;
+    }
+    if (Q['dnvp_'+c+'_strength'] < 0) {
+        Q['dnvp_'+c+'_strength'] = 0;
+    }
+}
+
+// re-calculate dissent.
+var dnvp_total_strength = Q.dnvp_christian_social_strength + Q.dnvp_volkskonservativ_strength + Q.dnvp_nationalist_strength + Q.dnvp_authoritarian_strength;
+
+// normalize strength for the different factions
+Q.dnvp_christian_social_strength = 100*Q.dnvp_christian_social_strength/dnvp_total_strength;
+Q.dnvp_volkskonservativ_strength = 100*Q.dnvp_volkskonservativ_strength/dnvp_total_strength;
+Q.dnvp_agrarian_strength = 100*Q.dnvp_agrarian_strength/dnvp_total_strength;
+Q.dnvp_authoritarian_strength = 100*Q.dnvp_authoritarian_strength/dnvp_total_strength;
+
+var dnvp_total_dissent = Q.dnvp_christian_social_strength*Q.dnvp_christian_social_dissent + Q.dnvp_volkskonservativ_strength*Q.dnvp_volkskonservativ_dissent + Q.dnvp_agrarian_strength*Q.dnvp_agrarian_dissent + Q.dnvp_authoritarian_strength*Q.dnvp_authoritarian_dissent;
+
+Q.dnvp_dissent = 0.01*dnvp_total_dissent/dnvp_total_strength;
+Q.dnvp_dissent_percent = Q.dnvp_dissent*100;
+console.log('new dnvp dissent: ' + Q.dnvp_dissent);
+
+if (Q.dnvp_dissent < 0) {
+    Q.dnvp_dissent = 0;
+} else if (Q.dnvp_dissent > 0.95) {
+    Q.dnvp_dissent = 0.95;
+}
+
+// nsdap
+// set faction strength/dissent to 0
+for (var c of Q.nsdap_factions) {
+    if (Q['nsdap_'+c+'_dissent'] < 0) {
+        Q['nsdap_'+c+'_dissent'] = 0;
+    } else if (Q['nsdap_'+c+'_dissent'] >= 100) {
+        Q['nsdap_'+c+'_dissent'] = 99;
+    }
+    if (Q['nsdap_'+c+'_strength'] < 0) {
+        Q['nsdap_'+c+'_strength'] = 0;
+    }
+}
+
+// re-calculate dissent.
+var nsdap_total_strength = Q.nsdap_strasserite_strength + Q.nsdap_paramilitary_strength + Q.nsdap_hitlerite_strength + Q.nsdap_volkisch_strength;
+
+// normalize strength for the different factions
+Q.nsdap_strasserite_strength = 100*Q.nsdap_strasserite_strength/nsdap_total_strength;
+Q.nsdap_paramilitary_strength = 100*Q.nsdap_paramilitary_strength/nsdap_total_strength;
+Q.nsdap_hitlerite_strength = 100*Q.nsdap_hitlerite_strength/nsdap_total_strength;
+Q.nsdap_volkisch_strength = 100*Q.nsdap_volkisch_strength/nsdap_total_strength;
+
+var nsdap_total_dissent = Q.nsdap_strasserite_strength*Q.nsdap_strasserite_dissent + Q.nsdap_paramilitary_strength*Q.nsdap_paramilitary_dissent + Q.nsdap_hitlerite_strength*Q.nsdap_hitlerite_dissent + Q.nsdap_volkisch_strength*Q.nsdap_volkisch_dissent;
+
+Q.nsdap_dissent = 0.01*nsdap_total_dissent/nsdap_total_strength;
+Q.nsdap_dissent_percent = Q.nsdap_dissent*100;
+console.log('new nsdap dissent: ' + Q.nsdap_dissent);
+
+if (Q.nsdap_dissent < 0) {
+    Q.nsdap_dissent = 0;
+} else if (Q.nsdap_dissent > 0.95) {
+    Q.nsdap_dissent = 0.95;
+}
+
 Q.sa_force = Q.sa_strength*Q.sa_militancy;
 Q.sh_force = Q.sh_strength*Q.sh_militancy;
 Q.rb_force = Q.rb_strength*Q.rb_militancy;

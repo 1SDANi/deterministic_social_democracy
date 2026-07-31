@@ -1,0 +1,35 @@
+title: Labor Affairs
+subtitle: The industrial Ruhr region is aflame with labor unrest
+on-arrival: labor_affairs_timer = 6; labor_affairs_seen_ai = 1; ddp_affairs_timer = 1;
+view-if: labor_minister_party ==  ddp_name and labor_affairs_timer = 0 and strike_term_seen = 0 and ddp_action_timer == 0
+new-page: true
+face-image: img/Kollwitz_Weavers.jpg
+tags: event
+
+= Labor Affairs
+
+
+The employers have started a major lockout to force the workers to take more cuts to wages and benefits. There is a need for the Labor Ministry to arbitrate in conflicts between employers and workers.
+
+- @support_labor
+- @balance
+- @support_employers
+
+
+@support_labor
+title: The [+ ddp_name +] will support labor in their demands... wait, what?
+subtitle: Popular among the workers, this will alienate the bourgeoisie
+view-if: ddp_ideology == "Left" and ddp_leader == "Erkelenz"
+on-arrival: labor_affairs_seen = 1; labor_dissent -= 3 if (in_grand_coalition or in_weimar_coalition or in_social_liberal_coalition or spd_toleration); left_dissent -= 3 if (in_grand_coalition or in_weimar_coalition or in_social_liberal_coalition or spd_toleration); workers_ddp += 3; coalition_dissent += 1 if (in_grand_coalition or in_center_right_coalition or in_bourgeois_coalition or in_weimar_coalition or _in_schleicher_left_coalition or _in_schleicher_right_coalition or ddp_in_popular_front); capital_strike_progress += 1 if unemployed > 15; capital_strike_progress += 1 if unemployed > 24; inflation += 0.1; pro_labor += 1; strike_term_seen += 1; dvp_right += 1; ddp_left += 1; ddp_cohesion -= 1; lvp_right += 1; economic_growth -= 0.1;
+
+@balance
+title: The [+ ddp_name +] will try to strike a compromise between the sides.
+subtitle: Both sides need to share the pain in the current crisis.
+view-if: ddp_ideology == "Left" or (ddp_ideology == Moderate and (ddp_leader == "Heuss" or ddp_leader == "Lemmer" or ddp_leader == "Lüders"))
+on-arrival: labor_dissent += 2 if (in_grand_coalition or in_weimar_coalition or in_social_liberal_coalition or spd_toleration); kpd_coalition_dissent += 1 if ddp_in_popular_front; kpd_relation -= 3 if ddp_in_popular_front; strike_term_seen += 1; ddp_cohesion += 1; ddp_left += 1;
+
+@support_employers
+title: The [+ ddp_name +] will support the employers in their demands.
+subtitle: Popular among the bourgeoisie, much less so among the workers.
+view-if: ddp_ideology == "Right" or (ddp_ideology == Moderate and (ddp_leader == "Stolper" or ddp_leader == "Dietrich" or ddp_leader == "Koch-Weser" or ddp_leader == "Hellpach"))
+on-arrival: labor_dissent += 4 if (in_grand_coalition or in_weimar_coalition or in_social_liberal_coalition or spd_toleration);  workers_ddp -= 1; coalition_dissent -= 1 if coalition_dissent > 0 and (in_grand_coalition or in_weimar_coalition or in_social_liberal_coalition); workers_kpd += 1 if spd_in_government or spd_toleration; workers_spd += 1 if not spd_in_government and not spd_toleration; kpd_coalition_dissent += 1 if ddp_in_popular_front; kpd_relation -= 4 if ddp_in_popular_front; capital_strike_progress -= 1 if capital_strike_progress > 1; capital_strike_progress -= 1 if capital_strike_progress > 8; pro_labor -= 1; labor_goal_completed += 1; strike_term_seen += 1; dvp_left += 1; ddp_right += 1; ddp_cohesion -= 0.5; lvp_left += 1;

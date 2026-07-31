@@ -1,0 +1,32 @@
+title: Labor Affairs
+subtitle: The industrial Ruhr region is aflame with labor unrest
+on-arrival: labor_affairs_timer = 6; labor_affairs_seen_ai = 1; z_affairs_timer = 1; 
+view-if: labor_minister_party == z_party_name and not cvp_formed and labor_affairs_timer = 0 and strike_term_seen = 0 and dvp_action_timer == 0
+new-page: true
+face-image: img/Kollwitz_Weavers.jpg
+tags: event
+
+= Labor Affairs
+
+
+The employers have started a major lockout to force the workers to take more cuts to wages and benefits. There is a need for the Labor Ministry to arbitrate in conflicts between employers and workers.
+
+- @support_labor
+- @balance
+- @support_employers
+
+@support_labor
+title: Zentrum will support labor in their demands
+subtitle: Popular among the workers, this will alienate the bourgeoisie.
+view-if: (z_leader == "Wirth" and not (dvp_in_government or dnvp_in_government or nsdap_in_government)) or (z_leader == "Joos" and spd_in_government and peoples_party) or (z_leader == "Stegerwald" and in_social_catholic_coalition) or z_leader == "Kaiser"
+on-arrival: labor_strength += 3 if spd_in_government or spd_toleration; labor_dissent -= 5 if spd_in_government or spd_toleration; left_dissent -= 5 if spd_in_government or spd_toleration; workers_z += 3; coalition_dissent += 1 if ddp_in_government or dvp_in_government or dnvp_in_government or nsdap_in_government; capital_strike_progress += 1 if in_popular_front; capital_strike_progress += 1 if unemployed > 15; capital_strike_progress += 1 if unemployed > 24; labor_goal_completed += 1; inflation += 0.1; pro_labor += 1; strike_term_seen += 1; dvp_right += 1; ddp_left += 1; ddp_cohesion -= 1; lvp_right += 1; economic_growth -= 0.1;
+
+@support_employers
+subtitle: Popular among the bourgeoisie, much less so among the workers.
+view-if: z_leader == "Bracht" or z_leader == "Kaas" or (z_leader == "Stegerwald" and in_popular_front) or z_leader == "Brüning"
+on-arrival: labor_dissent += 4 if spd_in_government or spd_toleration; workers_z -= 2; coalition_dissent -= 1 if coalition_dissent > 0 and spd_in_government; workers_kpd += 1; workers_kpd += 1 if spd_in_government or spd_toleration; workers_spd += 1 if not (spd_in_government or spd_toleration); kpd_coalition_dissent += 1 if in_popular_front; kpd_relation -= 4 if in_popular_front; capital_strike_progress -= 1 if capital_strike_progress > 1; capital_strike_progress -= 1 if capital_strike_progress > 8; pro_labor -= 1; strike_term_seen += 1; dvp_left += 1; ddp_right += 1; ddp_cohesion -= 0.5; lvp_left += 1;
+
+@balance
+subtitle: Both sides need to share the pain in the current crisis.
+view-if: z_leader == "Adenauer" or z_leader == "Marx" or (z_leader == "Stegerwald" and not (in_popular_front or in_social_catholic_coalition))
+on-arrival: labor_dissent += 2 if spd_in_government or spd_toleration; workers_z -= 1; kpd_coalition_dissent += 1 if in_popular_front; kpd_relation -= 3 if in_popular_front; strike_term_seen += 1; ddp_cohesion += 1; ddp_left += 1; labor_goal_spd_peoples += 1

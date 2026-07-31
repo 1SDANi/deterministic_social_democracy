@@ -1,0 +1,19 @@
+title: Labor Affairs
+subtitle: The industrial Ruhr region is aflame with labor unrest
+on-arrival: labor_affairs_timer = 6; labor_affairs_seen_ai = 1; kpd_affairs_timer = 1;
+view-if: labor_minister_party == "KPD" and labor_affairs_timer = 0 and strike_term_seen = 0 and kpd_action_timer == 0
+new-page: true
+face-image: img/Kollwitz_Weavers.jpg
+tags: event
+
+= Labor Affairs
+
+
+The employers have started a major lockout to force the workers to take more cuts to wages and benefits. There is a need for the Labor Ministry to arbitrate in conflicts between employers and workers.
+
+- @kpd_support_labor
+
+@kpd_support_labor
+title: The KPD will support the employers in their demands.
+subtitle: Popular among the workers, this will alienate the bourgeoisie.
+on-arrival: kpd_stalinist_strength += 5 if kpd_leader == "Thälmann" and in_popular_front; kpd_conciliator_strength += 5 if (kpd_leader == "Thälmann" and in_popular_front) or (kpd_leader == "Conciliators" and in_left_front); kpd_brandlerite_strength += 5 if kpd_leader == "Conciliators" and in_popular_front; kpd_weddinger_dissent -= 5; kpd_stalinist_dissent -= 5; kpd_conciliator_dissent -= 5; kpd_brandlerite_dissent -= 5; left_strength += 3; labor_dissent -= 3 if spd_in_government; left_dissent -= 3 if spd_in_government; ddp_labor_strength += 3 if ddp_in_government; ddp_labor_dissent -= 3 if ddp_in_government; ddp_bourgeois_dissent += 3 if ddp_in_government; ddp_business_dissent += 3 if ddp_in_government; z_left_strength += 3 if z_in_government; z_left_dissent -= 3 if z_in_government; z_labor_dissent -= 3 if z_in_government; z_conservative_dissent += 3 if z_in_government; workers_kpd += 3; coalition_dissent += 1 if in_popular_front; dvp_kpd_relation -= 5; z_dvp_relation -= 1 if z_in_government; dvp_relation -= 2 if spd_in_government; ddp_dvp_relation -= 1 if ddp_in_government; ddp_kpd_relation -= 2; ddp_z_relation -= 1 if z_in_government; ddp_relation -= 1 if not spd_in_government; capital_strike_progress += 1; capital_strike_progress += 1 if unemployed > 15; capital_strike_progress += 1 if unemployed > 24; labor_goal_completed += 1; inflation += 0.1; pro_labor += 1; strike_term_seen += 1; dvp_right += 1; ddp_left += 1; ddp_cohesion -= 1; lvp_right += 1; economic_growth -= 0.1;
