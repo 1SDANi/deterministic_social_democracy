@@ -1,0 +1,26 @@
+title: KPD's Turn
+new-page: true
+face-image: img/kpd_poster.jpg
+on-arrival: z_turn_taken = 1
+view-if: z_turn_taken == 0
+tags: event
+
+= KPD's Turn
+
+- @labor_affairs
+
+@labor_affairs
+title: Labor Affairs
+view-if: labor_minister_party == "KPD" and labor_affairs_timer == 0 and strike_term_seen == 0
+
+The industrial Ruhr region is aflame with labor unrest
+
+- @support_labor
+
+
+@support_labor
+title: The KPD will support the employers in their demands.
+
+Popular among the workers, this will alienate the bourgeoisie.
+
+go-to: labor_affairs.support_labor

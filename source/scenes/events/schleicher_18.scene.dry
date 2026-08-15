@@ -19,8 +19,8 @@ The hope is that such unity will allow organized labor to resist coercion from S
 - @schleicher_3: Negotiations stall.
 
 @schleicher_2
-unavailable-subtitle: [? if schleicher_spd_influence >= 6: Schleicher uses his influence within the ADGB to block further negotiations. ?][? if labor_dissent >= 40 or unions_independent: Labor dissent is too high. ?][? if z_relation < 40 or (z_relation < 60 and z_in_gov): We lack the adequate relations with the <span style="color: #000000;">Center Party</span>. ?]
-choose-if: schleicher_spd_influence < 6 and (z_relation >= 40 or (z_relation >= 60 and z_in_gov)) and labor_dissent < 40 and not unions_independent
+unavailable-subtitle: [? if schleicher_spd_influence >= 6: Schleicher uses his influence within the ADGB to block further negotiations. ?][? if labor_dissent >= 40 or unions_independent: Labor dissent is too high. ?][? if z_relation < 40 or (z_relation < 60 and z_in_government): We lack the adequate relations with the <span style="color: #000000;">Center Party</span>. ?]
+choose-if: schleicher_spd_influence < 6 and (z_relation >= 40 or (z_relation >= 60 and z_in_government)) and labor_dissent < 40 and not unions_independent
 
 Negotiations have progressed, but one major obstacle remains: the ADGB’s continued commitment to <span style="color: #9B0000;">Marxism</span>, setting it apart from the other unions that now advocate for class collaboration. The question stands—do we stay silent on this point, for the sake of unity?
 
@@ -68,6 +68,6 @@ Q.workers_dnef += 2;
 
 Without coordination among the <span style="color: #000000;">rep</span><span style="color: #DD0000;">ubl</span><span style="color: #FFCC00;">ican</span> unions, Schleicher has moved quickly to strike separate deals with the more right-leaning organizations. The DHV, the conservative white-collar union, has been the first to pledge loyalty to the "new state," joined by the <span style="color: #D3C24D;">Hirsch-Duncker</span> unions—too marginal to wield real leverage anyway.
 
-The <span style="color: #000000;">Christian</span> unions have been cozying up to Schleicher for months[? if z_in_gov:, and Stegerwald's entry into government has only accelerated these talks of cooperation between his cabinet and the unionists.?][? if not z_in_gov:, though they remain broadly wary of Schleicher and his true intentions.?] Their advocacy for a "pluralistic" model, where unions retain formal autonomy within a corporatist Germany, has only made Schleicher’s task easier.
+The <span style="color: #000000;">Christian</span> unions have been cozying up to Schleicher for months[? if z_in_government:, and Stegerwald's entry into government has only accelerated these talks of cooperation between his cabinet and the unionists.?][? if not z_in_government:, though they remain broadly wary of Schleicher and his true intentions.?] Their advocacy for a "pluralistic" model, where unions retain formal autonomy within a corporatist Germany, has only made Schleicher’s task easier.
 
 [? if schleicher_spd_influence >= 6: Schleicher has also been quietly cultivating allies within the ADGB itself. Voices calling for the rejection of <span style="color: #9B0000;">Marxism</span> and a break with the <span style="color: #c00000;">**SPD**</span> are growing louder by the day. Damn it. ?]

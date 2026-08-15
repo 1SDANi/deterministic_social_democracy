@@ -38,6 +38,7 @@ if (Q.next_election_month > 12) {
 } else {
     Q.next_election_year = Q.year;
 }
+Q.dnvp_in_government = 1;
 !}
 
 Before the Reichstag was to convene, Goerdeler presents a decree to dissolve it. He expects that, with the exodus of voters from the <span style="color: #7A3C00;">**NSDAP**</span> and the certainty of their collapse next election, they will be forced to become more sensible. 

@@ -1,0 +1,35 @@
+title: DNF's Turn
+new-page: true
+face-image: img/dvp.jpg
+on-arrival: dnvp_turn_taken = 1
+view-if: dnvp_turn_taken == 0 and dnf_formed
+tags: event
+
+= DNF's Turn
+
+- @labor_affairs
+
+@labor_affairs
+title: Labor Affairs
+view-if: (labor_minister_party == "DNVP" or labor_minister_party == "DNF") and labor_affairs_timer == 0 and strike_term_seen == 0
+
+The industrial Ruhr region is aflame with labor unrest
+
+- @balance
+- @support_employers
+
+@balance
+title: The DNVP will try to strike a compromise between the sides.
+view-if: dnvp_leader == "Treviranus" or dnvp_leader == "Lambach" or dnvp_leader == "Lejeune-Jung"
+
+Both sides need to share the pain in the current crisis.
+
+go-to: labor_affairs.balance
+
+@support_employers
+title: The DNVP will support the employers in their demands.
+view-if: dnvp_leader == "Westarp" or dnvp_leader == "Schiele" or dnvp_leader == "Keudell" or dnvp_leader == "Hergt" or dnvp_leader == "Hugenberg" or dnvp_leader == "Triumvirate"
+
+Popular among the bourgeoisie, much less so among the workers.
+
+go-to: labor_affairs.support_employers

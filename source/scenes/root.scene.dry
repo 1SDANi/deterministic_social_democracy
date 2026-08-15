@@ -55,6 +55,15 @@ Q.resources = 2;
 // party dues
 Q.dues = 5;
 
+Q.kdp_turn_taken = 0;
+Q.ddp_turn_taken = 0;
+Q.z_turn_taken = 0;
+Q.dvp_turn_taken = 0;
+Q.kvp_turn_taken = 0;
+Q.dnvp_turn_taken = 0;
+Q.dnef_turn_taken = 0;
+Q.nsdap_turn_taken = 0;
+
 // the state of the party
 // overall dissent reduces every increase in party support.
 Q.dissent = 0.05;
@@ -281,6 +290,7 @@ Q.dvp_nationalism = 0;
 Q.dnvp_nationalism = 0;
 // Support for democratic reform within the SPD relative to 1928
 Q.democratization = 0;
+Q.ddp_democratization = 0;
 Q.ddp_autocratization = 0;
 Q.z_democratization = 0;
 Q.dvp__democratization = 0;
@@ -771,8 +781,13 @@ Q.z_in_government = 1;
 Q.ddp_in_government = 0;
 Q.dvp_in_government = 1;
 Q.dnvp_in_government = 1;
+Q.dnf_in_government = 0;
+Q.kvp_in_government = 0;
+Q.dnef_in_government = 0;
 Q.kpd_in_government = 0;
 Q.nsdap_in_government = 0;
+Q.bvp_in_government = 1;
+Q.dsu_in_gov = 0;
 
 Q.spd_prussia_time = 0;
 
@@ -941,7 +956,7 @@ Q.timers = ['advisor_action', 'confronting_nazis', 'crisis_program',
     'fundraising', 'ideology',
     'inter_party_relationships', 'international_relations',
     'iron_front', 'media', 'enemies',
-    'party_organizations', 'rally', 'reichsbanner',
+    'party_organizations', 'rally', 'ddp_rally', 'reichsbanner',
     'shuffle_leadership', 'streetfighting', 'peoples_party',
     'party_disunity',
     // govt
@@ -1001,6 +1016,7 @@ Q.media_timer = 0;
 Q.enemies_timer = 0;
 Q.party_organizations_timer = 0;
 Q.rally_timer = 0;
+Q.ddp_rally_timer = 0;
 Q.reichsbanner_timer = 0;
 Q.shuffle_leadership_timer = 0;
 Q.streetfighting_timer = 0;
@@ -1046,11 +1062,6 @@ Q.womens_rights_timer = 0;
 Q.homosexual_rights_timer = 0;
 Q.economic_democracy_timer = 0;
 Q.coalition_affairs_timer = 0;
-Q.kdp_action_timer = 0;
-Q.ddp_action_timer = 0;
-Q.z_action_timer = 0;
-Q.dvp_action_timer = 0;
-Q.dnvp_action_timer = 0;
 // event timers
 Q.emergency_cuts_timer = 0;
 Q.unemployment_insurance_timer = 0;

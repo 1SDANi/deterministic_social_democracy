@@ -782,7 +782,7 @@ if (Q.dnef_formed) {
     if (Q.schleicher_spd_support) Q.workers_schleicher += Q.schleicher_spd_support / 4;
     if (Q.schleicher_spd_r < 2) Q.workers_schleicher -= (Q.workers_spd_normalized / 25);
     if (Q.labor_dissent) Q.workers_schleicher += Q.labor_dissent / 20;
-    if (Q.z_in_gov) Q.workers_schleicher += Q.workers_z_normalized / 5;
+    if (Q.z_in_government) Q.workers_schleicher += Q.workers_z_normalized / 5;
     if (Q.schleicher_labor) Q.workers_schleicher += 2;
     if (Q.unions_schleicher) Q.workers_schleicher += 5;
     if (Q.adgb_explode) Q.workers_schleicher += 1;
@@ -795,7 +795,7 @@ if (Q.dnef_formed) {
     if (Q.workers_schleicher > 12) Q.workers_schleicher = 12;
     if (Q.workers_schleicher < 0) Q.workers_schleicher = 0;
 
-    if (Q.z_in_gov) Q.industrialists_schleicher += 1;
+    if (Q.z_in_government) Q.industrialists_schleicher += 1;
     if (Q.dsu_in_gov) Q.industrialists_schleicher -= 1;
     if (Q.dvp_dnef) Q.industrialists_schleicher += 3;
     if (Q.kvp_dnef || Q.dnvp_dnef) Q.industrialists_schleicher += 2;
@@ -810,7 +810,7 @@ if (Q.dnef_formed) {
 
     if (Q.schleicher_spd_r) Q.republicans_schleicher += Q.schleicher_spd_r / 4;
     if (Q.schleicher_spd_support) Q.republicans_schleicher += Q.schleicher_spd_support / 6;
-    if (Q.z_in_gov) Q.republicans_schleicher += 2;
+    if (Q.z_in_government) Q.republicans_schleicher += 2;
     if (Q.schleicher_labor) Q.republicans_schleicher += 1;
     if (Q.z_leader == "Stegerwald") Q.republicans_schleicher += 1;
     if (Q.z_leader == "Bracht" || Q.z_dnef) Q.republicans_schleicher += 3;
@@ -941,7 +941,7 @@ if (Q.rubicon && Q.month_actions >= 1 && Q.month_actions != Q.month_actions_chec
         Q.schleicher_time += 1;
         if (Q.schleicher_post) {
             Q.schleicher_post_time += 1;
-            if (Q.z_in_gov) Q.z_in_gov_time += 1;
+            if (Q.z_in_government) Q.z_in_gov_time += 1;
             if (Q.dsu_in_gov) Q.dsu_in_gov_time += 1;
         }
         if (Q.z_leader == "Bracht") Q.bracht_time += 1;

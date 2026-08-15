@@ -21,7 +21,7 @@ Hopefully [+ dnvp_leader +] can restore order within his party, and prevent new 
 @vonc_yes
 title: Support the vote of no confidence, voting against the government.
 subtitle: We will be the one to destroy Brüning, screw you.
-on-arrival: time_to_election = 3; spd_in_government = 0; in_right_coalition = 0; in_center_right_coalition = 0; in_grand_coalition = 0; spd_toleration = 0; spd_toleration_right = 0; dvp_relation -= 4; z_relation -= 4; ddp_relation -= 2; lvp_relation -= 3; reformist_dissent += 5
+on-arrival: time_to_election = 3; ddp_in_government = 0; dvp_in_government = 0; bvp_in_government = 0; dnvp_in_government = 0; kvp_in_government = 0; spd_in_government = 0; in_right_coalition = 0; in_center_right_coalition = 0; in_grand_coalition = 0; spd_toleration = 0; spd_toleration_right = 0; dvp_relation -= 4; z_relation -= 4; ddp_relation -= 2; lvp_relation -= 3; reformist_dissent += 5
 call: set_next_election_time
 go-to: new_prussia_election if (in_center_right_coalition_prussia or in_right_coalition_prussia)
 
@@ -196,6 +196,7 @@ go-to: election_set
 The defections of even a small amount of members of the <span style="color: #3E88B3;">**DNVP**</span>'s parliamentary delegation to Hugenberg's <span style="color: #003755;">**DNF**</span> has successfully caused Brüning to lose the vote of no confidence, ushering in new elections where the extremists stand to gain.
 
 @election_set
+on-arrival: ddp_in_government = 0; dvp_in_government = 0; bvp_in_government = 0; dnvp_in_government = 0; kvp_in_government = 0;
 call: set_next_election_time
 
 The <span style="color: #000000;">bourgeois</span>-<span style="color: #3E88B3;">right</span> coalition has fallen. New elections have been set for [+ next_election_month : month +] [+ next_election_year +].

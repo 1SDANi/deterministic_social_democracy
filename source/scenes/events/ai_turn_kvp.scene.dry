@@ -1,0 +1,35 @@
+title: KVP's Turn
+new-page: true
+face-image: img/kvp.jpg
+on-arrival: kvp_turn_taken = 1;
+view-if: kvp_turn_taken == 0 and kvp_formed
+tags: event
+
+= KVP's Turn
+
+- @labor_affairs
+
+@labor_affairs
+title: Labor Affairs
+view-if: labor_minister_party == "KVP" and labor_affairs_timer == 0 and strike_term_seen == 0
+
+The industrial Ruhr region is aflame with labor unrest
+
+- @balance
+- @support_employers
+
+@balance
+title: The KVP will try to strike a compromise between the sides.
+view-if: kvp_leader == "Treviranus"
+
+Both sides need to share the pain in the current crisis.
+
+go-to: labor_affairs.balance
+
+@support_employers
+title: The KVP will support the employers in their demands.
+view-if: kvp_leader == "Westarp"
+
+Popular among the bourgeoisie, much less so among the workers.
+
+go-to: labor_affairs.support_employers

@@ -433,7 +433,7 @@ if (!Q.dstp_dnef && !Q.lvp_dnef && !Q.dstp_maintained && (Q.republicans_schleich
 if ((Q.z_ideology == "Left" || Q.stegerwald_path || Q.z_relation >= 60) && (Q.republicans_schleicher < 6 || Q.z_relation >= 70) && Q.z_leader != "Bracht") Q.z_against_schleicher = 1;
 
 if (Q.z_against_schleicher) Q.spd_points += 5;
-if (Q.z_against_schleicher && Q.z_in_gov) Q.spd_points += 2;
+if (Q.z_against_schleicher && Q.z_in_government) Q.spd_points += 2;
 if (Q.libs_against_schleicher) Q.spd_points += 3;
 
 if (!Q.z_against_schleicher && !Q.libs_against_schleicher) Q.spd_alone = 1;
@@ -575,10 +575,10 @@ Germany is lost.
 title: The <span style="color: #000000;">Center Party</span> breaks with Schleicher!
 subtitle: The house of cards is falling apart.
 view-if: z_against_schleicher
-go-to: z_break_gov if z_in_gov; z_break_oppo if not z_in_gov
+go-to: z_break_gov if z_in_government; z_break_oppo if not z_in_government
 
 @z_break_gov
-on-arrival: hindenburg_schleicher_r -= 2; republicans_schleicher_bonus -= 4; z_in_gov = 0; catholics_dnef -= 10; catholics_dnef_bonus -= 8; catholics_z -= 4; catholics_dnvp += 2 if not kvp_formed; catholics_kvp += 2; catholics_dvp += 2
+on-arrival: hindenburg_schleicher_r -= 2; republicans_schleicher_bonus -= 4; z_in_government = 0; catholics_dnef -= 10; catholics_dnef_bonus -= 8; catholics_z -= 4; catholics_dnvp += 2 if not kvp_formed; catholics_kvp += 2; catholics_dvp += 2
 
 = The <span style="color: #000000;">Center Party</span> exits cabinet
 

@@ -41,8 +41,8 @@ Q.unemployed_dnef += 6;
 
 Q.dnef_relation -= 10;
 
-if (Q.vice_chancellor == "Strasser" && Q.z_in_gov) Q.vice_chancellor = "Stegerwald";
-if (Q.vice_chancellor == "Strasser" && !Q.z_in_gov) Q.vice_chancellor = 0;
+if (Q.vice_chancellor == "Strasser" && Q.z_in_government) Q.vice_chancellor = "Stegerwald";
+if (Q.vice_chancellor == "Strasser" && !Q.z_in_government) Q.vice_chancellor = 0;
 if (Q.prussia_leader == "Strasser") Q.prussia_leader = "Goerdeler";
 
 Q.dnef_r += parseFloat((Q.dsu_r * 0.6).toFixed(1));

@@ -49,6 +49,11 @@ Q.sa_strength *= 0.8;
 
 Q.old_chancellor = Q.chancellor;
 
+Q.z_in_government = 1;
+Q.dvp_in_government = 1;
+Q.ddp_in_government = 1;
+Q.bvp_in_government = 1;
+
 Q.chancellor = "Brüning";
 Q.chancellor_party = "Z";
 
@@ -76,6 +81,11 @@ if (Q.president_ideology == "Left") {
     Q.economic_minister_party = "I"; 
     Q.finance_minister_party = "I"; 
     Q.agriculture_minister_party = "I";
+    Q.z_in_government = 0;
+    Q.dvp_in_government = 0;
+    Q.ddp_in_government = 0;
+    Q.bvp_in_government = 0;
+    Q.spd_in_government = 1;
 }
 
 Q.dvp_left += 4;

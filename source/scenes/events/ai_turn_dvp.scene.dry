@@ -1,0 +1,35 @@
+title: DVP's Turn
+new-page: true
+face-image: img/dvp.jpg
+on-arrival: dvp_turn_taken = 1;
+view-if: dvp_turn_taken == 0 and not lvp_formed
+tags: event
+
+= DVP's Turn
+
+- @labor_affairs
+
+@labor_affairs
+title: Labor Affairs
+view-if: labor_minister_party == "DVP" and labor_affairs_timer == 0 and strike_term_seen == 0
+
+The industrial Ruhr region is aflame with labor unrest
+
+- @balance
+- @support_employers
+
+@balance
+title: The DVP will try to strike a compromise between the sides.
+view-if: dvp_ideology == "Left" and (dvp_leader == "Stresemann" or dvp_leader == "Thiel" or dvp_leader == "zu Dohna-Schlodien" or dvp_leader == "Glatzel")
+
+Both sides need to share the pain in the current crisis.
+
+go-to: labor_affairs.balance
+
+@support_employers
+title: The DVP will support the employers in their demands.
+view-if: dvp_ideology != "Left" or (dvp_leader != "Stresemann" and dvp_leader != "Thiel" and dvp_leader != "zu Dohna-Schlodien" and dvp_leader != "Glatzel")
+
+Popular among the bourgeoisie, much less so among the workers.
+
+go-to: labor_affairs.support_employers

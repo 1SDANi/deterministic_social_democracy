@@ -1,6 +1,6 @@
 title: The <span style="color: #6A1E1E;">**DSU**</span> Enters Government
 subtitle: Our choice doesn't matter after all.
-view-if: chancellor == "Schleicher" and not dsu_in_gov and not dsu_was_gov and z_in_gov and z_leader == "Bracht" and schleicher_post_time >= 8
+view-if: chancellor == "Schleicher" and not dsu_in_gov and not dsu_was_gov and z_in_government and z_leader == "Bracht" and schleicher_post_time >= 8
 max-visits: 1
 new-page: true
 tags: event
