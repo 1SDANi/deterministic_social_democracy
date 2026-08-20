@@ -1,0 +1,218 @@
+title: DVP Rally
+new-page: true
+
+= DVP's Turn
+
+@rally
+title: Rally
+on-arrival: dvp_rally_timer = 6 if next_election_time - time > 6 and not (year == 1928 and month == 1); dvp_rally_timer = 2 if (year == 1928 and month == 1) or (next_election_time - time <= 6)
+view-if: dvp_rally_timer <= 0 and not (labor_minister_party == "DVP" and labor_affairs_timer == 0 and strike_term_seen == 0)
+
+The DVP will hold a rally
+
+- @sa_disrupt
+- @class_collaboration
+- @rally_reagan
+- @rally_nationalism
+- @rally_democracy
+- @rally_lautenbach
+- @rally_local
+
+@class_collaboration
+title: The class collaboration of the proletariat with the bourgeoisie.
+view-if: workers_schleicher_bonus
+on-arrival: {!
+    old_middle_dvp += 3*(1-dvp_dissent);
+    new_middle_dvp += 2*(1-dvp_dissent);
+
+    if (workers_schleicher_bonus > 0) {
+        workers_dvp += 1*(1-dvp_dissent);
+        unemployed_dvp += 1*(1-dvp_dissent);
+        rural_dvp += 1*(1-dvp_dissent);
+    }
+    
+    if (workers_schleicher_bonus > 0) {
+        workers_dvp += 1*(1-dvp_dissent);
+        unemployed_dvp += 1*(1-dvp_dissent);
+        rural_dvp += 1*(1-dvp_dissent);
+    }
+    
+    dvp_right += 1;
+    ddp_right += 1;
+    lvp_right += 1;
+
+    dvp_industrialist_strength += 3;
+    ddp_business_strength += 3;
+    z_conservative_strength += 3;
+
+    dvp_labor_dissent -= 3;
+    dvp_liberal_dissent -= 3;
+    dvp_industrialist_dissent -= 3;
+    dvp_nationalist_dissent -= 3;
+
+    dvp_nationalism += 1;
+!}
+
+The DVP's mesage of class collaboration appeals to all but the class conscious. [? if workers_schleicher_bonus > 0 : Schleicher's united labor front  ?] [? if workers_schleicher_bonus > 1 : and popularity  ?] [? if workers_schleicher_bonus > 0 : has opposition to corporatism tantamount to support for revolution in the eyes of many. ?]
+
+@rally_reagan
+title: Wirtschaftsliberalismus - The reduction of taxation and government spending
+view-if: upper_tax_rates > 1 and (dvp_leader == "zu Dohna-Schlodien" or dvp_leader == "Luther" and not (dvp_lautenbach_adopted or lautenbach_adopted))
+on-arrival: {!
+    old_middle_dvp += 2*(1-dvp_dissent);
+    new_middle_dvp += (1-dvp_dissent);
+    
+    if (upper_tax_rates > 1) {
+        rural_dvp += 1*(1-dvp_dissent);
+        old_middle_dvp += 1*(1-dvp_dissent);
+        new_middle_dvp += (1-dvp_dissent);
+        workers_dvp += 1*(1-dvp_dissent);
+    }
+    
+    dvp_right += 0.5;
+
+    dvp_liberal_strength += 3;
+    dvp_industrialist_strength += 3;
+
+    dvp_industrialist_dissent -= 3;
+    dvp_liberal_dissent -= 3;
+!}
+
+The DVP's speakers call for the reduction of taxation and government spending
+
+[? if upper_tax_rates > 1: Recent bourgeoisie media commentary on the current tax structure have supplied ample fodder for their rhetoric ?]
+
+@rally_nationalism
+title: Supporting rearmament, nationalism, and an end to reparations
+view-if: dvp_leader == "Scholz" or dvp_leader == "Dingeldey" or dvp_leader == "Hugo"
+on-arrival: {!
+    dvp_nationalism += 1;
+    nationalism += 3*(1 - dvp_dissent);
+    new_middle_dvp += 2*(1-dvp_dissent);
+    old_middle_dvp += 2*(1-dvp_dissent);
+    rural_dvp += 1*(1-dvp_dissent);
+
+    if (dvp_nationalism >= 3)
+    {
+        pro_republic -= 3*(1-dvp_dissent);
+
+        if (nationalism >= 60) {
+            dvp_right += 0.5;
+            ddp_right += 0.5;
+
+            dvp_nationalist_strength += 3;
+            ddp_regionalist_strength += 3;
+            z_conservative_strength += 3;
+        }
+    }
+
+!}
+
+The DVP's speakers praise the military establishment and call for rearmament.
+
+[? if dvp_nationalism >= 3 : With nationalism increasingly popular within their party, the rally's speakers call for the cessation of reparations and reuinifaction of Germany ?]
+
+@rally_democracy
+title: Expanding our nascent democracy and defending it against <span style="color: #808080;">dictatorship</span> and <span style="color: #7A3C00;">fascism</span>.
+view-if: dvp_leader == "Stresemann" or dvp_leader == "Kardorff" or dvp_leader == "Curtius"
+on-arrival: {!
+    dvp_democratization -= 1;
+    pro_republic += 3*(1 - dvp_dissent);
+    if (dvp_democratization >= 3) {
+        rural_dvp += 1*(1-dvp_dissent);
+        new_middle_dvp += 2*(1-dvp_dissent);
+        old_middle_dvp += 2*(1-dvp_dissent);
+    }
+
+    if (pro_republic >= 70) {
+        dvp_left += 0.5;
+        ddp_left += 0.5;
+
+        dvp_liberal_strength += 3;
+        ddp_liberal_strength += 3;
+        z_center_strength += 3;
+    }
+!}
+
+The DVP will defend the <span style="color: #000000;">rep</span><span style="color: #DD0000;">ubl</span><span style="color: #FFCC00;">ican</span> system and rail against the <span style="color: #808080;">monarchists</span> and <span style="color: #A00500;">communists</span> who threaten it.
+
+[? if dvp_democratization < 3 : Talk of democracy does not excite the middle classes and rural folk as much as more practical issues. ?]
+[? if dvp_democratization >= 3 : Since they have consistently made democratization a theme of their campaigns, the middle classes and rural folk are enthusiastic about their message. ?]
+
+@rally_lautenbach
+title: Support the Lautenbach plan!
+view-if: return_to_normalcy == 0 and dvp_lautenbach_adopted and (dvp_leader == "Thiel" or dvp_leader == "Glatzel") and not return_to_normalcy and (lautenbach_adopted <= dvp_lautenbach_rally or not dvp_in_government)
+on-arrival: {!
+    old_middle_dvp += 3*(1-dvp_dissent);
+    new_middle_dvp += 2*(1-dvp_dissent);
+    rural_dvp += 2*(1-dvp_dissent);
+    unemployed_dvp += 1*(1-dvp_dissent);
+    workers_dvp += 1*(1-dvp_dissent);
+
+    if (lautenbach_adopted) {
+        old_middle_dvp += 3*(1-dvp_dissent);
+        new_middle_dvp += 2*(1-dvp_dissent);
+        rural_dvp += 1*(1-dvp_dissent);
+        workers_dvp += 2*(1-dvp_dissent);
+        unemployed_dvp += 2*(1-dvp_dissent);
+    }
+    
+    dvp_lautenbach_rally += 1;
+!}
+
+The Lautenbach plan has become a popular rallying cry for the DVP. The workers and employers see it as a necessary compromise. [? if not lautenbach_adopted: However, many are still skeptical whether the plan will actually prove effective. ?]
+
+@rally_local
+title: A mixture of various local and national concerns that resonate most with the audience.
+view-if: (dvp_leader == "Thiel" or dvp_leader == "Glatzel") and not (dvp_lautenbach_adopted or lautenbach_adopted)
+on-arrival: {!
+    workers_dvp += 2*(1-dvp_dissent);
+    old_middle_dvp += 2*(1-dvp_dissent);
+    new_middle_dvp += 2*(1-dvp_dissent);
+    unemployed_dvp += 2*(1-dvp_dissent);
+!}
+
+The DVP's speakers have gauged the mood and are speaking to the issues that seem to most affect workers, employers, and women in this moment.
+
+@sa_disrupt
+title: The <span style="color: #7A3C00;">Nazi</span> <span style="color: #7A3C00;">**SA**</span> has disrupted the DVP rally!
+view-if: sa_force > 25 and not sa_banned and not return_to_normalcy
+
+The <span style="color: #7A3C00;">Nazi</span> <span style="color: #7A3C00;">**SA**</span> has disrupted the DVP rally!
+
+
+- @rally_police
+- @rally_cancel
+
+@rally_police
+title: The DVP has called the police to protect their rally
+view-if: dvp_ideology == "Left"
+on-arrival: police_protect_success = prussian_police_loyalty * prussian_police_militancy * prussian_police_strength*2 - sa_militancy*sa_strength;
+
+The DVP have called the police to protect their rally
+
+go-to: rally_police_win if police_protect_success >= 0; rally_police_lose if police_protect_success < 0
+
+@rally_cancel
+view-if: dvp_ideology != "Left"
+title: The DVP have canceled their rally
+
+The <span style="color: #7A3C00;">**SA**</span> have won this show of strength.
+
+@rally_police_win
+title: The police have prevailed!
+
+The police successfully protected the DVP's rally, so it can go ahead as usual.
+
+- @class_collaboration
+- @rally_reagan
+- @rally_nationalism
+- @rally_democracy
+- @rally_lautenbach
+- @rally_local
+
+@rally_police_lose
+title: The police were unable or unwilling to hold back the <span style="color: #7A3C00;">**SA**</span> mob.
+on-arrival: new_middle_nsdap += 3; strife += 1
+
+The <span style="color: #7A3C00;">**SA**</span> have won this show of strength.

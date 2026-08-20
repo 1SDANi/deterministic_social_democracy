@@ -1,8 +1,8 @@
 title: DNF's Turn
 new-page: true
 face-image: img/dvp.jpg
-on-arrival: dnvp_turn_taken = 1
-view-if: dnvp_turn_taken == 0 and dnf_formed
+on-arrival: dvp_affairs_timer = 1
+view-if: dvp_affairs_timer == 0 and dnf_formed
 tags: event
 
 = DNF's Turn

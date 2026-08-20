@@ -55,15 +55,6 @@ Q.resources = 2;
 // party dues
 Q.dues = 5;
 
-Q.kdp_turn_taken = 0;
-Q.ddp_turn_taken = 0;
-Q.z_turn_taken = 0;
-Q.dvp_turn_taken = 0;
-Q.kvp_turn_taken = 0;
-Q.dnvp_turn_taken = 0;
-Q.dnef_turn_taken = 0;
-Q.nsdap_turn_taken = 0;
-
 // the state of the party
 // overall dissent reduces every increase in party support.
 Q.dissent = 0.05;
@@ -105,13 +96,13 @@ Q.social_patriot_dissent = 0;
 
 Q.kpd_factions = ['weddinger', 'stalinist', 'conciliator', 'brandlerite'];
 Q.kpd_weddinger_strength = 10;
-Q.kpd_weddinger_dissent = 20;
+Q.kpd_weddinger_dissent = 80;
 Q.kpd_stalinist_strength = 60;
 Q.kpd_stalinist_dissent = 0;
 Q.kpd_conciliator_strength = 20;
 Q.kpd_conciliator_dissent = 10;
 Q.kpd_brandlerite_strength = 10;
-Q.kpd_brandlerite_dissent = 20;
+Q.kpd_brandlerite_dissent = 60;
 
 Q.sapd_factions = ['brandlerite', 'left', 'center', 'labor'];
 Q.sapd_brandlerite_strength = 0;
@@ -133,13 +124,13 @@ Q.aspd_neorevisionist_dissent = 0;
 Q.aspd_progressive_strength = 0;
 Q.aspd_progressive_dissent = 0;
 
-Q.ddp_factions = ['labor', 'liberal', 'bourgeois', 'business'];
+Q.ddp_factions = ['labor', 'liberal', 'regionalist', 'business'];
 Q.ddp_labor_strength = 20;
 Q.ddp_labor_dissent = 20;
 Q.ddp_liberal_strength = 30;
 Q.ddp_liberal_dissent = 0;
-Q.ddp_bourgeois_strength = 25;
-Q.ddp_bourgeois_dissent = 5;
+Q.ddp_regionalist_strength = 25;
+Q.ddp_regionalist_dissent = 5;
 Q.ddp_business_strength = 25;
 Q.ddp_business_dissent = 5;
 
@@ -154,8 +145,8 @@ Q.lvp_nationalist_strength = 0;
 Q.lvp_nationalist_dissent = 0;
 
 Q.z_factions = ['left', 'labor', 'center', 'conservative'];
-Q.z_strength = 20;
-Q.z_dissent = 20;
+Q.z_left_strength = 20;
+Q.z_left_dissent = 20;
 Q.z_labor_strength = 25;
 Q.z_labor_dissent = 5;
 Q.z_center_strength = 30;
@@ -219,14 +210,14 @@ Q.centrists_resign = 0;
 Q.left_split = 0;
 Q.reformists_resigned = 0;
 
-Q.kpd_weddinger_split = 0;
+Q.kpd_weddinger_split = 1;
 Q.kdp_stalinist_split = 0;
 Q.kpd_conciliators_split = 0;
 Q.kpd_brandlerites_split = 0;
 
 Q.ddp_labor_split = 0;
 Q.ddp_liberal_split = 0;
-Q.ddp_bourgeois_split = 0;
+Q.ddp_regionalist_split = 0;
 Q.ddp_business_split = 0;
 
 Q.z_left_split = 0;
@@ -275,31 +266,36 @@ Q.z_radicalization = 0;
 Q.dvp_radicalization = 0;
 Q.dnvp_radicalization = 5;
 // Support for the WTB plan and proto-Keynesian works creation plans in general
+Q.kpd_wtb_support = 0;
 Q.wtb_support = 0;
 Q.ddp_lautenbach_support = 0;
 Q.z_lautenbach_support = 0;
-Q.dvp_corporatist_support = 0;
+Q.dvp_schacht_support = 0;
 Q.dvp_lautenbach_support = 0;
 Q.dnvp_lautenbach_support = 0;
 Q.dnvp_corporatist_support = 0;
 // Support for Pacifism within the SPD relative to 1928
 Q.pacifism = 0;
-Q.ddp_pacifism = 0;
-Q.z_pacifism = 0;
+Q.kpd_pacifism = 0;
+Q.ddp_autocratization = 0;
+Q.z_autocratization = 0;
 Q.dvp_nationalism = 0;
 Q.dnvp_nationalism = 0;
 // Support for democratic reform within the SPD relative to 1928
 Q.democratization = 0;
+Q.kpd_democratization = 0;
 Q.ddp_democratization = 0;
-Q.ddp_autocratization = 0;
+Q.dvp_democratization = 0;
 Q.z_democratization = 0;
-Q.dvp__democratization = 0;
+Q.dvp_democratization = 0;
 Q.dnvp_democratization = 0;
 // Support for a communist coalition relative to 1928
 Q.communist_coalition = 0;
 // economic_plan: have we adopted *any* economic plan?
 // 1 - WTB plan, 2 - AfA-bund plan, 3 - radical plan (mass nationalization of industries)
 Q.economic_plan = 0;
+// 1 = radical plan, 2 - mass socializations, 3 - WTB plan
+Q.kpd_economic_plan = 0;
 // 1 - AfA-bund plan, 2 - Lautenbach plan, 3 - austerity plan
 Q.ddp_economic_plan = 0;
 // 1 - AfA-bund plan, 2 - Lautenbach plan, 3 - austerity plan
@@ -310,9 +306,10 @@ Q.dvp_economic_plan = 0;
 Q.dnvp_economic_plan = 0;
 // have we officially adopted the WTB plan?
 Q.wtb_adopted = 0;
+Q.kpd_wtb_adopted = 0;
 Q.ddp_lautenbach_adopted = 0;
 Q.z_lautenbach_adopted = 0;
-Q.dvp_corporatist_adopted = 0;
+Q.dvp_schacht_adopted = 0;
 Q.dvp_lautenbach_adopted = 0;
 Q.dnvp_lautenbach_adopted = 0;
 Q.dnvp_corporatist_adopted = 0;
@@ -327,6 +324,9 @@ Q.nationalization_adopted = 0;
 // moderate economic plan
 Q.moderate_plan_support = 0;
 Q.moderate_plan_adopted = 0;
+
+Q.kpd_socialization_support = 0;
+Q.kpd_socialization_adopted = 0;
 
 Q.ddp_austerity_support = 0;
 Q.ddp_austerity_adopted = 0;
@@ -362,17 +362,23 @@ Q.lvp_relation = 0;
 Q.ddp_kpd_relation = 0;
 Q.ddp_dvp_relation = 60;
 Q.ddp_z_relation = 50;
+Q.ddp_kvp_relation = 0;
 Q.ddp_dnvp_relation = 50;
 Q.ddp_nsdap_relation = 5;
 
 Q.z_kpd_relation = 0;
 Q.z_dvp_relation = 50;
+Q.z_kvp_relation = 0;
 Q.z_dnvp_relation = 35;
 Q.z_nsdap_relation = 5;
 
 Q.dvp_kpd_relation = 0;
 Q.dvp_dnvp_relation = 50;
+Q.dvp_kvp_relation = 0;
 Q.dvp_nsdap_relation = 25;
+
+Q.kvp_kpd_relation = 0;
+Q.kvp_dnvp_relation = 0;
 
 Q.dnvp_kpd_relation = 0;
 Q.dnvp_nsdap_relation = 35;
@@ -956,7 +962,9 @@ Q.timers = ['advisor_action', 'confronting_nazis', 'crisis_program',
     'fundraising', 'ideology',
     'inter_party_relationships', 'international_relations',
     'iron_front', 'media', 'enemies',
-    'party_organizations', 'rally', 'ddp_rally', 'reichsbanner',
+    'party_organizations',
+    'rally', 'kpd_rally', 'ddp_rally', 'z_rally', 'dvp_rally', 'dnvp_rally',
+    'reichsbanner',
     'shuffle_leadership', 'streetfighting', 'peoples_party',
     'party_disunity',
     // govt
@@ -977,7 +985,7 @@ Q.timers = ['advisor_action', 'confronting_nazis', 'crisis_program',
     'bruning_event', 'lvp_merger', 'lvp_merger_1', 'lvp_merger_2', 'bourgeois_merger',
     'bourgeois_negotiations_1930', 'bourgeois_negotiations_1930_aftermath', 'schleichers_schemes',
     'bourgeois_negotiations_elections_1930', 'nazi_decay', 'stegerwald_transformation', 'emergency_fundraising', 'red_general', 'weimar_rally', 'nazi_funds',
-    'dsu_policy', 'kpd_affairs_timer', 'ddp_affairs_timer', 'dvp_affairs_timer', 'dnvp_affairs_timer'];
+    'dsu_policy', 'kpd_affairs', 'ddp_affairs', 'z_affairs', 'dvp_affairs', 'dnvp_affairs', 'nsdap_affairs'];
 Q.rubicon_timers = ['advisor_action', 'confronting_nazis', 'crisis_program',
     'fundraising', 'ideology',
     'inter_party_relationships', 'international_relations',
@@ -1016,7 +1024,10 @@ Q.media_timer = 0;
 Q.enemies_timer = 0;
 Q.party_organizations_timer = 0;
 Q.rally_timer = 0;
+Q.kpd_rally_timer = 0;
 Q.ddp_rally_timer = 0;
+Q.z_rally_timer = 0;
+Q.dnvp_rally_timer = 0;
 Q.reichsbanner_timer = 0;
 Q.shuffle_leadership_timer = 0;
 Q.streetfighting_timer = 0;
@@ -1024,6 +1035,12 @@ Q.peoples_party_timer = 0;
 Q.bruning_event_timer = 0;
 Q.stegerwald_transformation_timer = 0;
 Q.dsu_policy_timer = 0;
+Q.kpd_affairs_timer = 0;
+Q.ddp_affairs_timer = 0;
+Q.z_affairs_timer = 0;
+Q.dvp_affairs_timer = 0;
+Q.dnvp_affairs_timer = 0;
+Q.nsdap_affairs_timer = 0;
 // n_elections is the number of elections that have happened since the start of the game.
 Q.n_elections = 0;
 Q.n_elections_prussia = 0;
@@ -1122,7 +1139,12 @@ Q.black_thursday_seen = 0;
 Q.grand_coalition_collapsed = 0;
 Q.true_christian_democracy = 0;
 Q.zentrum_disintegration = 0;
+Q.kpd_wtb_rally = 0;
 Q.wtb_rally = 0;
+Q.ddp_lautenbach_rally = 0;
+Q.z_lautenbach_rally = 0;
+Q.dvp_lautenbach_rally = 0;
+Q.dnvp_lautenbach_rally = 0;
 Q.braun_resign = 0;
 Q.secret_mode = 0;
 Q.secret_trigger = 0;

@@ -18,7 +18,7 @@ on-display: {!
 !}
 on-arrival: {!
 Q.lautenbach_seen = 1;
-if (Q.budget >= 2 && Q.inflation < -8 && Q.unemployed >= 30 && Q.reparations <= -2) Q.lautenbach_adopted = 1;
+if (Q.budget >= 2 && Q.inflation < -8 && Q.unemployed >= 30 && Q.reparations <= -2) Q.lautenbach_adopted += 1;
 if (!Q.lautenbach_adopted) Q.lautenbach_failed = 1;
 !}
 

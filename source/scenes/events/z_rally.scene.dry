@@ -1,0 +1,222 @@
+title: [+ z_party_name +] Rally
+new-page: true
+
+@rally
+title: Rally
+on-arrival: z_rally_timer = 6 if next_election_time - time > 6 and not (year == 1928 and month == 1); z_rally_timer = 2 if (year == 1928 and month == 1) or (next_election_time - time <= 6)
+view-if: z_rally_timer <= 0 and not (labor_minister_party == z_party_name and labor_affairs_timer == 0 and strike_term_seen == 0)
+
+The [? if z_party_name != "CVP": <span style="color: #000000;">Center Party</span> ?][? if z_party_name == "CVP": <span style="color: #000000;">**CVP**</span>?] will hold a rally
+
+- @sa_disrupt
+- @class_collaboration
+- @rally_catholic
+- @rally_nationalism
+- @rally_democracy
+- @rally_lautenbach
+- @rally_local
+
+@sa_disrupt
+title: The <span style="color: #7A3C00;">Nazi</span> <span style="color: #7A3C00;">**SA**</span> has disrupted the [? if z_party_name != "CVP": <span style="color: #000000;">Center Party</span> ?][? if z_party_name == "CVP": <span style="color: #000000;">**CVP**</span>?] rally!
+view-if: sa_force > 25 and not sa_banned and not return_to_normalcy
+
+The <span style="color: #7A3C00;">Nazi</span> <span style="color: #7A3C00;">**SA**</span> has disrupted the [? if z_party_name != "CVP": <span style="color: #000000;">Center Party</span> ?][? if z_party_name == "CVP": <span style="color: #000000;">**CVP**</span>?] rally!
+
+- @rally_police
+- @rally_cancel
+
+@rally_police
+title: The [? if z_party_name != "CVP": <span style="color: #000000;">Center Party</span> ?][? if z_party_name == "CVP": <span style="color: #000000;">**CVP**</span>?] has called the police to protect their rally
+view-if: z_leader == "Kaiser" or z_leader == "Joos" or z_leader == "Wirth"
+on-arrival: police_protect_success = prussian_police_loyalty * prussian_police_militancy * prussian_police_strength*2 - sa_militancy*sa_strength;
+
+The [? if z_party_name != "CVP": <span style="color: #000000;">Center Party</span> ?][? if z_party_name == "CVP": <span style="color: #000000;">**CVP**</span>?] have called the police to protect their rally
+
+go-to: rally_police_win if police_protect_success >= 0; rally_police_lose if police_protect_success < 0
+
+@rally_cancel
+view-if:  z_leader != "Kaiser" and z_leader != "Joos" and z_leader != "Wirth"
+title: The [? if z_party_name != "CVP": <span style="color: #000000;">Center Party</span> ?][? if z_party_name == "CVP": <span style="color: #000000;">**CVP**</span>?] have canceled their rally
+
+The <span style="color: #7A3C00;">**SA**</span> have won this show of strength.
+
+@rally_police_win
+title: The police have prevailed!
+
+The police successfully protected the [? if z_party_name != "CVP": <span style="color: #000000;">Center Party</span> ?][? if z_party_name == "CVP": <span style="color: #000000;">**CVP**</span>?]'s rally, so it can go ahead as usual.
+
+- @class_collaboration
+- @rally_catholic
+- @rally_nationalism
+- @rally_democracy
+- @rally_lautenbach
+- @rally_local
+
+@rally_police_lose
+title: The police were unable or unwilling to hold back the <span style="color: #7A3C00;">**SA**</span> mob.
+on-arrival: new_middle_nsdap += 3; strife += 1
+
+The <span style="color: #7A3C00;">**SA**</span> have won this show of strength.
+
+@class_collaboration
+title: The class collaboration of the proletariat with the bourgeoisie.
+view-if: z_leader == "Bracht"
+on-arrival: {!
+    catholics_z += 3*(1-z_dissent);
+    old_middle_z += 2*(1-z_dissent);
+    new_middle_z += 2*(1-z_dissent);
+
+    if (workers_schleicher_bonus > 0) {
+        catholics_z += 2*(1-z_dissent);
+        workers_z += 2*(1-z_dissent);
+        unemployed_z += 2*(1-z_dissent);
+    }
+    
+    ddp_right += 0.5;
+    lvp_right += 0.5;
+    dvp_right += 0.5;
+    
+    z_conservative_strength += 3;
+    ddp_business_strength += 3;
+    lvp_bourgeois_strength += 3;
+    dvp_industrialist_strength += 3
+
+    z_labor_dissent -= 3;
+    z_center_dissent -= 3;
+    z_left_dissent += 3;
+    z_conservative_dissent -= 3;
+    
+    z_autocratization += 1;
+!}
+
+The [? if z_party_name != "CVP": <span style="color: #000000;">Center Party</span> ?][? if z_party_name == "CVP": <span style="color: #000000;">**CVP**</span>?]'s mesage of class collaboration appeals to all but the class conscious. [? if workers_schleicher_bonus > 0 : Schleicher's united labor front  ?] [? if workers_schleicher_bonus > 1 : and popularity  ?] [? if workers_schleicher_bonus > 0 : has opposition to corporatism tantamount to support for revolution in the eyes of many. ?]
+
+@rally_catholic
+title: Kulturpolitik - the defense of catholic rights and culture.
+view-if: z_leader == "Kaas" or z_leader == "Marx"
+on-arrival: {!
+    catholics_z += 1*(1-dissent);
+
+    if (prussian_concordat_progress) {
+        catholics_z += 1*(1-dissent);
+    }
+
+    if (prussian_concordat) {
+        catholics_z += 2*(1-dissent);
+    }
+
+    if (reichskonkordat_progress) {
+        catholics_z += 2*(1-dissent);
+    }
+
+    if (reichskonkordat) {
+        catholics_z += 2*(1-dissent);
+    }
+    
+    z_conservative_strength += 3;
+    z_center_strength += 3;
+    
+    z_conservative_dissent -= 3;
+    z_center_dissent -= 3;
+    z_labor_dissent -= 3;
+    z_left_dissent -= 3;
+!}
+
+@rally_nationalism
+title: Supporting rearmament, nationalism, and an end to reparations
+view-if: z_leader == "Brüning" or z_leader == "Adenauer"
+on-arrival: {!
+    z_autocratization += 1;
+    nationalism += 3*(1 - z_dissent);
+
+    catholics_z += 2*(1-z_dissent);
+    old_middle_z += 2*(1-z_dissent);
+    rural_z += 1*(1-z_dissent);
+
+    if (z_autocratization >= 3) {
+        pro_republic -= 3*(1-z_dissent);
+
+        if (nationalism >= 60) {
+            ddp_right += 0.5;
+            lvp_right += 0.5;
+            dvp_right += 0.5;
+
+            z_conservative_strength += 3;
+            ddp_regionalist_strength += 3;
+            dvp_nationalist_strength += 3;
+            lvp_nationalist_strength += 3;
+        }
+    }
+!}
+
+The [? if z_party_name != "CVP": <span style="color: #000000;">Center Party</span> ?][? if z_party_name == "CVP": <span style="color: #000000;">**CVP**</span>?]'s speakers praise the military establishment and call for rearmament.
+
+[? if z_autocratization >= 3 : With nationalism increasingly popular within their party, the rally's speakers call for the cessation of reparations and reuinifaction of Germany ?]
+
+@rally_democracy
+title: Expanding our nascent democracy and defending it against <span style="color: #808080;">dictatorship</span> and <span style="color: #7A3C00;">fascism</span>.
+view-if: z_leader == "Wirth" or z_leader == "Joos"
+on-arrival: {!
+    z_democratization += 1;
+    pro_republic += 3*(1 - z_dissent);
+    
+    if (z_democratization >= 3) {
+        catholics_z += 2*(1-z_dissent);
+        workers_z += 1*(1-z_dissent);
+        new_middle_z += 1*(1-z_dissent);
+        unemployed_z += 1*(1-z_dissent);
+    }
+
+    if (pro_republic >= 70) {
+        ddp_left += 0.5;
+        lvp_left += 0.5;
+        dvp_left += 0.5;
+
+        z_center_strength += 3;
+        ddp_liberal_strength += 3;
+        lvp_liberal_strength += 3;
+        dvp_liberal_strength += 3;
+    }
+!}
+
+The [? if z_party_name != "CVP": <span style="color: #000000;">Center Party</span> ?][? if z_party_name == "CVP": <span style="color: #000000;">**CVP**</span>?] will defend the <span style="color: #000000;">rep</span><span style="color: #DD0000;">ubl</span><span style="color: #FFCC00;">ican</span> system and rail against the <span style="color: #808080;">monarchists</span> and <span style="color: #A00500;">communists</span> who threaten it.
+
+[? if z_democratization < 3 : Talk of democracy does not excite the workers and catholics as much as more practical issues. ?]
+[? if z_democratization >= 3 : Since they have consistently made democratization a theme of their campaigns, the workers and catholics are enthusiastic about their message. ?]
+
+@rally_lautenbach
+title: Support the Lautenbach plan!
+view-if: (z_leader == "Wirth" or z_leader == "Stegerwald") and z_lautenbach_adopted and not return_to_normalcy and (lautenbach_adopted <= z_lautenbach_rally or not z_in_government)
+on-arrival: {!
+    catholics_z += 3*(1-z_dissent);
+    new_middle_z += 1*(1-z_dissent);
+    old_middle_z += 1*(1-z_dissent);
+    workers_z += 2*(1-z_dissent);
+    unemployed_z += 1*(1-z_dissent);
+    rural_z += 1*(1-z_dissent);
+
+    if (lautenbach_adopted) {
+        catholics_z += 3*(1-z_dissent);
+        workers_z += 2*(1-z_dissent);
+        rural_z += 1*(1-z_dissent);
+        new_middle_z += 1*(1-z_dissent);
+        old_middle_z += 1*(1-z_dissent);
+        unemployed_ddp += 1*(1-z_dissent);
+    }
+    
+    ddp_lautenbach_rally += 1;
+!}
+
+The Lautenbach plan has become a popular rallying cry for the [? if z_party_name != "CVP": <span style="color: #000000;">Center Party</span> ?][? if z_party_name == "CVP": <span style="color: #000000;">**CVP**</span>?]. The workers and employers see it as a necessary compromise. [? if not lautenbach_adopted: However, many are still skeptical whether the plan will actually prove effective. ?]
+
+@rally_local
+title: A mixture of various local and national concerns that resonate most with the audience.
+view-if: (z_leader == "Wirth" or z_leader == "Stegerwald") and not (z_lautenbach_adopted and not return_to_normalcy and (lautenbach_adopted <= z_lautenbach_rally or not z_in_government))
+on-arrival: {!
+    workers_spd += 3*(1-dissent);
+    old_middle_spd += 1*(1-dissent);
+    new_middle_spd += 2*(1-dissent);
+    unemployed_spd += 3*(1-dissent);
+!}
+
+The [? if z_party_name != "CVP": <span style="color: #000000;">Center Party</span> ?][? if z_party_name == "CVP": <span style="color: #000000;">**CVP**</span>?]'s speakers have gauged the mood and are speaking to the issues that seem to most affect the workers in this moment.

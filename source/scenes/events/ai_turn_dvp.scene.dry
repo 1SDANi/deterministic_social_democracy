@@ -1,12 +1,13 @@
 title: DVP's Turn
 new-page: true
 face-image: img/dvp.jpg
-on-arrival: dvp_turn_taken = 1;
-view-if: dvp_turn_taken == 0 and not lvp_formed
+on-arrival: dvp_affairs_timer = 1;
+view-if: dvp_affairs_timer == 0 and not lvp_formed
 tags: event
 
 = DVP's Turn
 
+- @dvp_rally.rally
 - @labor_affairs
 
 @labor_affairs

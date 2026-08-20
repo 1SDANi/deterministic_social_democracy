@@ -337,15 +337,15 @@ for (var c of Q.ddp_factions) {
 }
 
 // re-calculate dissent.
-var ddp_total_strength = Q.ddp_labor_strength + Q.ddp_liberal_strength + Q.ddp_bourgeois_strength + Q.ddp_business_strength;
+var ddp_total_strength = Q.ddp_labor_strength + Q.ddp_liberal_strength + Q.ddp_regionalist_strength + Q.ddp_business_strength;
 
 // normalize strength for the different factions
 Q.ddp_labor_strength = 100*Q.ddp_labor_strength/ddp_total_strength;
 Q.ddp_liberal_strength = 100*Q.ddp_liberal_strength/ddp_total_strength;
-Q.ddp_bourgeois_strength = 100*Q.ddp_bourgeois_strength/ddp_total_strength;
+Q.ddp_regionalist_strength = 100*Q.ddp_regionalist_strength/ddp_total_strength;
 Q.ddp_business_strength = 100*Q.ddp_business_strength/ddp_total_strength;
 
-var ddp_total_dissent = Q.ddp_labor_strength*Q.ddp_labor_dissent + Q.ddp_liberal_strength*Q.ddp_liberal_dissent + Q.ddp_bourgeois_strength*Q.ddp_bourgeois_dissent + Q.ddp_business_strength*Q.ddp_business_dissent;
+var ddp_total_dissent = Q.ddp_labor_strength*Q.ddp_labor_dissent + Q.ddp_liberal_strength*Q.ddp_liberal_dissent + Q.ddp_regionalist_strength*Q.ddp_regionalist_dissent + Q.ddp_business_strength*Q.ddp_business_dissent;
 
 Q.ddp_dissent = 0.01*ddp_total_dissent/ddp_total_strength;
 Q.ddp_dissent_percent = Q.ddp_dissent*100;

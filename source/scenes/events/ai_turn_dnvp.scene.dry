@@ -1,12 +1,13 @@
 title: DNVP's Turn
 new-page: true
-face-image: img/dvp.jpg
-on-arrival: dnvp_turn_taken = 1
-view-if: dnvp_turn_taken == 0 and not dnf_formed
+face-image: img/hitler_og.jpg
+on-arrival: dnvp_affairs_timer = 1
+view-if: dnvp_affairs_timer == 0 and not dnf_formed
 tags: event
 
 = DNVP's Turn
 
+- @dnvp_rally.rally
 - @labor_affairs
 
 @labor_affairs

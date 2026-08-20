@@ -1,0 +1,214 @@
+title: DDP Rally
+new-page: true
+
+@rally
+title: Rally
+on-arrival: ddp_rally_timer = 6 if next_election_time - time > 6 and not (year == 1928 and month == 1); ddp_rally_timer = 2 if (year == 1928 and month == 1) or (next_election_time - time <= 6)
+view-if: ddp_rally_timer <= 0 and not (labor_minister_party == ddp_name and labor_affairs_timer == 0 and strike_term_seen == 0)
+
+The [+ ddp_name +] will hold a rally
+
+- @sa_disrupt
+- @class_collaboration
+- @rally_welfare
+- @rally_nationalism
+- @rally_democracy
+- @rally_lautenbach
+- @rally_local
+
+@class_collaboration
+title: The class collaboration of the proletariat with the bourgeoisie.
+view-if: ddp_leader == "Mahraun"
+on-arrival: {!
+    new_middle_ddp += 3*(1-ddp_dissent);
+    old_middle_ddp += 2*(1-ddp_dissent);
+
+    if (workers_schleicher_bonus > 0) {
+        workers_ddp += 2*(1-ddp_dissent); 
+        unemployed_ddp += 2*(1-ddp_dissent);
+    }
+
+    
+    if (workers_schleicher_bonus > 1) {
+        workers_ddp += 2*(1-ddp_dissent);
+        unemployed_ddp += 2*(1-ddp_dissent);
+    }
+
+    dvp_right += 1;
+    ddp_right += 1;
+    lvp_right += 1;
+    
+    ddp_business_strength += 3;
+
+    ddp_labor_dissent -= 3;
+    ddp_liberal_dissent -= 3;
+    ddp_business_dissent -= 3;
+    ddp_regionalist_dissent -= 3;
+    ddp_autocratization += 1;
+    
+    dvp_industrialist_strength += 3;
+    z_conservative_strength += 3;
+!}
+
+The [+ ddp_name +]'s mesage of class collaboration appeals to all but the class conscious. [? if workers_schleicher_bonus > 0 : Schleicher's united labor front  ?] [? if workers_schleicher_bonus > 1 : and popularity  ?] [? if workers_schleicher_bonus > 0 : has opposition to corporatism tantamount to support for revolution in the eyes of many. ?]
+
+@rally_welfare
+title: Sozialpolitik - The maintenance and expansion of social welfare programs.
+view-if: welfare > 0 and (ddp_leader == "Lüders" or ddp_leader == "Lemmer" and not (ddp_lautenbach_adopted or lautenbach_adopted))
+on-arrival: {!
+    new_middle_ddp += 2*(1-ddp_dissent);
+    workers_ddp += 1*(1-ddp_dissent);
+
+    if (welfare > 0) {
+        new_middle_ddp += 2*(1-ddp_dissent);
+        workers_ddp += 2*(1-ddp_dissent);
+        unemployed_ddp += 1*(1-ddp_dissent);
+    }
+
+    ddp_left += 0.5;
+
+    ddp_liberal_strength += 3;
+    ddp_labor_strength += 3;
+    
+    ddp_labor_dissent -= 3;
+    ddp_liberal_dissent -= 3;
+
+    ddp_autocratization += 1;
+!}
+
+The humanistic message appeals to women and the organized workers, whose benefits are the accomplishments of <span style="color: #586593;">liberal democracy</span>. [? if welfare > 1 : Expansions in welfare have made this message more effective. ?]
+
+@rally_nationalism
+title: Supporting rearmament, nationalism, and an end to reparations
+view-if: ddp_leader == "Stolper" or ddp_leader == "Dietrich"
+on-arrival: {!
+    ddp_autocratization += 1;
+    nationalism += 3*(1 - ddp_dissent);
+    new_middle_ddp += 2*(1-ddp_dissent);
+    old_middle_ddp += 1*(1-ddp_dissent);
+
+    if (ddp_autocratization >= 3) {
+        workers_ddp += 1*(1-ddp_dissent);
+        unemployed_ddp += 1*(1-ddp_dissent);
+        pro_republic -= 3*(1-ddp_dissent);
+
+        if (nationalism >= 60) {
+            ddp_right += 0.5;
+            dvp_right += 0.5;
+
+            ddp_regionalist_strength += 3;
+            dvp_nationalist_strength += 3;
+            z_conservative_strength += 3;
+        }
+    }
+!}
+
+The [+ ddp_name +]'s speakers praise the military establishment and call for rearmament.
+
+[? if ddp_autocratization >= 3 : With nationalism increasingly popular within their party, the rally's speakers call for the cessation of reparations and reuinifaction of Germany ?]
+
+@rally_democracy
+title: Expanding our nascent democracy and defending it against <span style="color: #808080;">dictatorship</span> and <span style="color: #7A3C00;">fascism</span>.
+view-if: ddp_leader == "Maier" or ddp_leader == "Heuss" or ddp_leader == "Koch-Weser"
+on-arrival: {!
+    ddp_democratization += 1;
+    pro_republic += 3*(1 - ddp_dissent);
+
+    if (ddp_democratization >= 3) {
+        workers_ddp += 1*(1-ddp_dissent);
+        unemployed_ddp += 1*(1-ddp_dissent);
+        new_middle_ddp += 2*(1-ddp_dissent);
+        old_middle_ddp += 1*(1-ddp_dissent);
+    }
+
+    if (pro_republic >= 70) {
+        ddp_left += 0.5;
+        dvp_left += 0.5;
+        
+        ddp_liberal_strength += 3;
+        dvp_liberal_strength += 3;
+        z_center_strength += 3;
+    }
+!}
+
+The [+ ddp_name +] will defend the <span style="color: #000000;">rep</span><span style="color: #DD0000;">ubl</span><span style="color: #FFCC00;">ican</span> system and rail against the <span style="color: #808080;">monarchists</span> and <span style="color: #A00500;">communists</span> who threaten it.
+
+[? if ddp_democratization < 3 : Talk of democracy does not excite the workers and middle classes as much as more practical issues. ?]
+[? if ddp_democratization >= 3 : Since they have consistently made democratization a theme of their campaigns, the workers and middle classes are enthusiastic about their message. ?]
+
+@rally_lautenbach
+title: Support the Lautenbach plan!
+view-if: return_to_normalcy == 0 and ddp_lautenbach_adopted and ddp_leader == "Lemmer" and not return_to_normalcy and (lautenbach_adopted <= ddp_lautenbach_rally or not ddp_in_government)
+on-arrival: {!
+    new_middle_ddp += 3*(1-ddp_dissent);
+    old_middle_ddp += 2*(1-ddp_dissent);
+    workers_ddp += 2*(1-ddp_dissent);
+    unemployed_ddp += 1*(1-ddp_dissent);
+    rural_ddp += 1*(1-ddp_dissent);
+
+    if (lautenbach_adopted) {
+        new_middle_ddp += 3*(1-ddp_dissent);
+        old_middle_ddp += 2*(1-ddp_dissent);
+        workers_ddp += 2*(1-ddp_dissent);
+        unemployed_ddp += 2*(1-ddp_dissent);
+        rural_ddp += 1*(1-ddp_dissent);
+    }
+    
+    ddp_lautenbach_rally += 1;
+!}
+
+The Lautenbach plan has become a popular rallying cry for the [+ ddp_name +]. The workers and employers see it as a necessary compromise. [? if not lautenbach_adopted: However, many are still skeptical whether the plan will actually prove effective. ?]
+
+@rally_local
+title: A mixture of various local and national concerns that resonate most with the audience.
+view-if: welfare <= 0 and (ddp_leader == "Lüders" or (ddp_leader == "Lemmer" and not (ddp_lautenbach_adopted or lautenbach_adopted)))
+on-arrival: {!
+    new_middle_ddp += 3*(1-ddp_dissent);
+    workers_ddp += 2*(1-ddp_dissent);
+    old_middle_ddp += 2*(1-ddp_dissent);
+    unemployed_ddp += 1*(1-ddp_dissent);
+!}
+
+The [+ ddp_name +]'s speakers have gauged the mood and are speaking to the issues that seem to most affect workers, employers, and women in this moment.
+
+@sa_disrupt
+title: The <span style="color: #7A3C00;">Nazi</span> <span style="color: #7A3C00;">**SA**</span> has disrupted the [+ ddp_name +] rally!
+view-if: sa_force > 25 and not sa_banned and not return_to_normalcy
+
+The <span style="color: #7A3C00;">Nazi</span> <span style="color: #7A3C00;">**SA**</span> has disrupted the [+ ddp_name +] rally!
+
+- @rally_police
+- @rally_cancel
+
+@rally_police
+title: The [+ ddp_name +] has called the police to protect their rally
+view-if: ddp_ideology == "Left"
+on-arrival: police_protect_success = prussian_police_loyalty * prussian_police_militancy * prussian_police_strength*2 - sa_militancy*sa_strength;
+
+The [+ ddp_name +] have called the police to protect their rally
+
+go-to: rally_police_win if police_protect_success >= 0; rally_police_lose if police_protect_success < 0
+
+@rally_cancel
+view-if: ddp_ideology != "Left"
+title: The [+ ddp_name +] have canceled their rally
+
+The <span style="color: #7A3C00;">**SA**</span> have won this show of strength.
+
+@rally_police_win
+title: The police have prevailed!
+
+The police successfully protected the [+ ddp_name +]'s rally, so it can go ahead as usual.
+
+- @class_collaboration
+- @rally_welfare
+- @rally_nationalism
+- @rally_democracy
+- @rally_lautenbach
+- @rally_local
+
+@rally_police_lose
+title: The police were unable or unwilling to hold back the <span style="color: #7A3C00;">**SA**</span> mob.
+on-arrival: new_middle_nsdap += 3; strife += 1
+
+The <span style="color: #7A3C00;">**SA**</span> have won this show of strength.

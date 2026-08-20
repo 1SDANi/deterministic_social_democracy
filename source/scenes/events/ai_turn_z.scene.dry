@@ -1,12 +1,13 @@
 title: [+ z_party_name +]'s Turn
 new-page: true
 face-image: img/center_poster.jpg
-on-arrival: z_turn_taken = 1;
-view-if: z_turn_taken == 0
+on-arrival: z_affairs_timer = 1;
+view-if: z_affairs_timer == 0
 tags: event
 
 = [+ z_party_name +]'s Turn
 
+- @z_rally.rally
 - @labor_affairs
 
 @labor_affairs
@@ -18,54 +19,25 @@ The industrial Ruhr region is aflame with labor unrest
 - @support_labor
 - @balance
 - @support_employers
-- @support_labor_cvp
-- @balance_cvp
-- @support_employers_cvp
 
 @support_labor
-title: Zentrum will will support labor in their demands
+title: The [? if z_party_name != "CVP": <span style="color: #000000;">Center Party</span> ?][? if z_party_name == "CVP": <span style="color: #000000;">**CVP**</span>?] will support labor in their demands
 view-if: z_party_name != "CVP" and ((z_leader == "Wirth" and not (dvp_in_government or dnvp_in_government or nsdap_in_government)) or (z_leader == "Joos" and spd_in_government and peoples_party) or z_leader == "Kaiser")
+go-to: labor_affairs.support_labor
 
 Popular among the workers, this will alienate the bourgeoisie.
-
-go-to: labor_affairs.support_labor
      
 @support_employers
-title: Zentrum will support the employers in their demands.
+title: The [? if z_party_name != "CVP": <span style="color: #000000;">Center Party</span> ?][? if z_party_name == "CVP": <span style="color: #000000;">**CVP**</span>?] will support the employers in their demands.
 view-if: z_party_name != "CVP" and (z_leader == "Bracht" or z_leader == "Kaas" or z_leader == "Brüning")
+go-to: labor_affairs.balance
 
 Popular among the bourgeoisie, much less so among the workers.
-
-go-to: labor_affairs.balance
 
 @balance
-title: Zentrum will try to strike a compromise between the sides.
+title: The [? if z_party_name != "CVP": <span style="color: #000000;">Center Party</span> ?][? if z_party_name == "CVP": <span style="color: #000000;">**CVP**</span>?] will try to strike a compromise between the sides.
 view-if: z_party_name != "CVP" and (z_leader == "Adenauer" or z_leader == "Marx" or z_leader == "Stegerwald")
+go-to: labor_affairs.support_employers
 
 Both sides need to share the pain in the current crisis.
 
-go-to: labor_affairs.support_employers
-
-@support_labor_cvp
-title: The CVP will will support labor in their demands
-view-if: z_party_name == "CVP" and ((z_leader == "Wirth" and not (dvp_in_government or dnvp_in_government or nsdap_in_government)) or (z_leader == "Joos" and spd_in_government and peoples_party) or z_leader == "Kaiser")
-
-Popular among the workers, this will alienate the bourgeoisie.
-
-go-to: labor_affairs.support_labor
-     
-@support_employers_cvp
-title: The CVP will support the employers in their demands.
-view-if: z_party_name == "CVP" and (z_leader == "Bracht" or z_leader == "Kaas" or z_leader == "Brüning")
-
-Popular among the bourgeoisie, much less so among the workers.
-
-go-to: labor_affairs.balance
-
-@balance_cvp
-title: The CVP will try to strike a compromise between the sides.
-view-if: z_party_name == "CVP" and (z_leader == "Adenauer" or z_leader == "Marx" or z_leader == "Stegerwald")
-
-Both sides need to share the pain in the current crisis.
-
-go-to: labor_affairs.support_employers

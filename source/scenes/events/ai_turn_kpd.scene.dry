@@ -1,12 +1,13 @@
 title: KPD's Turn
 new-page: true
 face-image: img/kpd_poster.jpg
-on-arrival: z_turn_taken = 1
-view-if: z_turn_taken == 0
+on-arrival: kpd_affairs_timer = 1
+view-if: kpd_affairs_timer == 0
 tags: event
 
 = KPD's Turn
 
+- @kpd_rally.rally
 - @labor_affairs
 
 @labor_affairs
