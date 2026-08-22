@@ -2,6 +2,7 @@ title: Cabinet
 is-pinned-card: true
 tags: advisor
 card-image: img/muller_cabinet.jpg
+
 on-arrival: last_cabinet_action = 1
 view-if: spd_in_government == 1 and (month > 5 or year > 1928)
 new-page: true 
