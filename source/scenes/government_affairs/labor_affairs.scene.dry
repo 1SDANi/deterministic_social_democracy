@@ -20,8 +20,8 @@ The industrial Ruhr region is aflame with labor unrest. The employers have start
 @support_labor
 subtitle: Popular among the workers, this will alienate the bourgeoisie.
 on-arrival: {!
-    if (labor_minister_party == "SPD") {
-        support_labor();
+    if (Q.labor_minister_party == "SPD") {
+        window.support_labor();
     }
 !}
 
@@ -29,8 +29,8 @@ Supporting labor is always popular in the <span style="color: #c00000;">**SPD**<
 
 @support_employers
 on-arrival: {!
-    if (labor_minister_party == "SPD") {
-        support_employers()
+    if (Q.labor_minister_party == "SPD") {
+        window.support_employers()
     }
 !}
 subtitle: Popular among the bourgeoisie, much less so among the workers.    
@@ -39,8 +39,8 @@ The more radical workers despise [? if labor_minister_party == "SPD": our ?][? i
 
 @balance
 on-arrival: {!
-    if (labor_minister_party == "SPD") {
-        labor_balance()
+    if (Q.labor_minister_party == "SPD") {
+        window.labor_balance()
     }
 !}
 subtitle: Both sides need to share the pain in the current crisis. 

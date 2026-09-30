@@ -1055,7 +1055,7 @@ Q.peoples_party_timer = 0;
 Q.bruning_event_timer = 0;
 Q.stegerwald_transformation_timer = 0;
 Q.dsu_policy_timer = 0;
-Q.ai_turn_timer = 0;
+Q.ai_turn_timer = 1;
 // n_elections is the number of elections that have happened since the start of the game.
 Q.n_elections = 0;
 Q.n_elections_prussia = 0;
