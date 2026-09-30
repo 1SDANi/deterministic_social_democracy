@@ -1,0 +1,97 @@
+title: Media
+new-page: true
+
+@media
+title: Media
+on-arrival: kpd_media_timer = 6
+view-if: kpd_media_timer <= 0 and not (labor_minister_party == "KPD" and labor_affairs_timer == 0 and strike_term_seen == 0)
+
+The KPD will set the direction of their newspaper and radio
+
+- @mobilize
+- @campaign
+- @ideological
+- @radio
+- @radio_2
+- @radio_3
+- @radio_4
+
+@mobilize
+title: Die Rote Fahne will mobilize the public against fascism, capitalism, and monarchism
+on-arrival: {!
+    rfb_strength += 50;
+    rfb_militancy += 0.02;
+    
+    if (kpd_wholesome) {
+        workers_nsdap -= 1*(1 - dissent);
+        unemployed_nsdap -= 2*(1 - dissent);
+    } else {
+        workers_spd -= 1*(1 - dissent);
+        unemployed_spd -= 2*(1 - dissent);
+    }
+
+    if (dnf_formed) {
+        workers_dnf -= 1*(1 - dissent);
+        unemployed_dnf -= 2*(1 - dissent);
+    } else {
+        workers_dnvp -= 1*(1 - dissent);
+        unemployed_dnvp -= 2*(1 - dissent);
+    }
+
+    workers_kpd += 1*(1 - dissent);
+    unemployed_kpd += 2*(1-dissent);
+!}
+
+Die Rote Fahne coordinates with the KPD and RFB to organize protests, rallies, and strikes
+
+@campaign
+title: Die Rote Fahne will highlight the failues of the SPD and the Weimar Republic
+on-arrival: kpd_campaign_media += 1; workers_kpd += 2*(1 - dissent); unemployed_kpd += 4*(1-dissent);
+
+Die Rote Fahne rails against the SPD's support of class collaboration and capitalism
+
+@ideological
+title: Die Rote Fahne will tow the party line
+on-arrival: {!
+    if (kpd_leader == "Thälmann") {
+        kpd_stalinist_strength += 3;
+        kpd_weddinger_strength -= 3;
+        kpd_conciliator_strength -= 3;
+        kpd_brandlerite_strength -= 3;
+
+        kpd_stalinist_dissent -= 10;
+    } else if (kpd_leader == "Conciliators") {
+        kpd_conciliator_strength += 3;
+        kpd_weddinger_strength -= 3;
+        kpd_stalinist_strength -= 3;
+        kpd_brandlerite_strength -= 3;
+
+        kpd_conciliator_dissent -= 10;
+    } else if (kpd_leader == "Brandlerites") {
+        kpd_brandlerite_strength += 3;
+        kpd_conciliator_strength -= 3;
+        kpd_weddinger_strength -= 3;
+        kpd_stalinist_strength -= 3;
+
+        kpd_brandlerite_dissent -= 10;
+    } else if (kpd_leader == "Weddingers") {
+        kpd_weddinger_strength += 3;
+        kpd_conciliator_strength -= 3;
+        kpd_stalinist_strength += 3;
+        kpd_brandlerite_strength -= 3;
+
+        kpd_weddinger_dissent -= 10;
+    }
+!}
+
+@radio
+title: The KPD will fund a radio station
+
+@radio_2
+title: The KPD will fund a radio station
+
+@radio_3
+title: The KPD will fund a radio station
+
+@radio_4
+title: The KPD will fund a radio station

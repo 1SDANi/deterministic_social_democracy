@@ -1,0 +1,61 @@
+title: AI turns
+new-page: true
+on-arrival: {!
+    window.ai_turns();
+!}
+view-if: ai_turn_timer == 0
+tags: event
+
+= AI Turns
+
+- @kpd
+- @ddp
+- @z
+- @dvp
+- @dnvp
+- @skip
+
+@kpd
+title: KPD's Turn
+view-if: true
+
+- @kpd_rally.rally
+- @kpd_rally.sa_disrupt
+- @ai_turn_kpd.labor_affairs
+
+@ddp
+title: [+ ddp_name +]'s Turn
+view-if: not lvp_formed
+
+- @ddp_rally.rally
+- @ddp_rally.sa_disrupt
+- @ai_turn_ddp.labor_affairs
+
+@z
+title: [+ z_party_name +]'s Turn
+view-if: not cvp_formed
+
+- @z_rally.rally
+- @z_rally.sa_disrupt
+- @ai_turn_z.labor_affairs
+
+@dvp
+title: DVP's Turn
+view-if: not (lvp_formed or cvp_dvp_formed)
+
+- @dvp_rally.rally
+- @dvp_rally.sa_disrupt
+- @ai_turn_dvp.labor_affairs
+
+@dnvp
+title: DNVP's Turn
+view-if: not (cvp_formed or dnf_formed)
+
+- @dnvp_rally.rally
+- @dnvp_rally.rfb_disrupt
+- @ai_turn_dnvp.labor_affairs
+
+@skip
+title: Continue...
+view-if: true
+on-arrival: ai_turn_timer = 1;

@@ -424,15 +424,35 @@ Q.rfb_banned_prussia = 0;
 Q.interior_police_strength = 50;
 Q.interior_police_militancy = 1;
 Q.interior_police_loyalty = 0.45;
+Q.interior_police_loyalty_kpd = 0.0;
+Q.interior_police_loyalty_ddp = 0.5;
+Q.interior_police_loyalty_dvp = 0.5;
+Q.interior_police_loyalty_kvp = 0.5;
+Q.interior_police_loyalty_dnvp = 0.45;
+Q.interior_police_loyalty_nsdap = 0.1;
 
 Q.prussian_police_strength = 90;
 Q.prussian_police_militancy = 2;
 Q.prussian_police_loyalty = 0.5;
+Q.prussian_police_loyalty_kpd = 0.1;
+Q.prussian_police_loyalty_ddp = 0.5;
+Q.prussian_police_loyalty_z = 0.5;
+Q.prussian_police_loyalty_dvp = 0.45;
+Q.prussian_police_loyalty_kvp = 0.35;
+Q.prussian_police_loyalty_dnvp = 0.25;
+Q.prussian_police_loyalty_nsdap = 0.0;
 
 // strength includes actual military and de facto reserves?
 Q.reichswehr_strength = 100;
 Q.reichswehr_militancy = 5;
 Q.reichswehr_loyalty = 0.2;
+Q.reichswehr_loyalty_kpd = 0.0;
+Q.reichswehr_loyalty_ddp = 0.35;
+Q.reichswehr_loyalty_z = 0.35;
+Q.reichswehr_loyalty_dvp = 0.45;
+Q.reichswehr_loyalty_kvp = 0.45;
+Q.reichswehr_loyalty_dnvp = 0.5;
+Q.reichswehr_loyalty_nsdap = 0.45;
 
 // The state of the country
 
@@ -985,7 +1005,7 @@ Q.timers = ['advisor_action', 'confronting_nazis', 'crisis_program',
     'bruning_event', 'lvp_merger', 'lvp_merger_1', 'lvp_merger_2', 'bourgeois_merger',
     'bourgeois_negotiations_1930', 'bourgeois_negotiations_1930_aftermath', 'schleichers_schemes',
     'bourgeois_negotiations_elections_1930', 'nazi_decay', 'stegerwald_transformation', 'emergency_fundraising', 'red_general', 'weimar_rally', 'nazi_funds',
-    'dsu_policy', 'kpd_affairs', 'ddp_affairs', 'z_affairs', 'dvp_affairs', 'dnvp_affairs', 'nsdap_affairs'];
+    'dsu_policy', 'ai_turn'];
 Q.rubicon_timers = ['advisor_action', 'confronting_nazis', 'crisis_program',
     'fundraising', 'ideology',
     'inter_party_relationships', 'international_relations',
@@ -1035,12 +1055,7 @@ Q.peoples_party_timer = 0;
 Q.bruning_event_timer = 0;
 Q.stegerwald_transformation_timer = 0;
 Q.dsu_policy_timer = 0;
-Q.kpd_affairs_timer = 0;
-Q.ddp_affairs_timer = 0;
-Q.z_affairs_timer = 0;
-Q.dvp_affairs_timer = 0;
-Q.dnvp_affairs_timer = 0;
-Q.nsdap_affairs_timer = 0;
+Q.ai_turn_timer = 0;
 // n_elections is the number of elections that have happened since the start of the game.
 Q.n_elections = 0;
 Q.n_elections_prussia = 0;

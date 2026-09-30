@@ -27,12 +27,12 @@ go-to: main_rally
 The police successfully protected our rally, so it can go ahead as usual.
 
 @police_protect_lose
-on-arrival: workers_nsdap += 3; strife += 1
+on-arrival: workers_nsdap += 3; strife += 0.125
 
 Unfortunately, the police were unable or unwilling to hold back the <span style="color: #7A3C00;">**SA**</span> mob. The <span style="color: #7A3C00;">Nazis</span> have won this show of strength.
 
 @rb_protect
-on-arrival: rb_success = rb_strength*rb_militancy - sa_strength*sa_militancy; strife += 1
+on-arrival: rb_success = rb_strength*rb_militancy - sa_strength*sa_militancy; strife += 0.125
 go-to: rb_protect_win if rb_success >= 0; rb_protect_lose if rb_success < 0
 
 @rb_protect_win
@@ -49,7 +49,7 @@ Unfortunately, the Reichsbanner was not able to hold back the <span style="color
 view-if: prussia_leader = "Braun" or prussia_leader = "Rosenfeld"
 choose-if: prussian_police_training > 0
 unavailable-subtitle: The loyal sections of the police have never coordinated with the Reichsbanner before.
-on-arrival: rb_success = rb_strength*rb_militancy - sa_strength*sa_militancy + prussian_police_loyalty*prussian_police_militancy*prussian_police_strength*2; strife += 1
+on-arrival: rb_success = rb_strength*rb_militancy - sa_strength*sa_militancy + prussian_police_loyalty*prussian_police_militancy*prussian_police_strength*2; strife += 0.125
 go-to: both_protect_win if rb_success >= 0; both_protect_lose if rb_success < 0
 
 @both_protect_win

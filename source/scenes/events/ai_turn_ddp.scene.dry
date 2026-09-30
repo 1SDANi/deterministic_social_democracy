@@ -1,14 +1,22 @@
 title: [+ ddp_name +]'s Turn
 new-page: true
 face-image: img/ddp.jpg
-on-arrival: ddp_affairs_timer = 1;
-view-if: ddp_affairs_timer == 0 and not lvp_formed
+view-if: false
 tags: event
 
 = [+ ddp_name +]'s Turn
 
 The [+ ddp_name +] will act
 
+- @ddp_rally.sa_disrupt
+- @ddp_rally.rally
+- @labor_affairs
+
+@ddp_turn
+title: [+ ddp_name +]'s Turn
+view-if: true
+
+- @ddp_rally.sa_disrupt
 - @ddp_rally.rally
 - @labor_affairs
 

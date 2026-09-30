@@ -2,12 +2,21 @@ title: DVP's Turn
 new-page: true
 face-image: img/dvp.jpg
 on-arrival: dvp_affairs_timer = 1;
-view-if: dvp_affairs_timer == 0 and not lvp_formed
+view-if: false
 tags: event
 
 = DVP's Turn
 
 - @dvp_rally.rally
+- @dvp_rally.sa_disrupt
+- @labor_affairs
+
+@dvp_turn
+title: DVP's Turn
+view-if: true
+
+- @dvp_rally.rally
+- @dvp_rally.sa_disrupt
 - @labor_affairs
 
 @labor_affairs

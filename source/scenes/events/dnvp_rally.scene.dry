@@ -5,12 +5,10 @@ new-page: true
 
 @rally
 title: Rally
-on-arrival: dnvp_rally_timer = 6 if next_election_time - time > 6 and not (year == 1928 and month == 1); dnvp_rally_timer = 2 if (year == 1928 and month == 1) or (next_election_time - time <= 6)
 view-if: dnvp_rally_timer <= 0 and not (labor_minister_party == "DNVP" and labor_affairs_timer == 0 and strike_term_seen == 0)
 
 The DNVP will hold a rally
 
-- @rfb_disrupt
 - @class_collaboration
 - @rally_volkism
 - @rally_nationalism
@@ -20,77 +18,19 @@ The DNVP will hold a rally
 
 @class_collaboration
 title: The class collaboration of the proletariat with the bourgeoisie.
-view-if: dnvp_leader == "Lambach"
-on-arrival: {!
-    old_middle_dnvp += 2*(1-dnvp_dissent);
-    new_middle_dnvp += 2*(1-dnvp_dissent);
-
-    if (corporatist_adopted) {
-        rural_dnvp += 2*(1-dnvp_dissent);
-        workers_dnvp += 2 *(1-dnvp_dissent);
-        unemployed_dnvp += 1*(1-dnvp_dissent);
-    }
-
-    if (corporatist_progress > 0) {
-        rural_dnvp += 1*(1-dnvp_dissent);
-        workers_dnvp += 1*(1-dnvp_dissent);
-        unemployed_dnvp += 1*(1-dnvp_dissent);
-    }
-    
-    dnvp_christian_social_strength += 3;
-
-    dnvp_christian_social_dissent -= 3;
-    dnvp_authoritarian_dissent -= 3;
-    dnvp_agrarian_dissent -= 3;
-    dnvp_volkskonservativ_dissent -= 3;
-
-    dnvp_nationalism += 1;
-!}
+view-if: dnvp_leader == "Lambach" and corporatist_progress
 
 The DNVP's mesage of class collaboration appeals to all but the class conscious. [? if corporatist_adopted: The adoption of the christian social corporatist plan has done much to revitalize worker enthusiasm.  ?] [? if corporatist_progress > 0: Their achievements in corporatism have assisted their messaging. ?]
 
 @rally_volkism
 title: Volkism - German Nationalism, Antisemitism, Patriarchy, Xenophobia, and Homophobia
 view-if: dnvp_leader == "Hugenberg" or dnvp_leader == "Schiele"
-on-arrival: {!
-    rural_dnvp += 2*(1-dnvp_dissent);
-    new_middle_dnvp += (1-dnvp_dissent);
-    old_middle_dnvp += (1-dnvp_dissent);
-    workers_dnvp += (1-dnvp_dissent);
-    unemployed_dnvp += (1-dnvp_dissent);
-
-    if (black_thursday_seen && !return_to_normalcy) {
-        rural_dnvp += 2*(1-dnvp_dissent);
-        new_middle_dnvp += (1-dnvp_dissent);
-        old_middle_dnvp += (1-dnvp_dissent);
-        workers_dnvp += (1-dnvp_dissent);
-        unemployed_dnvp += (1-dnvp_dissent);
-    }
-
-    dnvp_nationalism += 1;
-!}
 
 The DNVP's speakers blames the ills of society on foreigners and the marginaqlized [? if black_thursday_seen and not return_to_normalcy: , a message popular among the desperate masses, who believe themselves betrayed by the establishment parties ?]
 
 @rally_nationalism
 title: Supporting rearmament, nationalism, and an end to reparations
-view-if: dnvp_leader == "Triumvirate" or dnvp_leader == "Westarp" or dnvp_leader == "Treviranus"
-on-arrival: {!
-    dnvp_nationalism += 1;
-    nationalism += 3*(1 - dnvp_dissent);
-
-    rural_dnvp += 3*(1-dnvp_dissent);
-    old_middle_dnvp += 2*(1-dnvp_dissent);
-
-    if (dnvp_nationalism >= 3) {
-        pro_republic -= 3*(1-dnvp_dissent);
-
-        if (nationalism >= 60) {
-            dnvp_volkskonservativ_strength += 3;
-            dnvp_authoritarian_strength += 3;
-        }
-    }
-!}
+view-if: dnvp_leader == "Triumvirate" or dnvp_leader == "Westarp" or (dnvp_leader == "Treviranus" and (return_to_normalcy or not dnvp_lautenbach_adopted or not (lautenbach_adopted <= dnvp_lautenbach_rally or not dnvp_in_government)))
 
 The DNVP's speakers praise the military establishment and call for rearmament.
 
@@ -99,21 +39,6 @@ The DNVP's speakers praise the military establishment and call for rearmament.
 @rally_democracy
 title: Expanding our nascent democracy and defending it against <span style="color: #808080;">dictatorship</span> and <span style="color: #7A3C00;">fascism</span>.
 view-if: dnvp_leader == "Hergt" or dnvp_leader == "Keudell"
-on-arrival: {!
-    dnvp_democratization -= 1;
-    pro_republic += 3*(1 - dnvp_dissent);
-
-    if (dnvp_democratization >= 3) {
-        rural_dnvp += 2*(1-dnvp_dissent);
-        workers_dnvp += 1*(1-dnvp_dissent);
-        new_middle_dnvp += 1*(1-dnvp_dissent);
-        old_middle_dnvp += 1*(1-dnvp_dissent);
-    }
-    
-    if (pro_republic >= 70) {
-        dnvp_christian_social_strength += 3;
-    }
-!}
 
 The DNVP will defend the <span style="color: #000000;">rep</span><span style="color: #DD0000;">ubl</span><span style="color: #FFCC00;">ican</span> system and rail against the <span style="color: #808080;">monarchists</span> and <span style="color: #A00500;">communists</span> who threaten it.
 
@@ -122,37 +47,13 @@ The DNVP will defend the <span style="color: #000000;">rep</span><span style="co
 
 @rally_lautenbach
 title: Support the Lautenbach plan!
-view-if: return_to_normalcy == 0 and dnvp_lautenbach_adopted and (dnvp_leader == "Lambach" or dnvp_leader == "Treviranus" or dnvp_leader == "Lejeune-Jung") and not return_to_normalcy and (lautenbach_adopted <= dnvp_lautenbach_rally or not dnvp_in_government)
-on-arrival: {!
-    rural_dnvp += 2*(1-dnvp_dissent);
-    old_middle_dnvp += 2*(1-dnvp_dissent);
-    new_middle_dnvp += 2*(1-dnvp_dissent);
-    unemployed_dnvp += 1*(1-dnvp_dissent);
-    workers_dnvp += 1*(1-dnvp_dissent);
-
-    if (lautenbach_adopted) {
-        rural_dnvp += 2*(1-dnvp_dissent);
-        old_middle_dnvp += 2*(1-dnvp_dissent);
-        new_middle_dnvp += 2*(1-dnvp_dissent);
-        workers_dnvp += 2*(1-dnvp_dissent);
-        unemployed_dnvp += 2*(1-dnvp_dissent);
-    }
-    
-    dnvp_lautenbach_rally += 1;
-!}
+view-if: return_to_normalcy == 0 and dnvp_lautenbach_adopted and (dnvp_leader == "Treviranus" or dnvp_leader == "Lejeune-Jung") and not return_to_normalcy and (lautenbach_adopted <= dnvp_lautenbach_rally or not dnvp_in_government)
 
 The Lautenbach plan has become a popular rallying cry for the DNVP. The workers and employers see it as a necessary compromise. [? if not lautenbach_adopted: However, many are still skeptical whether the plan will actually prove effective. ?]
 
 @rally_local
 title: A mixture of various local and national concerns that resonate most with the audience.
-view-if: (dnvp_leader == "Lejeune-Jung" and not corporatist_progress) or (dnvp_leader == "Lambach" and not (dnvp_lautenbach_adopted or lautenbach_adopted))
-on-arrival: {!
-    workers_dnvp += 2*(1-dnvp_dissent);
-    old_middle_dnvp += 2*(1-dnvp_dissent);
-    new_middle_dnvp += 2*(1-dnvp_dissent);
-    unemployed_dnvp += 1*(1-dnvp_dissent);
-    rural_dnvp += 1*(1-dnvp_dissent);
-!}
+view-if: (dnvp_leader == "Lambach" and not corporatist_progress) or (dnvp_leader == "Lejeune-Jung" and (return_to_normalcy or not dnvp_lautenbach_adopted or not (lautenbach_adopted <= dnvp_lautenbach_rally or not dnvp_in_government)))
 
 The DNVP's speakers have gauged the mood and are speaking to the issues that seem to most affect workers, employers, and women in this moment.
 
@@ -165,22 +66,14 @@ The Communist RFB has disrupted the DNVP rally!
 - @rally_police
 - @stahlhelm_protect
 - @both_protect
-- @rally_cancel
 
 @rally_police
 title: The DNVP have called the police to protect their rally
-view-if: dnvp_authoritarian_strength + dnvp_agrarian_strength  < dnvp_volkskonservativ_strength + dnvp_christian_social_strength
-on-arrival: police_protect_success = prussian_police_loyalty * prussian_police_militancy * prussian_police_strength*2 - rfb_militancy*rfb_strength;
+view-if: (prussia_leader == "Braun" or prussia_leader == "Rosenfeld" or not prussian_police_sh_training) and (dnvp_authoritarian_strength + dnvp_agrarian_strength < dnvp_volkskonservativ_strength + dnvp_christian_social_strength)
 
 The DNVP have called the police to protect their rally
 
-go-to: rally_police_win if police_protect_success >= 0; rally_police_lose if police_protect_success < 0
-
-@rally_cancel
-view-if: dnvp_authoritarian_strength + dnvp_agrarian_strength + dnvp_volkskonservativ_strength < dnvp_christian_social_strength
-title: The DNVP have canceled their rally
-
-The RFB have won this show of strength.
+go-to: rally_police_win if police_protect_success_dnvp >= 0; rally_police_lose if police_protect_success_dnvp < 0
 
 @rally_police_win
 title: The police have prevailed!
@@ -196,14 +89,12 @@ The police successfully protected the DNVP's rally, so it can go ahead as usual.
 
 @rally_police_lose
 title: The police were unable or unwilling to hold back the RFB.
-on-arrival: new_middle_kpd += 3; strife += 1
 
 The RFB have won this show of strength.
 
 @stahlhelm_protect
 title: The Stahlhelm are sent to protect the rally.
-view-if: prussia_leader == "Braun" or prussia_leader == "Rosenfeld" or prussian_police_sh_training
-on-arrival: stahlhelm_success = stahlhelm_strength*stahlhelm_militancy - rfb_strength*rfb_militancy; strife += 1
+view-if: (prussia_leader == "Braun" or prussia_leader == "Rosenfeld" or not prussian_police_sh_training) and (dnvp_authoritarian_strength + dnvp_agrarian_strength > dnvp_volkskonservativ_strength + dnvp_christian_social_strength)
 go-to: stahlhelm_protect_win if stahlhelm_success >= 0; stahlhelm_protect_lose if stahlhelm_success < 0
 
 @stahlhelm_protect_win
@@ -224,8 +115,7 @@ The Stahlhelm was not able to hold back the RFB. The Communists have won this sh
 
 @both_protect
 title: The Stahlhelm and Prussian police are sent to protect the rally.
-view-if: prussia_leader != "Braun" or prussia_leader != "Rosenfeld" and prussian_police_sh_training
-on-arrival: stahlhelm_success = stahlhelm_strength*stahlhelm_militancy - rfb_strength*rfb_militancy + prussian_police_loyalty*prussian_police_militancy*prussian_police_strength*2; strife += 1
+view-if: prussia_leader != "Braun" and prussia_leader != "Rosenfeld" and prussian_police_sh_training
 go-to: both_protect_win if stahlhelm_success >= 0; both_protect_lose if stahlhelm_success < 0
 
 @both_protect_win
