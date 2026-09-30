@@ -45,7 +45,7 @@ window.kpd_turn = function() {
 };
 
 window.ddp_turn = function() {
-    if (dendryUI.labor_minister_party == ddp_name && dendryUI.labor_affairs_timer == 0 && dendryUI.strike_term_seen == 0) {
+    if (dendryUI.labor_minister_party == dendryUI.ddp_name && dendryUI.labor_affairs_timer == 0 && dendryUI.strike_term_seen == 0) {
         if (dendryUI.ddp_ideology == "Left" && dendryUI.ddp_leader == "Erkelenz") {
             window.support_labor();
         } else if (ddp_ideology == "Moderate") {
@@ -61,7 +61,7 @@ window.ddp_turn = function() {
 };
 
 window.z_turn = function() {
-    if (dendryUI.labor_minister_party == z_party_name && dendryUI.labor_affairs_timer == 0 && dendryUI.strike_term_seen == 0) {
+    if (dendryUI.labor_minister_party == dendryUI.z_party_name && dendryUI.labor_affairs_timer == 0 && dendryUI.strike_term_seen == 0) {
         if ((dendryUI.z_leader == "Wirth" && !(dendryUI.dvp_in_government || dendryUI.dnvp_in_government || dendryUI.nsdap_in_government)) || (dendryUI.z_leader == "Joos" && dendryUI.spd_in_government && dendryUI.peoples_party) || dendryUI.z_leader == "Kaiser") {
             window.support_labor();
         } else if (dendryUI.z_leader == "Adenauer" || dendryUI.z_leader == "Marx" || dendryUI.z_leader == "Stegerwald") {
