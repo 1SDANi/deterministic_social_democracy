@@ -1,4 +1,4 @@
-title: Media
+title: KPD Media
 new-page: true
 
 @media
@@ -10,7 +10,9 @@ The KPD will set the direction of their newspaper and radio
 
 - @mobilize
 - @campaign
-- @ideological
+- @ideological_stalinist
+- @ideological_conciliator
+- @ideological_brandlerite
 - @radio
 - @radio_2
 - @radio_3
@@ -18,80 +20,54 @@ The KPD will set the direction of their newspaper and radio
 
 @mobilize
 title: Die Rote Fahne will mobilize the public against fascism, capitalism, and monarchism
-on-arrival: {!
-    rfb_strength += 50;
-    rfb_militancy += 0.02;
-    
-    if (kpd_wholesome) {
-        workers_nsdap -= 1*(1 - dissent);
-        unemployed_nsdap -= 2*(1 - dissent);
-    } else {
-        workers_spd -= 1*(1 - dissent);
-        unemployed_spd -= 2*(1 - dissent);
-    }
-
-    if (dnf_formed) {
-        workers_dnf -= 1*(1 - dissent);
-        unemployed_dnf -= 2*(1 - dissent);
-    } else {
-        workers_dnvp -= 1*(1 - dissent);
-        unemployed_dnvp -= 2*(1 - dissent);
-    }
-
-    workers_kpd += 1*(1 - dissent);
-    unemployed_kpd += 2*(1-dissent);
-!}
+view-if: (kpd_leader == "Thälmann" and kpd_stalinist_strength >= 80 and year >= 1930 and anticommunist_force >= 30 and not return_to_normalcy) or (kpd_leader == "Conciliators" and kpd_conciliator_strength >= 70 and year >= 1930 and noncommunist_force >= rfb_force and not return_to_normalcy) or (kpd_leader == "Brandlerites" and kpd_stalinist_strength >= 60 and year >= 1930 and anticommunist_force >= left_force and not return_to_normalcy)
 
 Die Rote Fahne coordinates with the KPD and RFB to organize protests, rallies, and strikes
 
 @campaign
 title: Die Rote Fahne will highlight the failues of the SPD and the Weimar Republic
-on-arrival: kpd_campaign_media += 1; workers_kpd += 2*(1 - dissent); unemployed_kpd += 4*(1-dissent);
+view-if: (kpd_leader == "Thälmann" and kpd_stalinist_strength >= 80 and (year < 1930 or anticommunist_force < 30 or return_to_normalcy)) or (kpd_leader == "Conciliators" and kpd_conciliator_strength >= 70 and (year < 1930 or noncommunist_force < rfb_force or return_to_normalcy))
 
 Die Rote Fahne rails against the SPD's support of class collaboration and capitalism
 
-@ideological
+@ideological_stalinist
 title: Die Rote Fahne will tow the party line
-on-arrival: {!
-    if (kpd_leader == "Thälmann") {
-        kpd_stalinist_strength += 3;
-        kpd_weddinger_strength -= 3;
-        kpd_conciliator_strength -= 3;
-        kpd_brandlerite_strength -= 3;
+view-if: kpd_leader == "Thälmann" and kpd_stalinist_strength < 80
 
-        kpd_stalinist_dissent -= 10;
-    } else if (kpd_leader == "Conciliators") {
-        kpd_conciliator_strength += 3;
-        kpd_weddinger_strength -= 3;
-        kpd_stalinist_strength -= 3;
-        kpd_brandlerite_strength -= 3;
+Die Rote Fahne reinforces the stalinist party line
 
-        kpd_conciliator_dissent -= 10;
-    } else if (kpd_leader == "Brandlerites") {
-        kpd_brandlerite_strength += 3;
-        kpd_conciliator_strength -= 3;
-        kpd_weddinger_strength -= 3;
-        kpd_stalinist_strength -= 3;
+@ideological_conciliator
+title: Die Rote Fahne will tow the party line
+view-if: kpd_leader == "Conciliators" and kpd_conciliator_strength < 70
 
-        kpd_brandlerite_dissent -= 10;
-    } else if (kpd_leader == "Weddingers") {
-        kpd_weddinger_strength += 3;
-        kpd_conciliator_strength -= 3;
-        kpd_stalinist_strength += 3;
-        kpd_brandlerite_strength -= 3;
+Die Rote Fahne reinforces support for [? if in_popular_front or in_left_front or in_popular_front_prussia or in_left_front_prussia: the ?][? if not in_popular_front and not in_left_front and not in_popular_front_prussia and not in_left_front_prussia: a ?] united front
 
-        kpd_weddinger_dissent -= 10;
-    }
-!}
+@ideological_brandlerite
+title: Die Rote Fahne will tow the party line
+view-if: kpd_leader == "Brandlerites" and (kpd_brandlerite_strength < 60 or ((year < 1930 or anticommunist_force < left_force or return_to_normalcy) and ((kpd_radio == 0 and kpd_resources < 2) or ((kpd_radio <= 3 or kpd_radio > 5 or year > 1931) and (kpd_resources < 1 or kpd_radio > 9)))))
+
+Die Rote Fahne reinforces the brandlerite party line
 
 @radio
 title: The KPD will fund a radio station
+view-if: kpd_leader == "Brandlerites" and kpd_brandlerite_strength >= 60 and (year < 1930 or anticommunist_force < left_force or return_to_normalcy) and kpd_radio == 0 and kpd_resources >= 2
+
+The KPD's new radio station allows the KPD to connect to people in a more intimate setting than before, spreading the message of <span style="color: #700000;">communism</span> along with music and other popular content. Since most proletarians cannot afford family radios right now, they are reaching the middle class, a fact of which many in their party are harshly critical.
 
 @radio_2
 title: The KPD will fund a radio station
+view-if: kpd_leader == "Brandlerites" and kpd_brandlerite_strength >= 60 and (year < 1930 or anticommunist_force < left_force or return_to_normalcy) and (kpd_radio <= 3 or kpd_radio > 5 or year > 1931) and kpd_resources >= 1 and kpd_radio > 0 and kpd_radio <= 3
+
+The KPD's new radio network has a mix of popular and political programming, and is proving a success.
 
 @radio_3
 title: The KPD will fund a radio station
+view-if: kpd_leader == "Brandlerites" and kpd_brandlerite_strength >= 60 and (year < 1930 or anticommunist_force < left_force or return_to_normalcy) and (kpd_radio > 3 and kpd_radio <= 5 and year <= 1931)
+
+The KPD's radio network has become a successful tool for spreading their message.
 
 @radio_4
 title: The KPD will fund a radio station
+view-if: kpd_leader == "Brandlerites" and kpd_brandlerite_strength >= 60 and (year < 1930 or anticommunist_force < left_force or return_to_normalcy) and (kpd_radio <= 3 or kpd_radio > 5 or year > 1931) and kpd_resources >= 1 and kpd_radio <= 9
+
+The KPD are continuing to invest in their radio stations. Both commercial and political radio are becoming more prevalent, making it harder to spread their message amidst the competition.

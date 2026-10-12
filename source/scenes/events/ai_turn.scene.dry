@@ -1,10 +1,14 @@
 title: AI turns
 new-page: true
 on-arrival: {!
-    window.ai_turns();
+    if (Q.ai_turn_effect_timer == 0) {
+        window.ai_turns();
+        Q.ai_turn_effect_timer = 1;
+    }
 !}
 view-if: ai_turn_timer == 0
 tags: event
+priority: 99
 
 = AI Turns
 
@@ -59,3 +63,4 @@ view-if: not (cvp_formed or dnf_formed)
 title: Continue...
 view-if: true
 on-arrival: ai_turn_timer = 1;
+go-to: post_event

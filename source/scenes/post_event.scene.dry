@@ -413,7 +413,7 @@ Q.dvp_liberal_strength = 100*Q.dvp_liberal_strength/dvp_total_strength;
 Q.dvp_industrial_strength = 100*Q.dvp_industrial_strength/dvp_total_strength;
 Q.dvp_nationalist_strength = 100*Q.dvp_nationalist_strength/dvp_total_strength;
 
-var dvp_total_dissent = Q.dvp_labor_strength*Q.dvp_labor_dissent + Q.dvp_liberal_strength*Q.dvp_liberal_dissent + Q.dvp_industrial_strength*Q.dvp_industrial_dissent + Q.dvp_industrialist_strength*Q.dvp_industrialist_dissent;
+var dvp_total_dissent = Q.dvp_labor_strength*Q.dvp_labor_dissent + Q.dvp_liberal_strength*Q.dvp_liberal_dissent + Q.dvp_industrialist_strength*Q.dvp_industrialist_dissent + Q.dvp_industrialist_strength*Q.dvp_industrialist_dissent;
 
 Q.dvp_dissent = 0.01*dvp_total_dissent/dvp_total_strength;
 Q.dvp_dissent_percent = Q.dvp_dissent*100;
@@ -439,7 +439,7 @@ for (var c of Q.dnvp_factions) {
 }
 
 // re-calculate dissent.
-var dnvp_total_strength = Q.dnvp_christian_social_strength + Q.dnvp_volkskonservativ_strength + Q.dnvp_nationalist_strength + Q.dnvp_authoritarian_strength;
+var dnvp_total_strength = Q.dnvp_christian_social_strength + Q.dnvp_volkskonservativ_strength + Q.dnvp_agrarian_strength + Q.dnvp_authoritarian_strength;
 
 // normalize strength for the different factions
 Q.dnvp_christian_social_strength = 100*Q.dnvp_christian_social_strength/dnvp_total_strength;
@@ -513,8 +513,26 @@ Q.prussia_force = Math.round((Q.prussia_force/total_force)*100);
 
 Q.far_right_force = Q.sh_force + Q.sa_force;
 Q.democracy_force = Q.rb_force + Q.prussia_force;
+Q.anticommunist_force = Q.sh_force + Q.sa_force;
+Q.left_force = Q.rfb_force;
+Q.noncommunist_force = Q.sh_force + Q.sa_force + Q.rb_force + Q.prussia_force;
+if (!Q.kpd_truce) {
+    anticommunist_force += Q.rb_force + Q.prussia_force;
+} else {
+    Q.left_force += Q.rb_force;
+
+    if (Q.prussia_leader != "Rosenfeld" && Q.prussia_leader != "Braun") {
+        anticommunist_force += Q.prussia_force;
+    } else {
+        left_force += Q.prussia_force;
+    }
+}
 Q.state_force = 0;
-if (Q.reichswehr_street) Q.state_force += Q.reichswehr_force;
+if (Q.reichswehr_street) {
+    Q.state_force += Q.reichswehr_force;
+    Q.anticommunist_force += Q.reichswehr_force;
+    Q.noncommunist_force += Q.reichswehr_force;
+}
 if (Q.prussia_leader == "Strasser" || Q.prussia_leader == "Schleicher" || Q.prussia_leader == "Papen") {
     Q.state_force += Q.prussia_force;
     Q.democracy_force -= Q.prussia_force;

@@ -52,8 +52,28 @@ Q.use_decimals = 0;
 
 // party resources
 Q.resources = 2;
+Q.kpd_resources = 2;
+Q.ddp_resources = 2;
+Q.z_resources = 2;
+Q.dvp_resources = 2;
+Q.dnvp_resources = 2;
+Q.nsdap_resources = 2;
 // party dues
 Q.dues = 5;
+Q.kpd_dues = 1;
+Q.ddp_dues = 4;
+Q.z_dues = 5;
+Q.dvp_dues = 2;
+Q.dnvp_dues = 3;
+Q.nsdap_dues = 1;
+// funding
+Q.funding = 0;
+Q.kpd_funding = 4;
+Q.ddp_funding = 1;
+Q.z_funding = 0;
+Q.dvp_funding = 3;
+Q.dnvp_funding = 2;
+Q.nsdap_funding = 0;
 
 // the state of the party
 // overall dissent reduces every increase in party support.
@@ -1005,7 +1025,7 @@ Q.timers = ['advisor_action', 'confronting_nazis', 'crisis_program',
     'bruning_event', 'lvp_merger', 'lvp_merger_1', 'lvp_merger_2', 'bourgeois_merger',
     'bourgeois_negotiations_1930', 'bourgeois_negotiations_1930_aftermath', 'schleichers_schemes',
     'bourgeois_negotiations_elections_1930', 'nazi_decay', 'stegerwald_transformation', 'emergency_fundraising', 'red_general', 'weimar_rally', 'nazi_funds',
-    'dsu_policy', 'ai_turn'];
+    'dsu_policy', 'ai_turn', 'ai_turn_effect'];
 Q.rubicon_timers = ['advisor_action', 'confronting_nazis', 'crisis_program',
     'fundraising', 'ideology',
     'inter_party_relationships', 'international_relations',
@@ -1056,6 +1076,7 @@ Q.bruning_event_timer = 0;
 Q.stegerwald_transformation_timer = 0;
 Q.dsu_policy_timer = 0;
 Q.ai_turn_timer = 1;
+Q.ai_turn_effect_timer = 1;
 // n_elections is the number of elections that have happened since the start of the game.
 Q.n_elections = 0;
 Q.n_elections_prussia = 0;
@@ -1155,6 +1176,7 @@ Q.grand_coalition_collapsed = 0;
 Q.true_christian_democracy = 0;
 Q.zentrum_disintegration = 0;
 Q.kpd_wtb_rally = 0;
+Q.kpd_radio = 0;
 Q.wtb_rally = 0;
 Q.ddp_lautenbach_rally = 0;
 Q.z_lautenbach_rally = 0;
@@ -1523,11 +1545,75 @@ For more information on the politics and government of the German Republic, see 
 - @1928_challenge: Custom Modes
 
 @1928_easy
-on-arrival: difficulty = -1; resources = 4; dues = 5; base_dues = 5; rb_strength = 2500; kpd_relation = 29; z_relation = 54; dvp_relation = 49; ddp_relation = 65; budget = 5;
+on-arrival: {!
+    Q.difficulty = -1;
+    Q.resources = 4;
+    Q.kpd_resources = 4;
+    Q.ddp_resources = 4;
+    Q.z_resources = 4;
+    Q.dvp_resources = 4;
+    Q.dnvp_resources = 4;
+    Q.nsdap_resources = 4;
+    Q.dues = 5;
+    Q.base_dues = 5;
+    Q.kpd_dues = 1;
+    Q.ddp_dues = 4;
+    Q.z_dues = 5;
+    Q.dvp_dues = 1;
+    Q.dnvp_dues = 2;
+    Q.nsdap_dues = 1;
+    Q.funding = 0;
+    Q.kpd_funding = 4;
+    Q.ddp_funding = 1;
+    Q.z_funding = 0;
+    Q.dvp_funding = 4;
+    Q.dnvp_funding = 3;
+    Q.nsdap_funding = 0;
+    Q.budget = 5;
+    Q.rb_strength = 2500;
+    Q.kpd_relation = 29;
+    Q.z_relation = 54;
+    Q.dvp_relation = 49;
+    Q.ddp_relation = 65;
+!}
 go-to: 1928_main
 
 @1928_hard
-on-arrival: difficulty = 1; resources = 0; dues = 3; base_dues = 3; rb_strength = 1000; reformist_dissent = 25; left_dissent = 30; labor_dissent = 25; center_dissent = 25; z_relation = 41; kpd_relation = 16; dvp_relation = 31; ddp_relation = 50; budget = 3
+on-arrival: {!
+    Q.difficulty = 1;
+    Q.resources = 0;
+    Q.kpd_resources = 4;
+    Q.ddp_resources = 0;
+    Q.z_resources = 0;
+    Q.dvp_resources = 4;
+    Q.dnvp_resources = 4;
+    Q.nsdap_resources = 4;
+    Q.dues = 3;
+    Q.base_dues = 3;
+    Q.kpd_dues = 1;
+    Q.ddp_dues = 2;
+    Q.z_dues = 3;
+    Q.dvp_dues = 1;
+    Q.dnvp_dues = 2;
+    Q.nsdap_dues = 1;
+    Q.funding = 0;
+    Q.kpd_funding = 4;
+    Q.ddp_funding = 1;
+    Q.z_funding = 0;
+    Q.dvp_funding = 4;
+    Q.dnvp_funding = 3;
+    Q.nsdap_funding = 0;
+    Q.rb_strength = 1000;
+    Q.reformist_dissent = 25;
+    Q.left_dissent = 30;
+    Q.labor_dissent = 25;
+    Q.center_dissent = 25;
+    Q.z_relation = 41;
+    Q.kpd_relation = 16;
+    Q.dvp_relation = 31;
+    Q.ddp_relation = 50;
+    Q.budget = 3
+!}
 go-to: 1928_main
 
 @1928_historical
@@ -1538,6 +1624,19 @@ Q.historical_mode = 1;
 Q.resources = 2;
 Q.dues = 2;
 Q.base_dues = 2;
+Q.kpd_dues = 1;
+Q.ddp_dues = 1;
+Q.z_dues = 2;
+Q.dvp_dues = 1;
+Q.dnvp_dues = 2;
+Q.nsdap_dues = 1;
+Q.funding = 0;
+Q.kpd_funding = 4;
+Q.ddp_funding = 1;
+Q.z_funding = 0;
+Q.dvp_funding = 4;
+Q.dnvp_funding = 3;
+Q.nsdap_funding = 0;
 Q.rb_strength = 2000;
 Q.reformist_dissent = 25;
 Q.left_dissent = 30;
@@ -1558,8 +1657,27 @@ on-arrival: {!
 Q.difficulty = -1;
 Q.dynamic_mode = 1;
 Q.resources = 3;
+Q.kpd_resources = 4;
+Q.ddp_resources = 3;
+Q.z_resources = 3;
+Q.dvp_resources = 4;
+Q.dnvp_resources = 4;
+Q.nsdap_resources = 1;
 Q.dues = 3;
 Q.base_dues = 3;
+Q.kpd_dues = 1;
+Q.ddp_dues = 2;
+Q.z_dues = 3;
+Q.dvp_dues = 1;
+Q.dnvp_dues = 2;
+Q.nsdap_dues = 1;
+Q.funding = 0;
+Q.kpd_funding = 3;
+Q.ddp_funding = 1;
+Q.z_funding = 0;
+Q.dvp_funding = 3;
+Q.dnvp_funding = 2;
+Q.nsdap_funding = 0;
 Q.rb_strength = 2000;
 Q.z_relation = 41;
 Q.kpd_relation = 21;
@@ -1574,8 +1692,27 @@ subtitle: Intended way of experiencing this mod.
 on-arrival: {!
 Q.difficulty = -1;
 Q.resources = 3;
+Q.kpd_resources = 4;
+Q.ddp_resources = 3;
+Q.z_resources = 3;
+Q.dvp_resources = 4;
+Q.dnvp_resources = 4;
+Q.nsdap_resources = 1;
 Q.dues = 3;
 Q.base_dues = 3;
+Q.base_dues = 3;
+Q.kpd_dues = 1;
+Q.ddp_dues = 2;
+Q.z_dues = 3;
+Q.dvp_dues = 1;
+Q.dnvp_dues = 2;
+Q.nsdap_dues = 1;
+Q.kpd_funding = 3;
+Q.ddp_funding = 1;
+Q.z_funding = 0;
+Q.dvp_funding = 3;
+Q.dnvp_funding = 2;
+Q.nsdap_funding = 0;
 Q.rb_strength = 2000;
 Q.z_relation = 41;
 Q.kpd_relation = 21;
