@@ -3,7 +3,17 @@ new-page: true
 
 @rally
 title: Rally
-view-if: ddp_rally_timer <= 0 and not (labor_minister_party == ddp_name and labor_affairs_timer == 0 and strike_term_seen == 0) and not (sa_force > 25 and not sa_banned and not return_to_normalcy)
+view-if: {!
+    if (Q.labor_minister_party == Q.ddp_name && Q.labor_affairs_post_timer == 0 && Q.strike_term_seen_post_timer == 0) {
+        return false;
+    } else if (Q.rfb_force > 25 && !Q.rfb_banned && !Q.return_to_normalcy) {
+        return false;
+    } else if (Q.ddp_rally_post_timer > 0) {
+        return true;
+    } else {
+        return false;
+    }
+!}
 
 The [+ ddp_name +] will hold a rally
 
@@ -14,50 +24,17 @@ The [+ ddp_name +] will hold a rally
 - @rally_lautenbach
 - @rally_local
 
-@class_collaboration
-title: The class collaboration of the proletariat with the bourgeoisie.
-view-if: ddp_leader == "Mahraun"
-
-The [+ ddp_name +]'s mesage of class collaboration appeals to all but the class conscious. [? if workers_schleicher_bonus > 0 : Schleicher's united labor front  ?] [? if workers_schleicher_bonus > 1 : and popularity  ?] [? if workers_schleicher_bonus > 0 : has opposition to corporatism tantamount to support for revolution in the eyes of many. ?]
-
-@rally_welfare
-title: Sozialpolitik - The maintenance and expansion of social welfare programs.
-view-if: welfare > 0 and (ddp_leader == "Lüders" or ddp_leader == "Lemmer" and (return_to_normalcy or not ddp_lautenbach_adopted or not (lautenbach_adopted <= ddp_lautenbach_rally or not ddp_in_government)))
-
-The humanistic message appeals to women and the organized workers, whose benefits are the accomplishments of <span style="color: #586593;">liberal democracy</span>. [? if welfare > 1 : Expansions in welfare have made this message more effective. ?]
-
-@rally_nationalism
-title: Supporting rearmament, nationalism, and an end to reparations
-view-if: ddp_leader == "Stolper" or ddp_leader == "Dietrich"
-
-The [+ ddp_name +]'s speakers praise the military establishment and call for rearmament.
-
-[? if ddp_autocratization >= 3 : With nationalism increasingly popular within their party, the rally's speakers call for the cessation of reparations and reuinifaction of Germany ?]
-
-@rally_democracy
-title: Expanding our nascent democracy and defending it against <span style="color: #808080;">dictatorship</span> and <span style="color: #7A3C00;">fascism</span>.
-view-if: ddp_leader == "Maier" or ddp_leader == "Heuss" or ddp_leader == "Koch-Weser"
-
-The [+ ddp_name +] will defend the <span style="color: #000000;">rep</span><span style="color: #DD0000;">ubl</span><span style="color: #FFCC00;">ican</span> system and rail against the <span style="color: #808080;">monarchists</span> and <span style="color: #A00500;">communists</span> who threaten it.
-
-[? if ddp_democratization < 3 : Talk of democracy does not excite the workers and middle classes as much as more practical issues. ?]
-[? if ddp_democratization >= 3 : Since they have consistently made democratization a theme of their campaigns, the workers and middle classes are enthusiastic about their message. ?]
-
-@rally_lautenbach
-title: Support the Lautenbach plan!
-view-if: return_to_normalcy == 0 and ddp_lautenbach_adopted and ddp_leader == "Lemmer" and ddp_lautenbach_adopted and not return_to_normalcy and (lautenbach_adopted <= ddp_lautenbach_rally or not ddp_in_government)
-
-The Lautenbach plan has become a popular rallying cry for the [+ ddp_name +]. The workers and employers see it as a necessary compromise. [? if not lautenbach_adopted: However, many are still skeptical whether the plan will actually prove effective. ?]
-
-@rally_local
-title: A mixture of various local and national concerns that resonate most with the audience.
-view-if: welfare <= 0 and (ddp_leader == "Lüders" or (ddp_leader == "Lemmer" and (return_to_normalcy or not ddp_lautenbach_adopted or not (lautenbach_adopted <= ddp_lautenbach_rally or not ddp_in_government))))
-
-The [+ ddp_name +]'s speakers have gauged the mood and are speaking to the issues that seem to most affect workers, employers, and women in this moment.
-
 @sa_disrupt
 title: The <span style="color: #7A3C00;">Nazi</span> <span style="color: #7A3C00;">**SA**</span> has disrupted the [+ ddp_name +] rally!
-view-if: ddp_rally_timer <= 0 and not (labor_minister_party == ddp_name and labor_affairs_timer == 0 and strike_term_seen == 0) and sa_force > 25 and not sa_banned and not return_to_normalcy
+view-if: {!
+    if (Q.labor_minister_party == Q.ddp_name && Q.labor_affairs_timer == 0 && Q.strike_term_seen == 0) {
+        return false;
+    } else if (Q.rfb_force > 25 && !Q.rfb_banned && !Q.return_to_normalcy && Q.ddp_rally_post_timer > 0) {
+        return true;
+    } else {
+        return false;
+    }
+!}
 
 The <span style="color: #7A3C00;">Nazi</span> <span style="color: #7A3C00;">**SA**</span> has disrupted the [+ ddp_name +] rally!
 
@@ -94,3 +71,77 @@ The police successfully protected the [+ ddp_name +]'s rally, so it can go ahead
 title: The police were unable or unwilling to hold back the <span style="color: #7A3C00;">**SA**</span> mob.
 
 The <span style="color: #7A3C00;">**SA**</span> have won this show of strength.
+
+@class_collaboration
+title: The class collaboration of the proletariat with the bourgeoisie.
+view-if: ddp_leader == "Mahraun"
+
+The [+ ddp_name +]'s mesage of class collaboration appeals to all but the class conscious. [? if workers_schleicher_bonus > 0 : Schleicher's united labor front  ?] [? if workers_schleicher_bonus > 1 : and popularity  ?] [? if workers_schleicher_bonus > 0 : has opposition to corporatism tantamount to support for revolution in the eyes of many. ?]
+
+@rally_welfare
+title: Sozialpolitik - The maintenance and expansion of social welfare programs.
+view-if: {!
+    if (Q.ddp_leader == "Lüders" || Q.ddp_leader == "Lemmer") {
+        if (Q.dvp_lautenbach_adopted && !Q.return_to_normalcy && (Q.lautenbach_adopted >= Q.dnvp_lautenbach_rally || !Q.dnvp_in_government)) {
+            return false;
+        } else if (welfare > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    } else {
+        return false;
+    }
+!}
+
+The humanistic message appeals to women and the organized workers, whose benefits are the accomplishments of <span style="color: #586593;">liberal democracy</span>. [? if welfare > 1 : Expansions in welfare have made this message more effective. ?]
+
+@rally_nationalism
+title: Supporting rearmament, nationalism, and an end to reparations
+view-if: ddp_leader == "Stolper" or ddp_leader == "Dietrich"
+
+The [+ ddp_name +]'s speakers praise the military establishment and call for rearmament.
+
+[? if ddp_autocratization >= 3 : With nationalism increasingly popular within their party, the rally's speakers call for the cessation of reparations and reuinifaction of Germany ?]
+
+@rally_democracy
+title: Expanding our nascent democracy and defending it against <span style="color: #808080;">dictatorship</span> and <span style="color: #7A3C00;">fascism</span>.
+view-if: ddp_leader == "Maier" or ddp_leader == "Heuss" or ddp_leader == "Koch-Weser"
+
+The [+ ddp_name +] will defend the <span style="color: #000000;">rep</span><span style="color: #DD0000;">ubl</span><span style="color: #FFCC00;">ican</span> system and rail against the <span style="color: #808080;">monarchists</span> and <span style="color: #A00500;">communists</span> who threaten it.
+
+[? if ddp_democratization < 3 : Talk of democracy does not excite the workers and middle classes as much as more practical issues. ?]
+[? if ddp_democratization >= 3 : Since they have consistently made democratization a theme of their campaigns, the workers and middle classes are enthusiastic about their message. ?]
+
+@rally_lautenbach
+title: Support the Lautenbach plan!
+view-if: {!
+    if (Q.dnvp_leader == "Lemmer") {
+        if (Q.ddp_lautenbach_adopted && !Q.return_to_normalcy && (Q.lautenbach_adopted >= Q.ddp_lautenbach_rally || !Q.ddp_in_government)) {
+            return true;
+        } else {
+            return false;
+        }
+    } else {
+        return false;
+    }
+!}
+
+The Lautenbach plan has become a popular rallying cry for the [+ ddp_name +]. The workers and employers see it as a necessary compromise. [? if not lautenbach_adopted: However, many are still skeptical whether the plan will actually prove effective. ?]
+
+@rally_local
+title: A mixture of various local and national concerns that resonate most with the audience.
+view-if: {!
+    if (Q.ddp_leader == "Lüders" || Q.ddp_leader == "Lemmer") {
+        if (Q.dvp_lautenbach_adopted && !Q.return_to_normalcy && (Q.lautenbach_adopted >= Q.dnvp_lautenbach_rally || !Q.dnvp_in_government)) {
+            return false;
+        } else if (welfare > 0) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+!}
+
+The [+ ddp_name +]'s speakers have gauged the mood and are speaking to the issues that seem to most affect workers, employers, and women in this moment.
+

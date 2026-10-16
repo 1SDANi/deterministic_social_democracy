@@ -3,8 +3,17 @@ new-page: true
 
 @media
 title: Media
-on-arrival: kpd_media_timer = 6
-view-if: kpd_media_timer <= 0 and not (labor_minister_party == "KPD" and labor_affairs_timer == 0 and strike_term_seen == 0)
+view-if: {!
+    if (Q.kpd_rally_timer <= 0) {
+        return false;
+    } else if (Q.labor_minister_party == Q.kpd_name && Q.labor_affairs_post_timer == 0 && Q.strike_term_seen_post_timer == 0) {
+        return false;
+    } else if (Q.kpd_media_timer > 0) {
+        return false;
+    } else {
+        return true;
+    }
+!}
 
 The KPD will set the direction of their newspaper and radio
 
@@ -20,13 +29,61 @@ The KPD will set the direction of their newspaper and radio
 
 @mobilize
 title: Die Rote Fahne will mobilize the public against fascism, capitalism, and monarchism
-view-if: (kpd_leader == "Thälmann" and kpd_stalinist_strength >= 80 and year >= 1930 and anticommunist_force >= 30 and not return_to_normalcy) or (kpd_leader == "Conciliators" and kpd_conciliator_strength >= 70 and year >= 1930 and noncommunist_force >= rfb_force and not return_to_normalcy) or (kpd_leader == "Brandlerites" and kpd_stalinist_strength >= 60 and year >= 1930 and anticommunist_force >= left_force and not return_to_normalcy)
+view-if: {!
+    if (Q.kpd_leader == "Thälmann") {
+        if (Q.kpd_stalinist_strength < 80) {
+            return false;
+        } else if (!Q.return_to_normalcy && Q.anticommunist_force >= 30 && Q.year >= 1930) {
+            return true;
+        } else {
+            return false;
+        }
+    } else if (Q.kpd_leader == "Conciliators") {
+        if (Q.kpd_conciliator_strength < 70) {
+            return false;
+        } else if (!Q.return_to_normalcy && Q.rfb_force < Q.noncommunist_force && Q.year >= 1930) {
+            return true;
+        } else {
+            return false;
+        }
+    } else if (Q.kpd_leader == "Brandlerites") {
+        if (Q.kpd_stalinist_strength < 60) {
+            return false;
+        } else if (!Q.return_to_normalcy && Q.left_force < Q.anticommunist_force && Q.year >= 1930) {
+            return true;
+        } else {
+            return false;
+        }
+    } else {
+        return false;
+    }
+!}
 
 Die Rote Fahne coordinates with the KPD and RFB to organize protests, rallies, and strikes
 
 @campaign
 title: Die Rote Fahne will highlight the failues of the SPD and the Weimar Republic
-view-if: (kpd_leader == "Thälmann" and kpd_stalinist_strength >= 80 and (year < 1930 or anticommunist_force < 30 or return_to_normalcy)) or (kpd_leader == "Conciliators" and kpd_conciliator_strength >= 70 and (year < 1930 or noncommunist_force < rfb_force or return_to_normalcy))
+view-if: {!
+    if (Q.kpd_leader == "Thälmann") {
+        if (Q.kpd_stalinist_strength < 80) {
+            return false;
+        } else if (!Q.return_to_normalcy && Q.anticommunist_force >= 30 && Q.year < 1930) {
+            return false;
+        } else {
+            return true;
+        }
+    } else if (Q.kpd_leader == "Conciliators") {
+        if (Q.kpd_conciliator_strength < 70) {
+            return false;
+        } else if (!Q.return_to_normalcy && Q.rfb_force < Q.noncommunist_force && Q.year < 1930) {
+            return false;
+        } else {
+            return true;
+        }
+    } else {
+        return false;
+    }
+!}
 
 Die Rote Fahne rails against the SPD's support of class collaboration and capitalism
 
@@ -44,30 +101,138 @@ Die Rote Fahne reinforces support for [? if in_popular_front or in_left_front or
 
 @ideological_brandlerite
 title: Die Rote Fahne will tow the party line
-view-if: kpd_leader == "Brandlerites" and (kpd_brandlerite_strength < 60 or ((year < 1930 or anticommunist_force < left_force or return_to_normalcy) and ((kpd_radio == 0 and kpd_resources < 2) or ((kpd_radio <= 3 or kpd_radio > 5 or year > 1931) and (kpd_resources < 1 or kpd_radio > 9)))))
+view-if: {!
+    if (Q.kpd_leader == "Brandlerites") {
+        if (Q.kpd_stalinist_strength < 60) {
+            return true;
+        } else if (!Q.return_to_normalcy && Q.left_force < Q.anticommunist_force && Q.year >= 1930) {
+            return false;
+        } else if (Q.kpd_radio > 3 && Q.kpd_radio <= 5 && Q.year <= 1931) {
+            return false;
+        } else if (Q.kpd_radio == 0) {
+            if (Q.kpd_resources >= 2) {
+                return false;
+            } else {
+                return true;
+            }
+        } else if (Q.kpd_resources >= 1) {
+            if (Q.kpd_radio > 0 && Q.kpd_radio <= 3) {
+                return false;
+            }  else if (Q.kpd_radio > 3 && (Q.radio >= 6 || Q.year >= 1932) && Q.kpd_radio <= 9) {
+                return false;
+            } else {
+                return true;
+            }
+        } else {
+            return true;
+        }
+    } else {
+        return false;
+    }
+!}
 
 Die Rote Fahne reinforces the brandlerite party line
 
 @radio
 title: The KPD will fund a radio station
-view-if: kpd_leader == "Brandlerites" and kpd_brandlerite_strength >= 60 and (year < 1930 or anticommunist_force < left_force or return_to_normalcy) and kpd_radio == 0 and kpd_resources >= 2
+view-if: {!
+    if (Q.kpd_leader == "Brandlerites") {
+        if (Q.kpd_stalinist_strength < 60) {
+            return false;
+        } else if (!Q.return_to_normalcy && Q.left_force < Q.anticommunist_force && Q.year >= 1930) {
+            return false;
+        } else if (Q.kpd_radio > 3 && Q.kpd_radio <= 5 && Q.year <= 1931) {
+            return false;
+        } else if (Q.kpd_radio == 0) {
+            if (Q.kpd_resources >= 2) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    } else {
+        return false;
+    }
+!}
 
 The KPD's new radio station allows the KPD to connect to people in a more intimate setting than before, spreading the message of <span style="color: #700000;">communism</span> along with music and other popular content. Since most proletarians cannot afford family radios right now, they are reaching the middle class, a fact of which many in their party are harshly critical.
 
 @radio_2
 title: The KPD will fund a radio station
-view-if: kpd_leader == "Brandlerites" and kpd_brandlerite_strength >= 60 and (year < 1930 or anticommunist_force < left_force or return_to_normalcy) and (kpd_radio <= 3 or kpd_radio > 5 or year > 1931) and kpd_resources >= 1 and kpd_radio > 0 and kpd_radio <= 3
+view-if: {!
+    if (Q.kpd_leader == "Brandlerites") {
+        if (Q.kpd_stalinist_strength < 60) {
+            return false;
+        } else if (!Q.return_to_normalcy && Q.left_force < Q.anticommunist_force && Q.year >= 1930) {
+            return false;
+        } else if (Q.kpd_radio > 3 && Q.kpd_radio <= 5 && Q.year <= 1931) {
+            return false;
+        } else if (Q.kpd_radio == 0) {
+            return false;
+        } else if (Q.kpd_resources >= 1) {
+            if (Q.kpd_radio > 0 && Q.kpd_radio <= 3) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    } else {
+        return false;
+    }
+!}
 
 The KPD's new radio network has a mix of popular and political programming, and is proving a success.
 
 @radio_3
 title: The KPD will fund a radio station
-view-if: kpd_leader == "Brandlerites" and kpd_brandlerite_strength >= 60 and (year < 1930 or anticommunist_force < left_force or return_to_normalcy) and (kpd_radio > 3 and kpd_radio <= 5 and year <= 1931)
+view-if: {!
+    if (Q.kpd_leader == "Brandlerites") {
+        if (Q.kpd_stalinist_strength < 60) {
+            return false;
+        } else if (!Q.return_to_normalcy && Q.left_force < Q.anticommunist_force && Q.year >= 1930) {
+            return false;
+        } else if (Q.kpd_radio > 3 && Q.kpd_radio <= 5 && Q.year <= 1931) {
+            return true;
+        } else {
+            return false;
+        }
+    } else {
+        return false;
+    }
+!}
 
 The KPD's radio network has become a successful tool for spreading their message.
 
 @radio_4
 title: The KPD will fund a radio station
-view-if: kpd_leader == "Brandlerites" and kpd_brandlerite_strength >= 60 and (year < 1930 or anticommunist_force < left_force or return_to_normalcy) and (kpd_radio <= 3 or kpd_radio > 5 or year > 1931) and kpd_resources >= 1 and kpd_radio <= 9
+view-if: {!
+    if (Q.kpd_leader == "Brandlerites") {
+        if (Q.kpd_stalinist_strength < 60) {
+            return false;
+        } else if (!Q.return_to_normalcy && Q.left_force < Q.anticommunist_force && Q.year >= 1930) {
+            return false;
+        } else if (Q.kpd_radio > 3 && Q.kpd_radio <= 5 && Q.year <= 1931) {
+            return false;
+        } else if (Q.kpd_radio == 0) {
+            return false;
+        } else if (Q.kpd_resources >= 1) {
+            if (Q.kpd_radio > 0 && Q.kpd_radio <= 3) {
+                return false;
+            } else if (Q.kpd_radio > 3 && (Q.radio >= 6 || Q.year >= 1932) && Q.kpd_radio <= 9) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    } else {
+        return false;
+    }
+!}
 
 The KPD are continuing to invest in their radio stations. Both commercial and political radio are becoming more prevalent, making it harder to spread their message amidst the competition.

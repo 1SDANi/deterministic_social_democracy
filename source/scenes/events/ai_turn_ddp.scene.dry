@@ -23,7 +23,7 @@ view-if: true
 @labor_affairs
 title: Labor Affairs
 subtitle: The industrial Ruhr region is aflame with labor unrest
-view-if: labor_minister_party == ddp_name and labor_affairs_timer == 0 and strike_term_seen == 0
+view-if: labor_minister_party == ddp_name and labor_affairs_post_timer > 0 and strike_term_seen_post_timer > 0
 
 The industrial Ruhr region is aflame with labor unrest
 

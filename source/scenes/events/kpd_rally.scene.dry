@@ -1,9 +1,19 @@
-title: KDP Rally
+title: KPD Rally
 new-page: true
 
 @rally
 title: Rally
-view-if: kpd_rally_timer <= 0 and not (labor_minister_party == "KPD" and labor_affairs_timer == 0 and strike_term_seen == 0) and not (sa_force > 25 and not sa_banned and not return_to_normalcy)
+view-if: {!
+    if (Q.labor_minister_party == "KPD" && Q.labor_affairs_post_timer == 0 && Q.strike_term_seen_post_timer == 0) {
+        return false;
+    } else if (Q.sa_force > 25 && !Q.sa_banned && !Q.return_to_normalcy) {
+        return false;
+    } else if (Q.kpd_rally_post_timer > 0) {
+        return true;
+    } else {
+        return false;
+    }
+!}
 
 The KPD will hold a rally
 
@@ -17,7 +27,15 @@ The KPD will hold a rally
 
 @sa_disrupt
 title: The <span style="color: #7A3C00;">Nazi</span> <span style="color: #7A3C00;">**SA**</span> has disrupted the KPD rally!
-view-if: kpd_rally_timer <= 0 and not (labor_minister_party == "KPD" and labor_affairs_timer == 0 and strike_term_seen == 0) and sa_force > 25 and not sa_banned and not return_to_normalcy
+view-if: {!
+    if (Q.labor_minister_party == "KPD" && Q.labor_affairs_timer == 0 && Q.strike_term_seen == 0) {
+        return false;
+    } else if (Q.sa_force > 25 && !Q.sa_banned && !Q.return_to_normalcy && Q.kpd_rally_post_timer > 0) {
+        return true;
+    } else {
+        return false;
+    }
+!}
 
 The <span style="color: #7A3C00;">Nazi</span> <span style="color: #7A3C00;">**SA**</span> has disrupted the KPD rally!
 
@@ -65,7 +83,19 @@ The KPD's speakers denounce the military establishment and all the spending ente
 
 @rally_democracy
 title: Expanding our nascent democracy and defending it against <span style="color: #808080;">dictatorship</span> and <span style="color: #7A3C00;">fascism</span>.
-view-if: kpd_leader == "Brandlerites" and kpd_in_government and not nazi_peak_triggered and not return_to_normalcy and not (kpd_wtb_adopted = 1 or wtb_implemented <= kpd_wtb_rally)
+view-if: {!
+    if (Q.kpd_leader == "Brandlerites") {
+        if (Q.kpd_wtb_adopted && !Q.return_to_normalcy && (Q.wtb_implemented <= Q.kpd_wtb_rally || !Q.kpd_in_government)) {
+            return false;
+        } else if (Q.kpd_in_government && !Q.nazi_peak_triggered) {
+            return true;
+        } else {
+            return false;
+        }
+    } else {
+        return false;
+    }
+!}
 
 The KPD's speakers defend the <span style="color: #000000;">rep</span><span style="color: #DD0000;">ubl</span><span style="color: #FFCC00;">ican</span> system and rail against the <span style="color: #808080;">monarchists</span> and <span style="color: #7A3C00;">authoritarians</span> who threaten it.
 
@@ -74,12 +104,42 @@ The KPD's speakers defend the <span style="color: #000000;">rep</span><span styl
 
 @rally_wtb
 title: Support the WTB plan!
-view-if: kpd_leader == "Brandlerites" and kpd_wtb_adopted and not return_to_normalcy and (wtb_implemented <= kpd_wtb_rally or not kpd_in_government)
+view-if: {!
+    if (Q.kpd_leader == "Brandlerites") {
+        if (Q.kpd_wtb_adopted && !Q.return_to_normalcy && (Q.wtb_implemented <= Q.kpd_wtb_rally || !Q.kpd_in_government)) {
+            return true;
+        } else {
+            return false;
+        }
+    } else {
+        return false;
+    }
+!}
 
 The WTB plan has become a popular rallying cry for the KPD. The workers are eager to go back to work, and that is exactly what the plan promises. [? if not wtb_implemented: However, many still believe that the plan is merely an empty slogan and will remain skeptical until we actually implement it. ?]
 
 @rally_local
 title: A mixture of various local and national concerns that resonate most with the audience.
-view-if: (kpd_leader == "Brandlerites" and not (kpd_wtb_adopted and not return_to_normalcy and (wtb_implemented <= kpd_wtb_rally or not kpd_in_government)) and not (kpd_in_government and not nazi_peak_triggered and not return_to_normalcy)) or (kpd_leader == "Conciliators" and return_to_normalcy)
+view-if: {!
+    if (Q.kpd_leader == "Brandlerites") {
+        if (Q.kpd_wtb_adopted && !Q.return_to_normalcy && (Q.wtb_implemented <= Q.kpd_wtb_rally || !Q.kpd_in_government)) {
+            return false;
+        } else if (Q.kpd_in_government && !Q.nazi_peak_triggered) {
+            return false;
+        } else {
+            return true;
+        }
+    } else if (Q.kpd_leader == "Conciliators") {
+        if (Q.return_to_normalcy) {
+            return false;
+        } else if (Q.socializations <= 0) {
+            return false;
+        } else {
+            return true;
+        }
+    } else {
+        return false;
+    }
+!}
 
 The KPD's speakers have gauged the mood and are speaking to the issues that seem to most affect the workers in this moment.

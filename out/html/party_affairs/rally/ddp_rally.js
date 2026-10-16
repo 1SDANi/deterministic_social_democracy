@@ -1,13 +1,17 @@
 window.ddp_rally = function() {
+    const Q = window.dendryUI?.dendryEngine?.state?.qualities;
+
     console.log('ddp rally');
-    if ((dendryUI.dendryEngine.state.qualities.year == 1928 && dendryUI.dendryEngine.state.qualities.month == 1) || (dendryUI.dendryEngine.state.qualities.next_election_time - dendryUI.dendryEngine.state.qualities.time <= 6)) {
-        dendryUI.dendryEngine.state.qualities.ddp_rally_timer = 2;
+    if ((Q.year == 1928 && Q.month == 1) || (Q.next_election_time - Q.time <= 6)) {
+        Q.ddp_rally_timer = 2;
+        Q.ddp_rally_post_timer = 1;
     } else {
-        dendryUI.dendryEngine.state.qualities.ddp_rally_timer = 6;
+        Q.ddp_rally_timer = 6;
+        Q.ddp_rally_post_timer = 1;
     }
 
-    if (dendryUI.dendryEngine.state.qualities.sa_force > 25 && !dendryUI.dendryEngine.state.qualities.sa_banned && !dendryUI.dendryEngine.state.qualities.return_to_normalcy) {
-        if (dendryUI.dendryEngine.state.qualities.ddp_ideology == "Left") {
+    if (Q.sa_force > 25 && !Q.sa_banned && !Q.return_to_normalcy) {
+        if (Q.ddp_ideology == "Left") {
             window.ddp_police_protect();
         }
     } else {
@@ -16,10 +20,12 @@ window.ddp_rally = function() {
 };
 
 window.ddp_police_protect = function() {
-    console.log('ddp_police_protect');
-    dendryUI.dendryEngine.state.qualities.police_protect_success_ddp = dendryUI.dendryEngine.state.qualities.prussian_police_loyalty_ddp*dendryUI.dendryEngine.state.qualities.prussian_police_militancy*dendryUI.dendryEngine.state.qualities.prussian_police_strength*2 - dendryUI.dendryEngine.state.qualities.sa_strength*dendryUI.dendryEngine.state.qualities.sa_militancy;
+    const Q = window.dendryUI?.dendryEngine?.state?.qualities;
 
-    if (dendryUI.dendryEngine.state.qualities.police_protect_success_ddp >= 0) {
+    console.log('ddp_police_protect');
+    Q.police_protect_success_ddp = Q.prussian_police_loyalty_ddp*Q.prussian_police_militancy*Q.prussian_police_strength*2 - Q.sa_strength*Q.sa_militancy;
+
+    if (Q.police_protect_success_ddp >= 0) {
         window.ddp_rally_results()
     } else {
         window.ddp_police_protect_lose()
@@ -27,159 +33,175 @@ window.ddp_police_protect = function() {
 };
 
 window.ddp_police_protect_lose = function() {
+    const Q = window.dendryUI?.dendryEngine?.state?.qualities;
+
     console.log('ddp_police_protect_lose');
-    dendryUI.dendryEngine.state.qualities.workers_nsdap += 3;
-    dendryUI.dendryEngine.state.qualities.strife += 0.125;
+    Q.workers_nsdap += 3;
+    Q.strife += 0.125;
 };
 
 window.ddp_rally_results = function() {
+    const Q = window.dendryUI?.dendryEngine?.state?.qualities;
+
     console.log('ddp_rally_results');
-    if (dendryUI.dendryEngine.state.qualities.ddp_leader == "Mahraun") {
+    if (Q.ddp_leader == "Mahraun") {
         window.ddp_rally_collaboration();
-    } else if (dendryUI.dendryEngine.state.qualities.ddp_leader == "Lüders") {
-        if (dendryUI.dendryEngine.state.qualities.welfare > 0) {
+    } else if (Q.ddp_leader == "Lüders") {
+        if (Q.welfare > 0) {
             window.ddp_rally_welfare();
         } else {
             window.ddp_rally_local();
         }
-    } else if (dendryUI.dendryEngine.state.qualities.ddp_leader == "Lemmer") {
-        if (dendryUI.dendryEngine.state.qualities.return_to_normalcy == 0 && dendryUI.dendryEngine.state.qualities.ddp_lautenbach_adopted && !dendryUI.dendryEngine.state.qualities.return_to_normalcy && (dendryUI.dendryEngine.state.qualities.lautenbach_adopted <= dendryUI.dendryEngine.state.qualities.ddp_lautenbach_rally || !dendryUI.dendryEngine.state.qualities.ddp_in_government)) {
+    } else if (Q.ddp_leader == "Lemmer") {
+        if (Q.return_to_normalcy == 0 && Q.ddp_lautenbach_adopted && !Q.return_to_normalcy && (Q.lautenbach_adopted <= Q.ddp_lautenbach_rally || !Q.ddp_in_government)) {
             window.ddp_rally_lautenbach();
         } else {
             window.ddp_rally_local();
         }
-    } else if (dendryUI.dendryEngine.state.qualities.ddp_leader == "Stolper" || dendryUI.dendryEngine.state.qualities.ddp_leader == "Dietrich") {
+    } else if (Q.ddp_leader == "Stolper" || Q.ddp_leader == "Dietrich") {
         window.ddp_rally_nationalism();
-    } else if (dendryUI.dendryEngine.state.qualities.ddp_leader == "Maier" || dendryUI.dendryEngine.state.qualities.ddp_leader == "Heuss" || dendryUI.dendryEngine.state.qualities.ddp_leader == "Koch-Weser") {
+    } else if (Q.ddp_leader == "Maier" || Q.ddp_leader == "Heuss" || Q.ddp_leader == "Koch-Weser") {
         window.ddp_rally_democracy();
     }
 };
 
 window.ddp_rally_collaboration = function() {
+    const Q = window.dendryUI?.dendryEngine?.state?.qualities;
+
     console.log('ddp_rally_collaboration');
-    dendryUI.dendryEngine.state.qualities.new_middle_ddp += 3*(1-dendryUI.dendryEngine.state.qualities.ddp_dissent);
-        dendryUI.dendryEngine.state.qualities.old_middle_ddp += 2*(1-dendryUI.dendryEngine.state.qualities.ddp_dissent);
+    Q.new_middle_ddp += 3*(1-Q.ddp_dissent);
+        Q.old_middle_ddp += 2*(1-Q.ddp_dissent);
 
-        if (dendryUI.dendryEngine.state.qualities.workers_schleicher_bonus > 0) {
-            dendryUI.dendryEngine.state.qualities.workers_ddp += 2*(1-dendryUI.dendryEngine.state.qualities.ddp_dissent); 
-            dendryUI.dendryEngine.state.qualities.unemployed_ddp += 2*(1-dendryUI.dendryEngine.state.qualities.ddp_dissent);
+        if (Q.workers_schleicher_bonus > 0) {
+            Q.workers_ddp += 2*(1-Q.ddp_dissent); 
+            Q.unemployed_ddp += 2*(1-Q.ddp_dissent);
         }
 
         
-        if (dendryUI.dendryEngine.state.qualities.workers_schleicher_bonus > 1) {
-            dendryUI.dendryEngine.state.qualities.workers_ddp += 2*(1-dendryUI.dendryEngine.state.qualities.ddp_dissent);
-            dendryUI.dendryEngine.state.qualities.unemployed_ddp += 2*(1-dendryUI.dendryEngine.state.qualities.ddp_dissent);
+        if (Q.workers_schleicher_bonus > 1) {
+            Q.workers_ddp += 2*(1-Q.ddp_dissent);
+            Q.unemployed_ddp += 2*(1-Q.ddp_dissent);
         }
 
-        dendryUI.dendryEngine.state.qualities.dvp_right += 1;
-        dendryUI.dendryEngine.state.qualities.ddp_right += 1;
-        dendryUI.dendryEngine.state.qualities.lvp_right += 1;
+        Q.dvp_right += 1;
+        Q.ddp_right += 1;
+        Q.lvp_right += 1;
         
-        dendryUI.dendryEngine.state.qualities.ddp_business_strength += 3;
+        Q.ddp_business_strength += 3;
 
-        dendryUI.dendryEngine.state.qualities.ddp_labor_dissent -= 3;
-        dendryUI.dendryEngine.state.qualities.ddp_liberal_dissent -= 3;
-        dendryUI.dendryEngine.state.qualities.ddp_business_dissent -= 3;
-        dendryUI.dendryEngine.state.qualities.ddp_regionalist_dissent -= 3;
-        dendryUI.dendryEngine.state.qualities.ddp_autocratization += 1;
+        Q.ddp_labor_dissent -= 3;
+        Q.ddp_liberal_dissent -= 3;
+        Q.ddp_business_dissent -= 3;
+        Q.ddp_regionalist_dissent -= 3;
+        Q.ddp_autocratization += 1;
         
-        dendryUI.dendryEngine.state.qualities.dvp_industrialist_strength += 3;
-        dendryUI.dendryEngine.state.qualities.z_conservative_strength += 3;
+        Q.dvp_industrialist_strength += 3;
+        Q.z_conservative_strength += 3;
 };
 
 window.ddp_rally_welfare = function() {
-    console.log('ddp_rally_welfare');
-    dendryUI.dendryEngine.state.qualities.new_middle_ddp += 2*(1-dendryUI.dendryEngine.state.qualities.ddp_dissent);
-    dendryUI.dendryEngine.state.qualities.workers_ddp += 1*(1-dendryUI.dendryEngine.state.qualities.ddp_dissent);
+    const Q = window.dendryUI?.dendryEngine?.state?.qualities;
 
-    if (dendryUI.dendryEngine.state.qualities.welfare > 0) {
-        dendryUI.dendryEngine.state.qualities.new_middle_ddp += 2*(1-dendryUI.dendryEngine.state.qualities.ddp_dissent);
-        dendryUI.dendryEngine.state.qualities.workers_ddp += 2*(1-dendryUI.dendryEngine.state.qualities.ddp_dissent);
-        dendryUI.dendryEngine.state.qualities.unemployed_ddp += 1*(1-dendryUI.dendryEngine.state.qualities.ddp_dissent);
+    console.log('ddp_rally_welfare');
+    Q.new_middle_ddp += 2*(1-Q.ddp_dissent);
+    Q.workers_ddp += 1*(1-Q.ddp_dissent);
+
+    if (Q.welfare > 0) {
+        Q.new_middle_ddp += 2*(1-Q.ddp_dissent);
+        Q.workers_ddp += 2*(1-Q.ddp_dissent);
+        Q.unemployed_ddp += 1*(1-Q.ddp_dissent);
     }
 
-    dendryUI.dendryEngine.state.qualities.ddp_left += 0.5;
+    Q.ddp_left += 0.5;
 
-    dendryUI.dendryEngine.state.qualities.ddp_liberal_strength += 3;
-    dendryUI.dendryEngine.state.qualities.ddp_labor_strength += 3;
+    Q.ddp_liberal_strength += 3;
+    Q.ddp_labor_strength += 3;
     
-    dendryUI.dendryEngine.state.qualities.ddp_labor_dissent -= 3;
-    dendryUI.dendryEngine.state.qualities.ddp_liberal_dissent -= 3;
+    Q.ddp_labor_dissent -= 3;
+    Q.ddp_liberal_dissent -= 3;
 
-    dendryUI.dendryEngine.state.qualities.ddp_autocratization += 1;
+    Q.ddp_autocratization += 1;
 };
 
 window.ddp_rally_nationalism = function() {
+    const Q = window.dendryUI?.dendryEngine?.state?.qualities;
+
     console.log('ddp_rally_nationalism');
-    dendryUI.dendryEngine.state.qualities.nationalism += 3*(1-dendryUI.dendryEngine.state.qualities.ddp_dissent);
+    Q.nationalism += 3*(1-Q.ddp_dissent);
         
-    dendryUI.dendryEngine.state.qualities.ddp_autocratization += 1;
-    dendryUI.dendryEngine.state.qualities.new_middle_ddp += 2*(1-dendryUI.dendryEngine.state.qualities.ddp_dissent);
-    dendryUI.dendryEngine.state.qualities.old_middle_ddp += 1*(1-dendryUI.dendryEngine.state.qualities.ddp_dissent);
+    Q.ddp_autocratization += 1;
+    Q.new_middle_ddp += 2*(1-Q.ddp_dissent);
+    Q.old_middle_ddp += 1*(1-Q.ddp_dissent);
 
-    if (dendryUI.dendryEngine.state.qualities.ddp_autocratization >= 3) {
-        dendryUI.dendryEngine.state.qualities.workers_ddp += 1*(1-dendryUI.dendryEngine.state.qualities.ddp_dissent);
-        dendryUI.dendryEngine.state.qualities.unemployed_ddp += 1*(1-dendryUI.dendryEngine.state.qualities.ddp_dissent);
-        dendryUI.dendryEngine.state.qualities.pro_republic -= 3*(1-dendryUI.dendryEngine.state.qualities.ddp_dissent);
+    if (Q.ddp_autocratization >= 3) {
+        Q.workers_ddp += 1*(1-Q.ddp_dissent);
+        Q.unemployed_ddp += 1*(1-Q.ddp_dissent);
+        Q.pro_republic -= 3*(1-Q.ddp_dissent);
 
-        if (dendryUI.dendryEngine.state.qualities.nationalism >= 60) {
-            dendryUI.dendryEngine.state.qualities.ddp_right += 0.5;
-            dendryUI.dendryEngine.state.qualities.dvp_right += 0.5;
+        if (Q.nationalism >= 60) {
+            Q.ddp_right += 0.5;
+            Q.dvp_right += 0.5;
 
-            dendryUI.dendryEngine.state.qualities.ddp_regionalist_strength += 3;
-            dendryUI.dendryEngine.state.qualities.dvp_nationalist_strength += 3;
-            dendryUI.dendryEngine.state.qualities.z_conservative_strength += 3;
+            Q.ddp_regionalist_strength += 3;
+            Q.dvp_nationalist_strength += 3;
+            Q.z_conservative_strength += 3;
         }
     }
 };
 
 
 window.ddp_rally_democracy = function() {
+    const Q = window.dendryUI?.dendryEngine?.state?.qualities;
+
     console.log('ddp_rally_democracy');
-    dendryUI.dendryEngine.state.qualities.ddp_democratization += 1;
+    Q.ddp_democratization += 1;
 
-    dendryUI.dendryEngine.state.qualities.pro_republic += 3*(1 - dendryUI.dendryEngine.state.qualities.ddp_dissent);
+    Q.pro_republic += 3*(1 - Q.ddp_dissent);
 
-    if (dendryUI.dendryEngine.state.qualities.ddp_democratization >= 3) {
-        dendryUI.dendryEngine.state.qualities.workers_ddp += 1*(1-dendryUI.dendryEngine.state.qualities.ddp_dissent);
-        dendryUI.dendryEngine.state.qualities.unemployed_ddp += 1*(1-dendryUI.dendryEngine.state.qualities.ddp_dissent);
-        dendryUI.dendryEngine.state.qualities.new_middle_ddp += 2*(1-dendryUI.dendryEngine.state.qualities.ddp_dissent);
-        dendryUI.dendryEngine.state.qualities.old_middle_ddp += 1*(1-dendryUI.dendryEngine.state.qualities.ddp_dissent);
+    if (Q.ddp_democratization >= 3) {
+        Q.workers_ddp += 1*(1-Q.ddp_dissent);
+        Q.unemployed_ddp += 1*(1-Q.ddp_dissent);
+        Q.new_middle_ddp += 2*(1-Q.ddp_dissent);
+        Q.old_middle_ddp += 1*(1-Q.ddp_dissent);
     }
 
-    if (dendryUI.dendryEngine.state.qualities.pro_republic >= 70) {
-        dendryUI.dendryEngine.state.qualities.ddp_left += 0.5;
-        dendryUI.dendryEngine.state.qualities.dvp_left += 0.5;
+    if (Q.pro_republic >= 70) {
+        Q.ddp_left += 0.5;
+        Q.dvp_left += 0.5;
         
-        dendryUI.dendryEngine.state.qualities.ddp_liberal_strength += 3;
-        dendryUI.dendryEngine.state.qualities.dvp_liberal_strength += 3;
-        dendryUI.dendryEngine.state.qualities.z_center_strength += 3;
+        Q.ddp_liberal_strength += 3;
+        Q.dvp_liberal_strength += 3;
+        Q.z_center_strength += 3;
     }
 };
 
 window.ddp_rally_lautenbach = function() {
-    console.log('ddp_rally_lautenbach');
-    dendryUI.dendryEngine.state.qualities.new_middle_ddp += 3*(1-dendryUI.dendryEngine.state.qualities.ddp_dissent);
-    dendryUI.dendryEngine.state.qualities.old_middle_ddp += 2*(1-dendryUI.dendryEngine.state.qualities.ddp_dissent);
-    dendryUI.dendryEngine.state.qualities.workers_ddp += 2*(1-dendryUI.dendryEngine.state.qualities.ddp_dissent);
-    dendryUI.dendryEngine.state.qualities.unemployed_ddp += 1*(1-dendryUI.dendryEngine.state.qualities.ddp_dissent);
-    dendryUI.dendryEngine.state.qualities.rural_ddp += 1*(1-dendryUI.dendryEngine.state.qualities.ddp_dissent);
+    const Q = window.dendryUI?.dendryEngine?.state?.qualities;
 
-    if (dendryUI.dendryEngine.state.qualities.lautenbach_adopted) {
-        dendryUI.dendryEngine.state.qualities.new_middle_ddp += 3*(1-dendryUI.dendryEngine.state.qualities.ddp_dissent);
-        dendryUI.dendryEngine.state.qualities.old_middle_ddp += 2*(1-dendryUI.dendryEngine.state.qualities.ddp_dissent);
-        dendryUI.dendryEngine.state.qualities.workers_ddp += 2*(1-dendryUI.dendryEngine.state.qualities.ddp_dissent);
-        dendryUI.dendryEngine.state.qualities.unemployed_ddp += 2*(1-dendryUI.dendryEngine.state.qualities.ddp_dissent);
-        dendryUI.dendryEngine.state.qualities.rural_ddp += 1*(1-dendryUI.dendryEngine.state.qualities.ddp_dissent);
+    console.log('ddp_rally_lautenbach');
+    Q.new_middle_ddp += 3*(1-Q.ddp_dissent);
+    Q.old_middle_ddp += 2*(1-Q.ddp_dissent);
+    Q.workers_ddp += 2*(1-Q.ddp_dissent);
+    Q.unemployed_ddp += 1*(1-Q.ddp_dissent);
+    Q.rural_ddp += 1*(1-Q.ddp_dissent);
+
+    if (Q.lautenbach_adopted) {
+        Q.new_middle_ddp += 3*(1-Q.ddp_dissent);
+        Q.old_middle_ddp += 2*(1-Q.ddp_dissent);
+        Q.workers_ddp += 2*(1-Q.ddp_dissent);
+        Q.unemployed_ddp += 2*(1-Q.ddp_dissent);
+        Q.rural_ddp += 1*(1-Q.ddp_dissent);
     }
     
-    dendryUI.dendryEngine.state.qualities.ddp_lautenbach_rally += 1;
+    Q.ddp_lautenbach_rally += 1;
 };
 
 window.ddp_rally_local = function() {
+    const Q = window.dendryUI?.dendryEngine?.state?.qualities;
+
     console.log('ddp_rally_local');
-    dendryUI.dendryEngine.state.qualities.new_middle_ddp += 3*(1-dendryUI.dendryEngine.state.qualities.ddp_dissent);
-    dendryUI.dendryEngine.state.qualities.workers_ddp += 2*(1-dendryUI.dendryEngine.state.qualities.ddp_dissent);
-    dendryUI.dendryEngine.state.qualities.old_middle_ddp += 2*(1-dendryUI.dendryEngine.state.qualities.ddp_dissent);
-    dendryUI.dendryEngine.state.qualities.unemployed_ddp += 1*(1-dendryUI.dendryEngine.state.qualities.ddp_dissent);
+    Q.new_middle_ddp += 3*(1-Q.ddp_dissent);
+    Q.workers_ddp += 2*(1-Q.ddp_dissent);
+    Q.old_middle_ddp += 2*(1-Q.ddp_dissent);
+    Q.unemployed_ddp += 1*(1-Q.ddp_dissent);
 };

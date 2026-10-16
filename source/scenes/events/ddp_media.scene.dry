@@ -1,3 +1,99 @@
 title: DDP Media
 new-page: true
 
+# Ripped from Cascadian Ptriot's amazing DDP mod
+
+@media
+title: Media
+view-if: ddp_media_timer <= 0 and ddp_rally_timer > 0 and (labor_minister_party != "DDP" or labor_affairs_post_timer != 0 or strike_term_seen_post_timer != 0)
+
+The DDP will invest in liberal media
+
+- @berlinertagblad
+- @diehilfe
+- @echoderjungedemokratie
+- @integrate1
+- @debate
+
+@berlinertagblad
+title: The DDP will fund the Berliner Tageblatt
+subtitle: -1 resource. The biggest left-liberal publisher in Germany, edited by prominent DDP member Theodor Wolff.
+view-if: {!
+    if (Q.ddp_resources >= 1) {
+        return true;
+    } else {
+        return false;
+    }
+!} 
+
+The DDP has funded the Berliner Tageblatt, and with its wide circulation, we see a noticeable increase in support for the DDP and for democracy.
+
+@diehilfe
+title: The DDP will fund Die Hilfe.
+subtitle: -1 resource, edited by herr Fredrich Naumann himself.
+view-if: ddp_resources >= 1 and dh_integrated == 0
+
+Funding Die Hilfe certainly benefits the DDP, as the editors are their most loyal members.
+
+@echoderjungedemokratie
+title: The DDP will fund the Echo der Junge Demokratie.
+subtitle: -1 resource, the newspaper of their Youth wing, herr Ludwig Quidde also publishes his writings here.
+view-if: ddp_resources >= 1 and edjd_integrated == 0
+
+The DDP have supported their youth wing's newspaper, to which they have responded with enthusiasm, and with its circulation, support for pacifism has grown within the party.
+
+@integrate1
+title: The DDP will integrate Die Hilfe into their newspaper.
+subtitle: -1 resource. 
+view-if: ddp_resources >= 1 and newspaper_founded = 1 and dh_integrated = 0 and (newspaper_editor = "Erkelenz" or newspaper_editor = "Heuss")
+
+The DDP has integrated Die Hilfe into their newspaper network, growing its influence significantly, and bringing with it funding and popularity.
+
+@integrate2
+title: The DDP will integrate Echo der Junge Demokratie into their newspaper.
+subtitle: [? if young_democrats < 3 : -2 resources ?][? if young_democrats >= 3 : -1 resource, their investments into Echo der Junge Demokratie has reduced the cost ?]
+view-if: newspaper_founded = 1 and edjd_integrated = 0 and (newspaper_editor = "Erkelenz" or newspaper_editor = "Quidde")
+
+THE DDP has integrated Echo der Junge Demokratie into their newspaper network, growing the influence of pacifism within the party.
+
+@bolsterpartymedia
+title: The DDP will continue to develop their newspaper network.
+subtitle: [? if newspaper_invested_in >= 3 : -1 resource. ?][? if newspaper_invested_in < 3 : It is now financially self-sufficient and doesn't require further resources to grow. ?]
+view-if: newspaper_founded = 1
+
+The DDP's newspaper network has a mix of popular and political programming, and is proving a success in spreading our meseage.
+
+@debate
+title: The DDP will have vibrant ideological debates in their party newspaper.
+view-if: newspaper_founded = 1
+
+The DDP's hosting of ideological debates within their party newspaper has successfully paved over the many tensions within their party.
+
+@partymedia
+title: The DDP will create their own official media
+subtitle: -2 resources.
+view-if: ddp_resources >= 2 and newspaper_founded = 0
+
+We have founded our own newspaper, and we must now select its head editor.
+
+- @heuss
+- @quide
+- @erkelenz
+
+@heuss
+title: Theodor Heuss, a rising star with a patriotic attitute.
+view-if: ddp_regionalist_strength + ddp_industrialist_strength > ddp_labor_strength + ddp_liberal_strength
+
+The right has managed to apoint Theodor Heuss to the position of chief editor.
+
+@quide
+title: Ludwig Quidde, notable pacifist.
+view-if: (ddp_labor_strength + ddp_liberal_strength > ddp_regionalist_strength + ddp_industrialist_strength) and not (ddp_labor_strength > ddp_regionalist_strength + ddp_industrialist_strength + ddp_liberal_strength)
+
+Ludiwg quide has been apointed chief editor.
+
+@erkelenz
+title: Anton Erkelenz, the labour leader.
+view-if: ddp_labor_strength > ddp_regionalist_strength + ddp_industrialist_strength + ddp_liberal_strength
+
+The left has managed to apoint Anton Erkelenz to he position of cheif editor.|

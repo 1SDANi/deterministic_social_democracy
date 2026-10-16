@@ -3,7 +3,17 @@ new-page: true
 
 @rally
 title: Rally
-view-if: z_rally_timer <= 0 and not (labor_minister_party == z_party_name and labor_affairs_timer == 0 and strike_term_seen == 0) and not (sa_force > 25 and not sa_banned and not return_to_normalcy)
+view-if: {!
+    if (Q.labor_minister_party == Q.z_party_name && Q.labor_affairs_post_timer == 0 && Q.strike_term_seen_post_timer == 0) {
+        return false;
+    } else if (Q.sa_force > 25 && !Q.sa_banned && !Q.return_to_normalcy) {
+        return false;
+    } else if (Q.z_rally_post_timer > 0) {
+        return true;
+    } else {
+        return false;
+    }
+!}
 
 The [? if z_party_name != "CVP": <span style="color: #000000;">Center Party</span> ?][? if z_party_name == "CVP": <span style="color: #000000;">**CVP**</span>?] will hold a rally
 
@@ -16,7 +26,15 @@ The [? if z_party_name != "CVP": <span style="color: #000000;">Center Party</spa
 
 @sa_disrupt
 title: The <span style="color: #7A3C00;">Nazi</span> <span style="color: #7A3C00;">**SA**</span> has disrupted the [? if z_party_name != "CVP": <span style="color: #000000;">Center Party</span> ?][? if z_party_name == "CVP": <span style="color: #000000;">**CVP**</span>?] rally!
-view-if: z_rally_timer <= 0 and not (labor_minister_party == z_party_name and labor_affairs_timer == 0 and strike_term_seen == 0) and sa_force > 25 and not sa_banned and not return_to_normalcy
+view-if: {!
+    if (Q.labor_minister_party == Q.z_party_name && Q.labor_affairs_timer == 0 && Q.strike_term_seen == 0) {
+        return false;
+    } else if (Q.sa_force > 25 && !Q.sa_banned && !Q.return_to_normalcy && Q.z_rally_post_timer > 0) {
+        return true;
+    } else {
+        return false;
+    }
+!}
 
 The <span style="color: #7A3C00;">Nazi</span> <span style="color: #7A3C00;">**SA**</span> has disrupted the [? if z_party_name != "CVP": <span style="color: #000000;">Center Party</span> ?][? if z_party_name == "CVP": <span style="color: #000000;">**CVP**</span>?] rally!
 
@@ -26,7 +44,6 @@ The <span style="color: #7A3C00;">Nazi</span> <span style="color: #7A3C00;">**SA
 @rally_police
 title: The [? if z_party_name != "CVP": <span style="color: #000000;">Center Party</span> ?][? if z_party_name == "CVP": <span style="color: #000000;">**CVP**</span>?] has called the police to protect their rally
 view-if: z_leader == "Kaiser" or z_leader == "Joos" or z_leader == "Wirth"
-on-arrival: police_protect_success_z = prussian_police_loyalty * prussian_police_militancy * prussian_police_strength*2 - sa_militancy*sa_strength;
 
 The [? if z_party_name != "CVP": <span style="color: #000000;">Center Party</span> ?][? if z_party_name == "CVP": <span style="color: #000000;">**CVP**</span>?] have called the police to protect their rally
 
@@ -65,6 +82,8 @@ The [? if z_party_name != "CVP": <span style="color: #000000;">Center Party</spa
 title: Kulturpolitik - the defense of catholic rights and culture.
 view-if: z_leader == "Kaas" or z_leader == "Marx"
 
+The [? if z_party_name != "CVP": <span style="color: #000000;">Center Party</span> ?][? if z_party_name == "CVP": <span style="color: #000000;">**CVP**</span>?] rallies catholics in support of the defense of catholic rights and culture 
+
 @rally_nationalism
 title: Supporting rearmament, nationalism, and an end to reparations
 view-if: z_leader == "Brüning" or z_leader == "Adenauer"
@@ -75,7 +94,19 @@ The [? if z_party_name != "CVP": <span style="color: #000000;">Center Party</spa
 
 @rally_democracy
 title: Expanding our nascent democracy and defending it against <span style="color: #808080;">dictatorship</span> and <span style="color: #7A3C00;">fascism</span>.
-view-if: z_leader == "Joos" or (z_leader == "Wirth" and (return_to_normalcy or not z_lautenbach_adopted or not (lautenbach_adopted <= z_lautenbach_rally or not z_in_government)))
+view-if: {!
+    if (Q.z_leader == "Joos") {
+        return true;
+    } else if (Q.z_leader == "Wirth") {
+        if (Q.z_lautenbach_adopted && !Q.return_to_normalcy && (Q.lautenbach_adopted >= Q.z_lautenbach_rally || !Q.z_in_government)) {
+            return false;
+        } else {
+            return true;
+        }
+    } else {
+        return false;
+    }
+!}
 
 The [? if z_party_name != "CVP": <span style="color: #000000;">Center Party</span> ?][? if z_party_name == "CVP": <span style="color: #000000;">**CVP**</span>?] will defend the <span style="color: #000000;">rep</span><span style="color: #DD0000;">ubl</span><span style="color: #FFCC00;">ican</span> system and rail against the <span style="color: #808080;">monarchists</span> and <span style="color: #A00500;">communists</span> who threaten it.
 
@@ -84,12 +115,32 @@ The [? if z_party_name != "CVP": <span style="color: #000000;">Center Party</spa
 
 @rally_lautenbach
 title: Support the Lautenbach plan!
-view-if: (z_leader == "Wirth" or z_leader == "Stegerwald") and z_lautenbach_adopted and not return_to_normalcy and (lautenbach_adopted <= z_lautenbach_rally or not z_in_government)
+view-if: {!
+    if (Q.z_leader == "Wirth" || Q.z_leader == "Stegerwald") {
+        if (Q.z_lautenbach_adopted && !Q.return_to_normalcy && (Q.lautenbach_adopted >= Q.z_lautenbach_rally || !Q.z_in_government)) {
+            return true;
+        } else {
+            return false;
+        }
+    } else {
+        return false;
+    }
+!}
 
 The Lautenbach plan has become a popular rallying cry for the [? if z_party_name != "CVP": <span style="color: #000000;">Center Party</span> ?][? if z_party_name == "CVP": <span style="color: #000000;">**CVP**</span>?]. The workers and employers see it as a necessary compromise. [? if not lautenbach_adopted: However, many are still skeptical whether the plan will actually prove effective. ?]
 
 @rally_local
 title: A mixture of various local and national concerns that resonate most with the audience.
-view-if: z_leader == "Stegerwald" and not (return_to_normalcy or not z_lautenbach_adopted or not (lautenbach_adopted <= z_lautenbach_rally or not z_in_government))
+view-if: {!
+    if (Q.z_leader == "Stegerwald") {
+        if (Q.z_lautenbach_adopted && !Q.return_to_normalcy && (Q.lautenbach_adopted >= Q.z_lautenbach_rally || !Q.z_in_government)) {
+            return false;
+        } else {
+            return true;
+        }
+    } else {
+        return false;
+    }
+!}
 
 The [? if z_party_name != "CVP": <span style="color: #000000;">Center Party</span> ?][? if z_party_name == "CVP": <span style="color: #000000;">**CVP**</span>?]'s speakers have gauged the mood and are speaking to the issues that seem to most affect the workers in this moment.

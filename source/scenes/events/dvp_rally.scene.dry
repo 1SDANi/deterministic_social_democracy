@@ -1,11 +1,19 @@
 title: DVP Rally
 new-page: true
 
-= DVP's Turn
-
 @rally
 title: Rally
-view-if: dvp_rally_timer <= 0 and not (labor_minister_party == "DVP" and labor_affairs_timer == 0 and strike_term_seen == 0)
+view-if: {!
+    if (Q.labor_minister_party == "DVP" && Q.labor_affairs_post_timer == 0 && Q.strike_term_seen_post_timer == 0) {
+        return false;
+    } else if (Q.sa_force > 25 && !Q.sa_banned && !Q.return_to_normalcy) {
+        return false;
+    } else if (Q.dvp_rally_post_timer > 0) {
+        return true;
+    } else {
+        return false;
+    }
+!}
 
 The DVP will hold a rally
 
@@ -16,55 +24,19 @@ The DVP will hold a rally
 - @rally_lautenbach
 - @rally_local
 
-@class_collaboration
-title: The class collaboration of the proletariat with the bourgeoisie.
-view-if: workers_schleicher_bonus
-
-The DVP's mesage of class collaboration appeals to all but the class conscious. [? if workers_schleicher_bonus > 0 : Schleicher's united labor front  ?] [? if workers_schleicher_bonus > 1 : and popularity  ?] [? if workers_schleicher_bonus > 0 : has opposition to corporatism tantamount to support for revolution in the eyes of many. ?]
-
-@rally_reagan
-title: Wirtschaftsliberalismus - The reduction of taxation and government spending
-view-if: upper_tax_rates > 1 and (dvp_leader == "zu Dohna-Schlodien" or dvp_leader == "Luther")
-
-The DVP's speakers call for the reduction of taxation and government spending
-
-[? if upper_tax_rates > 1: Recent bourgeoisie media commentary on the current tax structure have supplied ample fodder for their rhetoric ?]
-
-@rally_nationalism
-title: Supporting rearmament, nationalism, and an end to reparations
-view-if: dvp_leader == "Scholz" or dvp_leader == "Dingeldey" or dvp_leader == "Hugo"
-
-The DVP's speakers praise the military establishment and call for rearmament.
-
-[? if dvp_nationalism >= 3 : With nationalism increasingly popular within their party, the rally's speakers call for the cessation of reparations and reuinifaction of Germany ?]
-
-@rally_democracy
-title: Expanding our nascent democracy and defending it against <span style="color: #808080;">dictatorship</span> and <span style="color: #7A3C00;">fascism</span>.
-view-if: dvp_leader == "Stresemann" or dvp_leader == "Kardorff" or dvp_leader == "Curtius" or (upper_tax_rates <= 1 and (dvp_leader == "zu Dohna-Schlodien" or dvp_leader == "Luther"))
-
-The DVP will defend the <span style="color: #000000;">rep</span><span style="color: #DD0000;">ubl</span><span style="color: #FFCC00;">ican</span> system and rail against the <span style="color: #808080;">monarchists</span> and <span style="color: #A00500;">communists</span> who threaten it.
-
-[? if dvp_democratization < 3 : Talk of democracy does not excite the middle classes and rural folk as much as more practical issues. ?]
-[? if dvp_democratization >= 3 : Since they have consistently made democratization a theme of their campaigns, the middle classes and rural folk are enthusiastic about their message. ?]
-
-@rally_lautenbach
-title: Support the Lautenbach plan!
-view-if: return_to_normalcy == 0 and dvp_lautenbach_adopted and (dvp_leader == "Thiel" or dvp_leader == "Glatzel") and not return_to_normalcy and (lautenbach_adopted <= dvp_lautenbach_rally or not dvp_in_government)
-
-The Lautenbach plan has become a popular rallying cry for the DVP. The workers and employers see it as a necessary compromise. [? if not lautenbach_adopted: However, many are still skeptical whether the plan will actually prove effective. ?]
-
-@rally_local
-title: A mixture of various local and national concerns that resonate most with the audience.
-view-if: (dvp_leader == "Thiel" or dvp_leader == "Glatzel") and (return_to_normalcy or not dvp_lautenbach_adopted or not (lautenbach_adopted <= dvp_lautenbach_rally or not dvp_in_government))
-
-The DVP's speakers have gauged the mood and are speaking to the issues that seem to most affect workers, employers, and women in this moment.
-
 @sa_disrupt
 title: The <span style="color: #7A3C00;">Nazi</span> <span style="color: #7A3C00;">**SA**</span> has disrupted the DVP rally!
-view-if: sa_force > 25 and not sa_banned and not return_to_normalcy
+view-if:  {!
+    if (Q.labor_minister_party == "DVP" && Q.labor_affairs_timer == 0 && Q.strike_term_seen == 0) {
+        return false;
+    } else if (Q.sa_force > 25 && !Q.sa_banned && !Q.return_to_normalcy && Q.dvp_rally_post_timer > 0) {
+        return true;
+    } else {
+        return false;
+    }
+!}
 
 The <span style="color: #7A3C00;">Nazi</span> <span style="color: #7A3C00;">**SA**</span> has disrupted the DVP rally!
-
 
 - @rally_police
 - @rally_cancel
@@ -99,3 +71,79 @@ The police successfully protected the DVP's rally, so it can go ahead as usual.
 title: The police were unable or unwilling to hold back the <span style="color: #7A3C00;">**SA**</span> mob.
 
 The <span style="color: #7A3C00;">**SA**</span> have won this show of strength.
+
+@class_collaboration
+title: The class collaboration of the proletariat with the bourgeoisie.
+view-if: workers_schleicher_bonus
+
+The DVP's mesage of class collaboration appeals to all but the class conscious. [? if workers_schleicher_bonus > 0 : Schleicher's united labor front  ?] [? if workers_schleicher_bonus > 1 : and popularity  ?] [? if workers_schleicher_bonus > 0 : has opposition to corporatism tantamount to support for revolution in the eyes of many. ?]
+
+@rally_reagan
+title: Wirtschaftsliberalismus - The reduction of taxation and government spending
+view-if: upper_tax_rates > 1 and (dvp_leader == "zu Dohna-Schlodien" or dvp_leader == "Luther")
+
+The DVP's speakers call for the reduction of taxation and government spending
+
+[? if upper_tax_rates > 1: Recent bourgeoisie media commentary on the current tax structure have supplied ample fodder for their rhetoric ?]
+
+@rally_nationalism
+title: Supporting rearmament, nationalism, and an end to reparations
+view-if: dvp_leader == "Scholz" or dvp_leader == "Dingeldey" or dvp_leader == "Hugo"
+
+The DVP's speakers praise the military establishment and call for rearmament.
+
+[? if dvp_nationalism >= 3 : With nationalism increasingly popular within their party, the rally's speakers call for the cessation of reparations and reuinifaction of Germany ?]
+
+@rally_democracy
+title: Expanding our nascent democracy and defending it against <span style="color: #808080;">dictatorship</span> and <span style="color: #7A3C00;">fascism</span>.
+view-if: {!
+    if (Q.dvp_leader == "Stresemann" || Q.dvp_leader == "Kardorff" || Q.dvp_leader == "Curtius") {
+        return true;
+    } else if (dvp_leader == "zu Dohna-Schlodien" || dvp_leader == "Luther") {
+        if (upper_tax_rates > 1) {
+            return false;
+        } else {
+            return true;
+        }
+    } else {
+        return false;
+    }
+!}
+
+The DVP will defend the <span style="color: #000000;">rep</span><span style="color: #DD0000;">ubl</span><span style="color: #FFCC00;">ican</span> system and rail against the <span style="color: #808080;">monarchists</span> and <span style="color: #A00500;">communists</span> who threaten it.
+
+[? if dvp_democratization < 3 : Talk of democracy does not excite the middle classes and rural folk as much as more practical issues. ?]
+[? if dvp_democratization >= 3 : Since they have consistently made democratization a theme of their campaigns, the middle classes and rural folk are enthusiastic about their message. ?]
+
+@rally_lautenbach
+title: Support the Lautenbach plan!
+view-if: {!
+    if (Q.dvp_leader == "Thiel" || Q.dvp_leader == "Glatzel") {
+        if (Q.dvp_lautenbach_adopted && !Q.return_to_normalcy && (Q.lautenbach_adopted >= Q.dvp_lautenbach_rally || !Q.dvp_in_government)) {
+            return true;
+        } else {
+            return false;
+        }
+    } else {
+        return false;
+    }
+!}
+
+The Lautenbach plan has become a popular rallying cry for the DVP. The workers and employers see it as a necessary compromise. [? if not lautenbach_adopted: However, many are still skeptical whether the plan will actually prove effective. ?]
+
+@rally_local
+title: A mixture of various local and national concerns that resonate most with the audience.
+view-if: {!
+    if (Q.dvp_leader == "Thiel" || Q.dvp_leader == "Glatzel") {
+        if (Q.dvp_lautenbach_adopted && !Q.return_to_normalcy && (Q.lautenbach_adopted >= Q.dvp_lautenbach_rally || !Q.dvp_in_government)) {
+            return false;
+        } else {
+            return true;
+        }
+    } else {
+        return false;
+    }
+
+!}
+
+The DVP's speakers have gauged the mood and are speaking to the issues that seem to most affect workers, employers, and women in this moment.

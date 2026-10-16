@@ -517,14 +517,14 @@ Q.anticommunist_force = Q.sh_force + Q.sa_force;
 Q.left_force = Q.rfb_force;
 Q.noncommunist_force = Q.sh_force + Q.sa_force + Q.rb_force + Q.prussia_force;
 if (!Q.kpd_truce) {
-    anticommunist_force += Q.rb_force + Q.prussia_force;
+    Q.anticommunist_force += Q.rb_force + Q.prussia_force;
 } else {
     Q.left_force += Q.rb_force;
 
     if (Q.prussia_leader != "Rosenfeld" && Q.prussia_leader != "Braun") {
-        anticommunist_force += Q.prussia_force;
+        Q.anticommunist_force += Q.prussia_force;
     } else {
-        left_force += Q.prussia_force;
+        Q.left_force += Q.prussia_force;
     }
 }
 Q.state_force = 0;

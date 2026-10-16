@@ -5,7 +5,17 @@ new-page: true
 
 @rally
 title: Rally
-view-if: dnvp_rally_timer <= 0 and not (labor_minister_party == "DNVP" and labor_affairs_timer == 0 and strike_term_seen == 0)
+view-if: {!
+    if (Q.labor_minister_party == "DNVP" && Q.labor_affairs_post_timer == 0 && Q.strike_term_seen_post_timer == 0) {
+        return false;
+    } else if (Q.rfb_force > 25 && !Q.rfb_banned && !Q.return_to_normalcy) {
+        return false;
+    } else if (Q.dnvp_rally_post_timer > 0) {
+        return true;
+    } else {
+        return false;
+    }
+!}
 
 The DNVP will hold a rally
 
@@ -16,50 +26,17 @@ The DNVP will hold a rally
 - @rally_lautenbach
 - @rally_local
 
-@class_collaboration
-title: The class collaboration of the proletariat with the bourgeoisie.
-view-if: dnvp_leader == "Lambach" and corporatist_progress
-
-The DNVP's mesage of class collaboration appeals to all but the class conscious. [? if corporatist_adopted: The adoption of the christian social corporatist plan has done much to revitalize worker enthusiasm.  ?] [? if corporatist_progress > 0: Their achievements in corporatism have assisted their messaging. ?]
-
-@rally_volkism
-title: Volkism - German Nationalism, Antisemitism, Patriarchy, Xenophobia, and Homophobia
-view-if: dnvp_leader == "Hugenberg" or dnvp_leader == "Schiele"
-
-The DNVP's speakers blames the ills of society on foreigners and the marginaqlized [? if black_thursday_seen and not return_to_normalcy: , a message popular among the desperate masses, who believe themselves betrayed by the establishment parties ?]
-
-@rally_nationalism
-title: Supporting rearmament, nationalism, and an end to reparations
-view-if: dnvp_leader == "Triumvirate" or dnvp_leader == "Westarp" or (dnvp_leader == "Treviranus" and (return_to_normalcy or not dnvp_lautenbach_adopted or not (lautenbach_adopted <= dnvp_lautenbach_rally or not dnvp_in_government)))
-
-The DNVP's speakers praise the military establishment and call for rearmament.
-
-[? if dnvp_nationalism >= 3 : With nationalism increasingly popular within their party, the rally's speakers call for the cessation of reparations and reuinifaction of Germany ?]
-
-@rally_democracy
-title: Expanding our nascent democracy and defending it against <span style="color: #808080;">dictatorship</span> and <span style="color: #7A3C00;">fascism</span>.
-view-if: dnvp_leader == "Hergt" or dnvp_leader == "Keudell"
-
-The DNVP will defend the <span style="color: #000000;">rep</span><span style="color: #DD0000;">ubl</span><span style="color: #FFCC00;">ican</span> system and rail against the <span style="color: #808080;">monarchists</span> and <span style="color: #A00500;">communists</span> who threaten it.
-
-[? if dnvp_democratization < 3 : Talk of democracy does not excite the workers, middle classes, and rural folk as much as more practical issues. ?]
-[? if dnvp_democratization >= 3 : Since they have consistently made democratization a theme of their campaigns, the workers, middle classes, and rural folk are enthusiastic about their message. ?]
-
-@rally_lautenbach
-title: Support the Lautenbach plan!
-view-if: return_to_normalcy == 0 and dnvp_lautenbach_adopted and (dnvp_leader == "Treviranus" or dnvp_leader == "Lejeune-Jung") and not return_to_normalcy and (lautenbach_adopted <= dnvp_lautenbach_rally or not dnvp_in_government)
-
-The Lautenbach plan has become a popular rallying cry for the DNVP. The workers and employers see it as a necessary compromise. [? if not lautenbach_adopted: However, many are still skeptical whether the plan will actually prove effective. ?]
-
-@rally_local
-title: A mixture of various local and national concerns that resonate most with the audience.
-view-if: (dnvp_leader == "Lambach" and not corporatist_progress) or (dnvp_leader == "Lejeune-Jung" and (return_to_normalcy or not dnvp_lautenbach_adopted or not (lautenbach_adopted <= dnvp_lautenbach_rally or not dnvp_in_government)))
-
-The DNVP's speakers have gauged the mood and are speaking to the issues that seem to most affect workers, employers, and women in this moment.
-
 @rfb_disrupt
 title: The Communist RFB has disrupted the DNVP rally!
-view-if: rfb_force > 25 and not rfb_banned and not return_to_normalcy
+view-if: {!
+    if (Q.labor_minister_party == "DNVP" && Q.labor_affairs_timer == 0 && Q.strike_term_seen == 0) {
+        return false;
+    } else if (Q.rfb_force > 25 && !Q.rfb_banned && !Q.return_to_normalcy && Q.dnvp_rally_post_timer > 0) {
+        return true;
+    } else {
+        return false;
+    }
+!}
 
 The Communist RFB has disrupted the DNVP rally!
 
@@ -69,7 +46,15 @@ The Communist RFB has disrupted the DNVP rally!
 
 @rally_police
 title: The DNVP have called the police to protect their rally
-view-if: (prussia_leader == "Braun" or prussia_leader == "Rosenfeld" or not prussian_police_sh_training) and (dnvp_authoritarian_strength + dnvp_agrarian_strength < dnvp_volkskonservativ_strength + dnvp_christian_social_strength)
+view-if: {!
+    if (Q.prussia_leader == "Braun" || Q.prussia_leader == "Rosenfeld" || !Q.russian_police_sh_training) {
+        return false;
+    } else if (Q.dnvp_authoritarian_strength + Q.dnvp_agrarian_strength < Q.dnvp_volkskonservativ_strength + Q.dnvp_christian_social_strength) {
+        return true;
+    } else {
+        return false;
+    }
+!}
 
 The DNVP have called the police to protect their rally
 
@@ -94,7 +79,17 @@ The RFB have won this show of strength.
 
 @stahlhelm_protect
 title: The Stahlhelm are sent to protect the rally.
-view-if: (prussia_leader == "Braun" or prussia_leader == "Rosenfeld" or not prussian_police_sh_training) and (dnvp_authoritarian_strength + dnvp_agrarian_strength > dnvp_volkskonservativ_strength + dnvp_christian_social_strength)
+view-if: {!
+    if (Q.prussia_leader == "Braun" || Q.prussia_leader == "Rosenfeld" || !Q.prussian_police_sh_training) {
+        if (Q.dnvp_authoritarian_strength + Q.dnvp_agrarian_strength > Q.dnvp_volkskonservativ_strength + Q.dnvp_christian_social_strength) {
+            return true;
+        } else {
+            return false;
+        }
+    } else {
+        return false;
+    }
+!}
 go-to: stahlhelm_protect_win if stahlhelm_success >= 0; stahlhelm_protect_lose if stahlhelm_success < 0
 
 @stahlhelm_protect_win
@@ -133,3 +128,80 @@ The police and Stahlhelm have successfully protected the DNVP rally against the 
 on-arrival: workers_kpd += 3; stahlhelm_strength -= 50
 
 The police and Stahlhelm were not able to hold back the RFB. The Communists have won this show of strength.
+
+@class_collaboration
+title: The class collaboration of the proletariat with the bourgeoisie.
+view-if: dnvp_leader == "Lambach" and corporatist_progress
+
+The DNVP's mesage of class collaboration appeals to all but the class conscious. [? if corporatist_adopted: The adoption of the christian social corporatist plan has done much to revitalize worker enthusiasm.  ?] [? if corporatist_progress > 0: Their achievements in corporatism have assisted their messaging. ?]
+
+@rally_volkism
+title: Volkism - German Nationalism, Antisemitism, Patriarchy, Xenophobia, and Homophobia
+view-if: dnvp_leader == "Hugenberg" or dnvp_leader == "Schiele"
+
+The DNVP's speakers blames the ills of society on foreigners and the marginaqlized [? if black_thursday_seen and not return_to_normalcy: , a message popular among the desperate masses, who believe themselves betrayed by the establishment parties ?]
+
+@rally_nationalism
+title: Supporting rearmament, nationalism, and an end to reparations
+view-if: {!
+    if (Q.dnvp_leader == "Triumvirate" || Q.dnvp_leader == "Westarp") {
+        return true;
+    } else if (Q.dnvp_leader == "Treviranus") {
+        if (Q.dnvp_lautenbach_adopted && !Q.return_to_normalcy && (Q.lautenbach_adopted >= Q.dnvp_lautenbach_rally || !Q.dnvp_in_government)) {
+            return false;
+        } else {
+            return true;
+        }
+    } else {
+        return false;
+    }
+!}
+
+The DNVP's speakers praise the military establishment and call for rearmament.
+
+[? if dnvp_nationalism >= 3 : With nationalism increasingly popular within their party, the rally's speakers call for the cessation of reparations and reuinifaction of Germany ?]
+
+@rally_democracy
+title: Expanding our nascent democracy and defending it against <span style="color: #808080;">dictatorship</span> and <span style="color: #7A3C00;">fascism</span>.
+view-if: dnvp_leader == "Hergt" or dnvp_leader == "Keudell"
+
+The DNVP will defend the <span style="color: #000000;">rep</span><span style="color: #DD0000;">ubl</span><span style="color: #FFCC00;">ican</span> system and rail against the <span style="color: #808080;">monarchists</span> and <span style="color: #A00500;">communists</span> who threaten it.
+
+[? if dnvp_democratization < 3 : Talk of democracy does not excite the workers, middle classes, and rural folk as much as more practical issues. ?]
+[? if dnvp_democratization >= 3 : Since they have consistently made democratization a theme of their campaigns, the workers, middle classes, and rural folk are enthusiastic about their message. ?]
+
+@rally_lautenbach
+title: Support the Lautenbach plan!
+view-if: {!
+    if (Q.dnvp_leader == "Treviranus" || Q.dnvp_leader == "Lejeune-Jung") {
+        if (Q.dnvp_lautenbach_adopted && !Q.return_to_normalcy && (Q.lautenbach_adopted >= Q.dnvp_lautenbach_rally || !Q.dnvp_in_government)) {
+            return true;
+        } else {
+            return false;
+        }
+    } else {
+        return false;
+    }
+!}
+
+The Lautenbach plan has become a popular rallying cry for the DNVP. The workers and employers see it as a necessary compromise. [? if not lautenbach_adopted: However, many are still skeptical whether the plan will actually prove effective. ?]
+
+@rally_local
+title: A mixture of various local and national concerns that resonate most with the audience.
+view-if: {!
+    if (Q.dnvp_leader == "Lambach") {
+        if (Q.corporatist_progress) {
+            return false;
+        } else {
+            return true;
+        }
+    } else if (Q.dnvp_leader == "Lejeune-Jung") {
+        if (Q.dnvp_lautenbach_adopted && !Q.return_to_normalcy && (Q.lautenbach_adopted >= Q.dnvp_lautenbach_rally || !Q.dnvp_in_government)) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+!}
+
+The DNVP's speakers have gauged the mood and are speaking to the issues that seem to most affect workers, employers, and women in this moment.

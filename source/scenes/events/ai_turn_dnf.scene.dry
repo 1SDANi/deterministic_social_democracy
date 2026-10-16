@@ -11,7 +11,7 @@ tags: event
 
 @labor_affairs
 title: Labor Affairs
-view-if: (labor_minister_party == "DNVP" or labor_minister_party == "DNF") and labor_affairs_timer == 0 and strike_term_seen == 0
+view-if: (labor_minister_party == "DNVP" or labor_minister_party == "DNF") and labor_affairs_post_timer > 0 and strike_term_seen_post_timer > 0
 
 The industrial Ruhr region is aflame with labor unrest
 
