@@ -13,24 +13,33 @@ The DDP will invest in liberal media
 - @diehilfe
 - @echoderjungedemokratie
 - @integrate1
+- @integrate2
+- @integrate3
+- @bolsterpartymedia
 - @debate
+- @partymedia
 
 @berlinertagblad
 title: The DDP will fund the Berliner Tageblatt
 subtitle: -1 resource. The biggest left-liberal publisher in Germany, edited by prominent DDP member Theodor Wolff.
 view-if: {!
-    if (Q.ddp_resources >= 1) {
-        return true;
+    if (bt_integrated) {
+        if (Q.ddp_resources >= 1) {
+            return true;
+        } else {
+            return false;
+        } 
     } else {
         return false;
     }
+    
 !} 
 
 The DDP has funded the Berliner Tageblatt, and with its wide circulation, we see a noticeable increase in support for the DDP and for democracy.
 
 @diehilfe
 title: The DDP will fund Die Hilfe.
-subtitle: -1 resource, edited by herr Fredrich Naumann himself.
+subtitle: -1 resource, edited by herr Gertrud Bäumer himself.
 view-if: ddp_resources >= 1 and dh_integrated == 0
 
 Funding Die Hilfe certainly benefits the DDP, as the editors are their most loyal members.
@@ -44,56 +53,70 @@ The DDP have supported their youth wing's newspaper, to which they have responde
 
 @integrate1
 title: The DDP will integrate Die Hilfe into their newspaper.
-subtitle: -1 resource. 
-view-if: ddp_resources >= 1 and newspaper_founded = 1 and dh_integrated = 0 and (newspaper_editor = "Erkelenz" or newspaper_editor = "Heuss")
+subtitle: [? if die_hilfe < 1 : -1 resources ?][? if die_hilfe >= 1 : Their investments into Die Hilfe has reduced the cost close to nil ?]
+view-if: ddp_resources >= 1 and ddp_newspaper_founded = 1 and dh_integrated = 0 and (ddp_newspaper_editor = "Erkelenz" or ddp_newspaper_editor = "Bäumer")
 
 The DDP has integrated Die Hilfe into their newspaper network, growing its influence significantly, and bringing with it funding and popularity.
 
 @integrate2
 title: The DDP will integrate Echo der Junge Demokratie into their newspaper.
-subtitle: [? if young_democrats < 3 : -2 resources ?][? if young_democrats >= 3 : -1 resource, their investments into Echo der Junge Demokratie has reduced the cost ?]
-view-if: newspaper_founded = 1 and edjd_integrated = 0 and (newspaper_editor = "Erkelenz" or newspaper_editor = "Quidde")
+subtitle: [? if junge_demokratie < 3 : -2 resources ?][? if junge_demokratie >= 3 : -1 resource, their investments into Echo der Junge Demokratie has reduced the cost ?]
+view-if: ddp_newspaper_founded = 1 and edjd_integrated = 0 and (ddp_newspaper_editor = "Erkelenz" or ddp_newspaper_editor = "Quide")
 
 THE DDP has integrated Echo der Junge Demokratie into their newspaper network, growing the influence of pacifism within the party.
 
+@integrate3
+title: The DDP will integrate Berliner Tageblatt into their newspaper.
+subtitle: [? if berliner_tegeblatt < 5 : -5 resources ?][? if berliner_tegeblatt >= 5 : -3 resource, their investments into Berliner Tageblatt has reduced the cost ?]
+view-if: ddp_newspaper_founded = 1 and edjd_integrated = 0 and (ddp_newspaper_editor = "Erkelenz" or ddp_newspaper_editor = "Heuss")
+
+THE DDP has integrated Berliner Tageblatt into their newspaper network, though some within the party have expressed concern at its already-outsized influence within the DDP's newspaper network.
+
 @bolsterpartymedia
 title: The DDP will continue to develop their newspaper network.
-subtitle: [? if newspaper_invested_in >= 3 : -1 resource. ?][? if newspaper_invested_in < 3 : It is now financially self-sufficient and doesn't require further resources to grow. ?]
-view-if: newspaper_founded = 1
+subtitle: [? if ddp_newspaper >= 3 : -1 resource. ?][? if ddp_newspaper < 3 : It is now financially self-sufficient and doesn't require further resources to grow. ?]
+view-if: ddp_newspaper_founded = 1
 
 The DDP's newspaper network has a mix of popular and political programming, and is proving a success in spreading our meseage.
 
 @debate
 title: The DDP will have vibrant ideological debates in their party newspaper.
-view-if: newspaper_founded = 1
+view-if: ddp_newspaper_founded = 1
 
 The DDP's hosting of ideological debates within their party newspaper has successfully paved over the many tensions within their party.
 
 @partymedia
 title: The DDP will create their own official media
 subtitle: -2 resources.
-view-if: ddp_resources >= 2 and newspaper_founded = 0
+view-if: ddp_resources >= 2 and ddp_newspaper_founded = 0
 
 We have founded our own newspaper, and we must now select its head editor.
 
 - @heuss
 - @quide
+- @baumer
 - @erkelenz
 
 @heuss
 title: Theodor Heuss, a rising star with a patriotic attitute.
-view-if: ddp_regionalist_strength + ddp_industrialist_strength > ddp_labor_strength + ddp_liberal_strength
+view-if: ddp_regionalist_strength + ddp_business_strength > ddp_labor_strength + ddp_liberal_strength
 
-The right has managed to apoint Theodor Heuss to the position of chief editor.
+The right has managed to appoint Theodor Heuss to the position of chief editor.
 
 @quide
 title: Ludwig Quidde, notable pacifist.
-view-if: (ddp_labor_strength + ddp_liberal_strength > ddp_regionalist_strength + ddp_industrialist_strength) and not (ddp_labor_strength > ddp_regionalist_strength + ddp_industrialist_strength + ddp_liberal_strength)
+view-if: (ddp_labor_strength + ddp_liberal_strength > ddp_regionalist_strength + ddp_business_strength) and not (ddp_labor_strength > ddp_regionalist_strength + ddp_business_strength + ddp_liberal_strength)
 
-Ludiwg quide has been apointed chief editor.
+Ludiwg quide has been appointed chief editor.
+
+@baumer
+title: Gertrud Bäumer, prominent feminist.
+view-if: ddp_liberal_strength + ddp_regionalist_strength > ddp_business_strength + ddp_labor_strength
+
+Following a deadlock in deciding upon chief editor, Gertrud Bäumer has been appointed as a compromise
 
 @erkelenz
 title: Anton Erkelenz, the labour leader.
-view-if: ddp_labor_strength > ddp_regionalist_strength + ddp_industrialist_strength + ddp_liberal_strength
+view-if: ddp_labor_strength > ddp_regionalist_strength + ddp_business_strength + ddp_liberal_strength
 
-The left has managed to apoint Anton Erkelenz to he position of cheif editor.|
+The left has managed to appoint Anton Erkelenz to he position of cheif editor.
