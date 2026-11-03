@@ -1,0 +1,129 @@
+title: The DVP's Enemies
+new-page: true
+
+@enemies
+title: Enemies
+view-if: {!
+    if (Q.dvp_rally_post_timer > 0) {
+        return false;
+    } else if (Q.labor_minister_party == "DVP" && Q.labor_affairs_post_timer > 0 && Q.strike_term_seen_post_timer > 0) {
+        return false;
+    } else if (Q.dvp_enemies_post_timer > 0) {
+        return true;
+    } else {
+        return false;
+    }
+!}
+
+The <span style="color: #C0A054;">**DVP**</span> will decide on who they will consider their main opponents
+
+- @anti_dem
+- @nsdap
+- @kpd
+- @left
+- @reactionaries
+- @revolutionaries
+
+@anti_dem
+title: The anti-democratic parties of the <span style="color: #7A3C00;">far</span>-[? if dnvp_ideology == "Radical": <span style="color: #3E88B3;">right</span>?][? if dnvp_ideology == "Moderate": <span style="color: #003755;">right</span>?] and <span style="color: #700000;">left</span> - the <span style="color: #700000;">**KPD**</span>, <span style="color: #7A3C00;">**NSDAP**</span>, and [? if dnvp_ideology == "Radical": <span style="color: #3E88B3;">**DNVP**</span>?][? if dnvp_ideology == "Moderate": <span style="color: #003755;">**DNF**</span>?].
+view-if: {!
+    if (Q.dvp_business_strength > Q.dvp_liberal_strength + Q.dvp_labor_strength) {
+        return false;
+    } else if (Q.dvp_business_strength + Q.dvp_regionalist_strength > Q.dvp_liberal_strength + Q.dvp_labor_strength) {
+        return false;
+    } else if (Q.dvp_business_strength + Q.dvp_regionalist_strength > Q.dvp_labor_strength) {
+        return false;
+    } else if (Q.dvp_liberal_strength + Q.dvp_labor_strength > Q.dvp_business_strength + Q.dvp_regionalist_strength) {
+        return false;
+    } else {
+        return true;
+    }
+!}
+
+Attacking the <span style="color: #7A3C00;">far</span>-[? if dnvp_ideology == "Radical": <span style="color: #3E88B3;">right</span>?][? if dnvp_ideology == "Moderate": <span style="color: #003755;">right</span>?] and <span style="color: #700000;">left</span> is popular among all but the <span style="color: #C0A054;">**DVP**</span>'s business faction, who would prefer the party focus its animus the <span style="color: #700000;">revolutionary</span> <span style="color: #3E88B3;">parties</span>.
+
+@nsdap
+title: The <span style="color: #7A3C00;">**NSDAP**</span> alone.
+view-if: {!
+    if (Q.dvp_business_strength > Q.dvp_liberal_strength + Q.dvp_labor_strength) {
+        return false;
+    } else if (Q.dvp_business_strength + Q.dvp_regionalist_strength > Q.dvp_liberal_strength + Q.dvp_labor_strength) {
+        return false;
+    } else if (Q.dvp_business_strength + Q.dvp_regionalist_strength > Q.dvp_labor_strength) {
+        return false;
+    } else if (Q.dvp_liberal_strength + Q.dvp_labor_strength > Q.dvp_business_strength + Q.dvp_regionalist_strength) {
+        if (Q.nsdap_votes >= 20) {
+            return true;
+        } else {
+            return false;
+        }
+    } else {
+        return false;
+    }
+!}
+
+[? if dvp_nazi_urgency == 0 or nsdap_votes < 10: The <span style="color: #7A3C00;">**NSDAP**</span> is a tiny party right now, with more bark than bite. Many in the <span style="color: #C0A054;">**DVP**</span> are questioning their leadership's choices. [? if nsdap_votes < 8: Worst still, giving them too much attention might only end up helping them. ?] ?][? if nazi_urgency > 0 and nsdap_votes >= 10 : The <span style="color: #7A3C00;">Nazis</span> are the most urgent problem for the <span style="color: #C0A054;">**DVP**</span> to deal with. ?]
+
+@kpd
+title: The <span style="color: #700000;">**KPD**</span>.
+view-if: {!
+    if (Q.dvp_business_strength > Q.dvp_liberal_strength + Q.dvp_labor_strength) {
+        return false;
+    } else if (Q.dvp_business_strength + Q.dvp_regionalist_strength > Q.dvp_liberal_strength + Q.dvp_labor_strength) {
+        return true;
+    } else {
+        return false;
+    }
+!}
+
+Attacking the <span style="color: #700000;">**KPD**</span> is supported by the whole of the <span style="color: #C0A054;">**DVP**</span>, though their labor faction questions the lack of response to the <span style="color: #7A3C00;">far</span>-[? if dnvp_ideology == "Radical": <span style="color: #3E88B3;">right</span>?][? if dnvp_ideology == "Moderate": <span style="color: #003755;">right</span>?].
+
+@left
+title: The <span style="color: #9B0000;">Marxist</span> parties - the <span style="color: #700000;">**KPD**</span> [? if sapd_formed:,  <span style="color: #9B0000;">**SAPD**</span>, ?] and <span style="color: #c00000;">**SPD**</span>.
+view-if: {!
+    if (Q.dvp_business_strength > Q.dvp_liberal_strength + Q.dvp_labor_strength) {
+        return true;
+    } else {
+        return false;
+    }
+!}
+
+Attacking the <span style="color: #9B0000;">Marxist</span> <span style="color: #700000;">L</span><span style="color: #9B0000;">e</span><span style="color: #c00000;">f</span><span style="color: #fe9e00;">t</span> is supported by the <span style="color: #C0A054;">**DVP**</span>'s business faction, though the party's left wing questions the logic of opposing their <span style="color: #c00000;">socialist</span> allies.
+
+@reactionaries
+title: The <span style="color: #7A3C00;">far</span>-[? if dnvp_ideology == "Radical": <span style="color: #3E88B3;">right</span>?][? if dnvp_ideology == "Moderate": <span style="color: #003755;">right</span>?] - the <span style="color: #7A3C00;">**NSDAP**</span> and [? if dnvp_ideology == "Radical": <span style="color: #3E88B3;">**DNVP**</span>?][? if dnvp_ideology == "Moderate": <span style="color: #003755;">**DNF**</span>?].
+view-if: {!
+    if (Q.dvp_business_strength > Q.dvp_liberal_strength + Q.dvp_labor_strength) {
+        return false;
+    } else if (Q.dvp_business_strength + Q.dvp_regionalist_strength > Q.dvp_liberal_strength + Q.dvp_labor_strength) {
+        return false;
+    } else if (Q.dvp_business_strength + Q.dvp_regionalist_strength > Q.dvp_labor_strength) {
+        return false;
+    } else if (Q.dvp_liberal_strength + Q.dvp_labor_strength > Q.dvp_business_strength + Q.dvp_regionalist_strength) {
+        if (Q.nsdap_votes >= 20) {
+            return false;
+        } else {
+            return true;
+        }
+    } else {
+        return false;
+    }
+!}
+
+Attacking the <span style="color: #7A3C00;">far</span>-[? if dnvp_ideology == "Radical": <span style="color: #3E88B3;">right</span>?][? if dnvp_ideology == "Moderate": <span style="color: #003755;">right</span>?] is popular among all but the <span style="color: #C0A054;">**DVP**</span> right, who are outraged by the lack of response to the <span style="color: #700000;">**KPD**</span> and opposition to the [? if dnvp_ideology == "Radical": <span style="color: #3E88B3;">**DNVP**</span>?][? if dnvp_ideology == "Moderate": <span style="color: #003755;">**DNF**</span>?].
+
+@revolutionaries
+title: The <span style="color: #700000;">revolutionary</span> <span style="color: #3E88B3;">parties</span> - the <span style="color: #700000;">**KPD**</span> and <span style="color: #7A3C00;">**NSDAP**</span>.
+view-if: {!
+    if (Q.dvp_business_strength > Q.dvp_liberal_strength + Q.dvp_labor_strength) {
+        return false;
+    } else if (Q.dvp_business_strength + Q.dvp_regionalist_strength > Q.dvp_liberal_strength + Q.dvp_labor_strength) {
+        return false;
+    } else if (Q.dvp_business_strength + Q.dvp_regionalist_strength > Q.dvp_labor_strength) {
+        return true;
+    } else {
+        return false;
+    }
+!}
+
+Attacking the parties actively engaged in building paramilitaries for the overthrow of the <span style="color: #000000;">We</span><span style="color: #DD0000;">im</span><span style="color: #FFCC00;">ar</span> <span style="color: #0087DC;">rep</span><span style="color: #A2D8E0;">ub</span><span style="color: #FFCC00;">blic</span> is popular among the whole of the <span style="color: #C0A054;">**DVP**</span>.

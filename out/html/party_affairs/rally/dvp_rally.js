@@ -2,7 +2,8 @@ window.dvp_rally = function() {
     const Q = window.dendryUI?.dendryEngine?.state?.qualities;
 
     console.log('dvp_rally');
-    if ((Q.year == 1928 && Q.month == 1) || (Q.next_election_time - Q.time <= 6)) {
+    
+    if ((Q.year == 1928 && (Q.month - 1) == 1) || (Q.next_election_time - (Q.time - 1) <= 6)) {
         Q.dvp_rally_timer = 2;
         Q.dvp_rally_post_timer = 1;
     } else {

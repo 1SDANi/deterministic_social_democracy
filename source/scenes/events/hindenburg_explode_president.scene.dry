@@ -466,7 +466,7 @@ Do we realize that this means civil war, against the full force of the state?
 go-to: eckener_win if winner = "Eckener"; bundesrepublik_win if winner = "Adenauer"; seeckt_victory if winner = "Seeckt"; nazis_lose if winner = "Grzesinski" or winner == "Wels" or winner = "Gessler"
 on-arrival: {!
 Q.president = Q.winner;
-if (Q.president == "Thalmann") Q.president = "Thälmann";
+if (Q.president == "Thälmann") Q.president = "Thälmann";
 if (Q.president == "Munzenberg") Q.president = "Münzenberg";
 if (Q.president == "Goring") Q.president = "Göring";
 

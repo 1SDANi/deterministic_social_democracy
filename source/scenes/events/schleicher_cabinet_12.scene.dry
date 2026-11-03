@@ -1,7 +1,7 @@
 title: The <span style="color: #700000;">**KPD**</span> Is Banned!
 subtitle: The Interior Ministry discovers "alarming evidence" of a planned revolution.
 view-if: chancellor == "Schleicher" and dsu_in_gov and not dsu_was_gov and dsu_policy and reichstag_joever_time >= 1 and not kpd_explode
-on-arrival: kpd_relation = 40 if kpd_relation < 40
+on-arrival: kpd_relation = 40 if kpd_relation < 40; kpd_nazi_urgency += 1;
 max-visits: 1
 new-page: true
 priority: -1
@@ -392,7 +392,7 @@ if (Q.kpd_relation >= 40) {
 } else if (Q.kpd_relation < 40) {
     Q.normalized_workers_total += Q.workers_kpd_normalized*0.5;
 }
-Q.spd_points += ((1 - Q.labor_dissent/100)*Q.normalized_workers_total*(1 - Q.unemployed/100)*2.5) / 5;
+Q.spd_points += ((1 - Q.labor_dissent/100)*Q.normalized_workers_total*(1 - Q.effective_unemployed/100)*2.5) / 5;
 
 Q.rb_power = Q.rb_strength*Q.rb_militancy;
 if (Q.dissent > 0.15) {
@@ -622,6 +622,10 @@ This, combined with his blatant constitutional breach just a week ago, has final
 
 Perhaps its our time to strike?
 
-- @civil_war: The <span style="color: #c00000;">**SPD**</span> stands with the <span style="color: #700000;">**Communists**</span>.
+- @kpd_ban_civil_war: The <span style="color: #c00000;">**SPD**</span> stands with the <span style="color: #700000;">**Communists**</span>.
 - @fight_mild
 - @do_nothing: This isn't our fight.
+
+@kpd_ban_civil_war
+on-arrival: kpd_relation = 80
+go-to: civil_war

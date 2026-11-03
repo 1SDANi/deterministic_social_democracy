@@ -6,7 +6,7 @@ title: Rally
 view-if: {!
     if (Q.labor_minister_party == Q.ddp_name && Q.labor_affairs_post_timer == 0 && Q.strike_term_seen_post_timer == 0) {
         return false;
-    } else if (Q.rfb_force > 25 && !Q.rfb_banned && !Q.return_to_normalcy) {
+    } else if (Q.sa_force > 25 && !Q.sa_banned && !Q.return_to_normalcy) {
         return false;
     } else if (Q.ddp_rally_post_timer > 0) {
         return true;
@@ -27,9 +27,9 @@ The [+ ddp_name +] will hold a rally
 @sa_disrupt
 title: The <span style="color: #7A3C00;">Nazi</span> <span style="color: #7A3C00;">**SA**</span> has disrupted the [+ ddp_name +] rally!
 view-if: {!
-    if (Q.labor_minister_party == Q.ddp_name && Q.labor_affairs_timer == 0 && Q.strike_term_seen == 0) {
+    if (Q.labor_minister_party == Q.ddp_name && Q.labor_affairs_timer > 0 && Q.strike_term_seen > 0) {
         return false;
-    } else if (Q.rfb_force > 25 && !Q.rfb_banned && !Q.return_to_normalcy && Q.ddp_rally_post_timer > 0) {
+    } else if (Q.sa_force > 25 && !Q.sa_banned && !Q.return_to_normalcy && Q.ddp_rally_post_timer > 0) {
         return true;
     } else {
         return false;

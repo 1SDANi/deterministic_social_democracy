@@ -103,6 +103,10 @@ window.support_employers_spd_action = function() {
 
     Q.workers_spd -= 3;
 
+    if (Q.new_middle_conscious) {
+        Q.new_middle_spd -= 2;
+    }
+
     Q.kpd_relation -= 8;
     Q.dvp_relation += 5;
     Q.lvp_relation += 5;
@@ -119,6 +123,10 @@ window.support_employers_spd_reaction = function() {
     Q.labor_dissent += 4;
 
     Q.workers_spd -= 1;
+
+    if (Q.new_middle_conscious) {
+        Q.new_middle_spd -= 1;
+    }
 
     Q.kpd_relation -= 4;
     Q.dvp_relation += 3;

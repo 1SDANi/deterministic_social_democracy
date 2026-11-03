@@ -1,7 +1,7 @@
 title: The Death of Hindenburg
 subtitle: The President has died...
 new-page: true
-view-if: year = 1934 and month >= 7 and president = "Hindenburg" and not dnef_formed
+view-if: year = 1934 and month >= 8 and president = "Hindenburg" and not dnef_formed
 on-arrival: {!
 Q.round = 0;
 Q.hindenburg_dead = 1;
@@ -279,7 +279,7 @@ Albert Einstein is a Nobel Prize-winning scientist, director of the Kaiser Wilhe
 
 He did not wish to run for president, disliking the public nature of campaigning, but we have somehow convinced him that his candidacy will be crucial to the future of Germany and the world. As a <span style="color: #005EB8;">Jewish</span> German pacifist, his becoming president would be a repudiation of everything the <span style="color: #7A3C00;">Nazis</span> stand for.
 
-The <span style="color: #D3C24D;">**[+ ddp_name +]**</span> will endorse Einstein's candidacy.
+[? if not lvp_formed: The <span style="color: #D3C24D;">**[+ ddp_name +]**</span> will endorse Einstein's candidacy. ?]
 
 @mann_r1
 subtitle: -2 resources - He might be too <span style="color: #700000;">far left</span> for the bourgeois parties.
@@ -343,8 +343,8 @@ We implore the [? if z_party_name != "CVP": <span style="color: #000000;">Center
 # convincing Z to support an SPD candidate
 @convince_z_spd
 title: Convince the [? if z_party_name != "CVP": <span style="color: #000000;">Center Party</span>?][? if z_party_name == "CVP": <span style="color: #000000;">**CVP**</span>?] to support [+ spd_candidate +].
-choose-if: spd_votes >= z_votes 
-unavailable-subtitle: [? if spd_votes < z_votes: The [? if z_party_name != "CVP": <span style="color: #000000;">Center</span>?][? if z_party_name == "CVP": <span style="color: #000000;">**CVP**</span>?] knows that they are more popular than us; they do not see a reason to support our candidate. ?]
+choose-if: spd_votes >= z_votes and not cvp_formed
+unavailable-subtitle: [? if spd_votes < z_votes: The [? if z_party_name != "CVP": <span style="color: #000000;">Center</span>?][? if z_party_name == "CVP": <span style="color: #000000;">**CVP**</span>?] knows that they are more popular than us; they do not see a reason to support our candidate. ?] [? if cvp_formed: The former <span style="color: #3E88B3;">**DNVP**</span> elements of the <span style="color: #000000;">**CVP**</span> would never support a Socialist candidate for president. ?]
 view-if: (spd_candidate = "Braun" or spd_candidate = "Schumacher" or spd_candidate = "Juchacz" or is_cultural_candidate) and z_candidate != spd_candidate and not cvp_formed
 on-arrival: {!
 Q.z_support_braun = 0;
@@ -437,7 +437,7 @@ max-visits: 1
 @convince_lvp_spd
 title: Convince the <span style="color: #FFCC00;">**LVP**</span> to support [+ spd_candidate +].
 view-if: (spd_candidate = "Braun" or spd_candidate = "Schumacher" or spd_candidate = "Juchacz" or is_cultural_candidate) and lvp_candidate != spd_candidate and lvp_formed
-on-arrival: lvp_candidate = spd_candidate if lvp_relation >= 65
+on-arrival: lvp_candidate = spd_candidate if ((lvp_relation >= 65) or ((lvp_relation >= 50) and (spd_candidate = "Einstein")))
 go-to: r1_menu if round = 0; r2_campaigning if round > 0
 max-visits: 1
 
@@ -960,11 +960,11 @@ Despite the <span style="color: #7A3C00;">Nazi</span> threats, supporters of the
 
 
 @election_end
-go-to: eckener_win if winner = "Eckener"; juchacz_win if winner = "Juchacz"; bundesrepublik_win if winner = "Schumacher" or winner = "Adenauer"; hitler_victory if winner = "Hitler" or winner = "Göring" or winner = "Goring"; seldte_victory if winner = "Seldte"; hergt_victory_nazi if winner = "Hergt" and nsdap_candidate == "Hergt"; hergt_victory_lite if winner = "Hergt" and nsdap_candidate != "Hergt"; lettow_vorbeck_victory if winner = "Lettow-Vorbeck"; munzenberg_victory if winner = "Munzenberg" or winner = "Münzenberg"; thalmann_victory if winner = "Thalmann" or winner = "Thälmann"; nazis_lose if winner = "Braun" or winner = "Gessler" or winner = "Heuss" or winner = "Bruning"; cultural_victory if winner = "Ossietzky" or winner = "Mann"; einstein_victory if winner = "Einstein"
+go-to: eckener_win if winner = "Eckener"; juchacz_win if winner = "Juchacz"; bundesrepublik_win if winner = "Schumacher" or winner = "Adenauer"; hitler_victory if winner = "Hitler" or winner = "Göring" or winner = "Goring"; seldte_victory if winner = "Seldte"; hergt_victory_nazi if winner = "Hergt" and nsdap_candidate == "Hergt"; hergt_victory_lite if winner = "Hergt" and nsdap_candidate != "Hergt"; lettow_vorbeck_victory if winner = "Lettow-Vorbeck"; munzenberg_victory if winner = "Munzenberg" or winner = "Münzenberg"; thalmann_victory if winner = "Thälmann" or winner = "Thälmann"; nazis_lose if winner = "Braun" or winner = "Gessler" or winner = "Heuss" or winner = "Bruning"; cultural_victory if winner = "Ossietzky" or winner = "Mann"; einstein_victory if winner = "Einstein"
 on-arrival: {!
 Q.president = Q.winner;
 if (Q.president == "Bruning") Q.president = "Brüning";
-if (Q.president == "Thalmann") Q.president = "Thälmann";
+if (Q.president == "Thälmann") Q.president = "Thälmann";
 if (Q.president == "Munzenberg") Q.president = "Münzenberg";
 if (Q.president == "Goring") Q.president = "Göring";
 

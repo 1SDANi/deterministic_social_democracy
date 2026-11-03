@@ -2,8 +2,8 @@ title: Cabinet
 is-pinned-card: true
 tags: advisor
 card-image: img/muller_cabinet.jpg
+view-if: in_spd_majority or sapd_toleration or (in_emergency_government and chancellor_party = "SPD") or ((in_left_front) and chancellor_party = "SPD")
 on-arrival: last_cabinet_action = 1
-view-if: spd_in_government == 1 and (month > 5 or year > 1928)
 new-page: true 
 
 = Cabinet

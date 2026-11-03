@@ -49,7 +49,7 @@ if (!dynamicMode && !historicalMode && Q.difficulty != 1) {
   }
 }
 
-if ((Q.dynamic_mode || Q.historical_mode || Q.difficulty == 1) && !((Q.year == 1934 && Q.month > 7) || Q.year >= 1935)) {
+if ((Q.dynamic_mode || Q.historical_mode || Q.difficulty == 1) && !((Q.year == 1934 && Q.month > 8) || Q.year >= 1935)) {
   // Roter Zar von Preußen - At the end of the game, Otto Braun is president, chancellor, and minister-president of prussia at the same time.
   if (Q.president == 'Braun' && Q.chancellor == 'Braun' && Q.prussia_leader == "Braun") {
       this.achieve('red_tzar_of_prussia');
@@ -72,6 +72,10 @@ if ((Q.dynamic_mode || Q.historical_mode || Q.difficulty == 1) && !((Q.year == 1
   // Wirtschaftswunder - reduce unemployment below 10% and have a non-negative budget by 1933.
   if (Q.year >= 1932  && Q.unemployed < 8.6 && Q.budget > 0 && Q.inflation < 5) {
       this.achieve('wirtschaftswunder');
+  }
+  // Freie Marktwirtschaft - win without doing an economic plan.
+  if (!Q.economic_plan && !(Q.total_defeat || Q.long_war || Q.chancellor_party == "NSDAP" || Q.chancellor == "Hitler" || Q.president == "Göring" || Q.president == "Frick" || Q.president == "Hitler" || Q.president == "Hammerstein" || Q.president == "Seldte" || Q.hammerstein_win || (Q.president == "Hergt" && Q.chancellor == "Seldte"))) {
+      this.achieve('freie_marktwirtschaft');
   }
   // Bollwerk der Demokratie - resist the Prussian Coup, and win.
   if (Q.republic_victory && Q.resist_coup) {
@@ -121,7 +125,7 @@ if ((Q.dynamic_mode || Q.historical_mode || Q.difficulty == 1) && !((Q.year == 1
       this.achieve("polykrise");
   }
   // Wirtschaftsexperiment - implement two different economic plans.
-  if ((Q.nationalization_progress >= 1 && Q.wtb_implemented >= 1) || (Q.wtb_implemented >= 1 && Q.moderate_plan_progress >= 1) || (Q.nationalization_progress >= 1 && Q.moderate_plan_progress >= 1)) {
+  if ((Q.nationalization_progress >= 1 && Q.wtb_implemented >= 1 && Q.nationalization_adopted == 1) || (Q.wtb_implemented >= 1 && Q.moderate_plan_progress >= 1) || (Q.nationalization_progress >= 1 && Q.nationalization_adopted == 1 && Q.moderate_plan_progress >= 1)) {
       this.achieve("wirtschaftsexperiment");
   }
   // Syndikalismus - support factory takeovers by workers.
@@ -293,7 +297,7 @@ if ((Q.dynamic_mode || Q.historical_mode || Q.difficulty == 1) && !((Q.year == 1
       Q.kpd_points_calc = 0;
       Q.kpd_points_calc += Q.rfb_force;
       Q.kpd_points_calc += (100 - Q.pro_republic) / 2;
-      Q.kpd_points_calc += Q.unemployed / 2;
+      Q.kpd_points_calc += Q.effective_unemployed / 2;
       Q.kpd_points_calc += Q.kpd_votes;
       Q.kpd_points_calc += Q.soviet_relation;
       if (Q.presid_calcent == "Thälmann") Q.kpd_points_calc += 16;
@@ -344,7 +348,7 @@ if ((Q.dynamic_mode || Q.historical_mode || Q.difficulty == 1) && !((Q.year == 1
   if (Q.chancellor == "Breitscheid" && Q.left_cartel_france && Q.reparations_resolved && (Q.sdapo_win || Q.austria_peace) && Q.radio) {
     this.achieve('mr_breitscheid');
   }
-  if (Q.year == 1934 && Q.month == 7 && Q.hilferding_advisor && Q.wels_advisor && Q.kleber_der_partei) {
+  if (Q.year == 1934 && Q.month == 8 && Q.hilferding_advisor && Q.wels_advisor && Q.kleber_der_partei) {
     this.achieve('kleber_der_partei');
   }
   if (Q.prussian_police_loyalty >= 0.95 && Q.reichswehr_loyalty >= 0.95 && Q.interior_police_loyalty >= 0.95 && Q.judicial_reform >= 2 && Q.prussia_purge >= 2) {

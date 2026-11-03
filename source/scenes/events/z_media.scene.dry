@@ -1,0 +1,136 @@
+title: [+ z_party_name +] Media
+new-page: true
+
+# Ripped from c2508's amazing Christian Democracy mod
+
+@media
+title: Media
+view-if: {!
+    if (Q.z_rally_post_timer > 0) {
+        return false;
+    } else if (Q.labor_minister_party == Q.z_party_name && Q.labor_affairs_post_timer > 0 && Q.strike_term_seen_post_timer != 0) {
+        return false;
+    } else if (Q.z_enemies_post_timer > 0) {
+        return false;
+    } else if (Q.z_media_post_timer > 0) {
+        return true;
+    } else {
+        return false;
+    }
+!}
+
+The [? if z_party_name != "CVP": <span style="color: #000000;">Center Party</span> ?][? if z_party_name == "CVP": <span style="color: #000000;">**CVP**</span>?] wields much influence in the Germany media, with control over many local and regional newspapers throughout every German city and region.
+
+- @campaign
+- @ideological
+- @newspaper 
+- @newspaper_2
+- @newspaper_3
+- @newspaper_4
+
+@campaign
+title: The [? if z_party_name != "CVP": <span style="color: #000000;">Center Party</span> ?][? if z_party_name == "CVP": <span style="color: #000000;">**CVP**</span>?] will use their media to elect more <span style="color: #000000;">Catholics</span>.
+view-if: {!
+    if (Q.z_dissent > 0.2) {
+        return false;
+    } else if (Q.z_newspaper == 0 && Q.z_resources >= 3) {
+        return false;
+    } else if (Q.z_newspaper > 0 && Q.z_newspaper <= 2 && Q.z_resources >= 2) {
+        return false;
+    } else if (Q.z_newspaper > 2 && Q.z_newspaper <= 5 && Q.z_resources >= 2) {
+        return false;
+    } else if (Q.z_newspaper > 5 && Q.catholics_z < 50) {
+        return true;
+    } else if (Q.z_newspaper > 5) {
+        return false;
+    } else {
+        return true;
+    }
+!}
+
+The [? if z_party_name != "CVP": <span style="color: #000000;">Center Party</span> ?][? if z_party_name == "CVP": <span style="color: #000000;">**CVP**</span>?]'s campaign media is mostly reaching the <span style="color: #000000;">Catholics</span> who already vote for them.
+
+@ideological
+title: The [? if z_party_name != "CVP": <span style="color: #000000;">Center Party</span> ?][? if z_party_name == "CVP": <span style="color: #000000;">**CVP**</span>?] will continue to follow the official party line regarding important issues. 
+view-if: {!
+    if (Q.z_dissent > 0.2) {
+        return true;
+    } else {
+        return false;
+    }
+!}
+
+This has been their media course historically, and it has successfully paved over the many tensions in the party.
+
+@newspaper
+title: Allocate funds to Germania
+subtitle: -3 resource
+view-if: {!
+    if (Q.z_dissent > 0.2) {
+        return false;
+    } else if (Q.z_newspaper == 0 && Q.z_resources >= 3) {
+        return true;
+    } else {
+        return false;
+    }
+!}
+
+The [? if z_party_name != "CVP": <span style="color: #000000;">Center Party</span> ?][? if z_party_name == "CVP": <span style="color: #000000;">**CVP**</span>?]'s funding has enabled their newspaper to begin distribution in towns and regions it has been previously absent. 
+
+@newspaper_2
+title: The [? if z_party_name != "CVP": <span style="color: #000000;">Center Party</span> ?][? if z_party_name == "CVP": <span style="color: #000000;">**CVP**</span>?] will continue developing their newspaper network.
+subtitle: -2 resources
+view-if: {!
+    if (Q.z_dissent > 0.2) {
+        return false;
+    } else if (Q.z_newspaper == 0 && Q.z_resources >= 3) {
+        return false;
+    } else if (Q.z_newspaper > 0 && Q.z_newspaper <= 2 && Q.z_resources >= 2) {
+        return true;
+    } else {
+        return false;
+    }
+!}
+
+Germania continues to grow, reaching more and more of the country.
+
+@newspaper_3
+title: The [? if z_party_name != "CVP": <span style="color: #000000;">Center Party</span> ?][? if z_party_name == "CVP": <span style="color: #000000;">**CVP**</span>?] will continue developing their newspaper network.
+subtitle: -1 resources
+view-if: {!
+    if (Q.z_dissent > 0.2) {
+        return false;
+    } else if (Q.z_newspaper == 0 && Q.z_resources >= 3) {
+        return false;
+    } else if (Q.z_newspaper > 0 && Q.z_newspaper <= 2 && Q.z_resources >= 2) {
+        return false;
+    } else if (Q.z_newspaper > 2 && Q.z_newspaper <= 5 && Q.z_resources >= 2) {
+        return true;
+    } else {
+        return false;
+    }
+!}
+
+Germania continues to grow, spreading its reach to Germany's most remote reaches.
+
+@newspaper_4
+title: The [? if z_party_name != "CVP": <span style="color: #000000;">Center Party</span> ?][? if z_party_name == "CVP": <span style="color: #000000;">**CVP**</span>?] will maintain their newspaper network.
+view-if: {!
+    if (Q.z_dissent > 0.2) {
+        return false;
+    } else if (Q.z_newspaper == 0 && Q.z_resources >= 3) {
+        return false;
+    } else if (Q.z_newspaper > 0 && Q.z_newspaper <= 2 && Q.z_resources >= 2) {
+        return false;
+    } else if (Q.z_newspaper > 2 && Q.z_newspaper <= 5 && Q.z_resources >= 2) {
+        return false;
+    } else if (Q.z_newspaper > 5 && Q.catholics_z < 50) {
+        return false;
+    } else if (Q.z_newspaper > 5) {
+        return true;
+    } else {
+        return false;
+    }
+!}
+
+Germania has has proven itself a staple of the German media landscape.

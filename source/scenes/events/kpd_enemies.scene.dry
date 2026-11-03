@@ -1,0 +1,297 @@
+title: The KPD's Enemies
+new-page: true
+
+# adapted from eldiabla666's amazing Roter Regen mod
+
+@enemies
+title: Enemies
+view-if: {!
+    if (Q.kpd_rally_post_timer > 0) {
+        return false;
+    } else if (Q.labor_minister_party == "KPD" && Q.labor_affairs_post_timer > 0 && Q.strike_term_seen_post_timer > 0) {
+        return false;
+    } else if (Q.kpd_enemies_post_timer > 0) {
+        return true;
+    } else {
+        return false;
+    }
+!}
+
+The <span style="color: #700000;">**KPD**</span> will decide on who they will consider their main opponents
+
+- @weimar
+- @spd
+- @nsdap
+- @fascists
+- @bourgeois
+- @reactionaries
+
+@weimar
+title: The <span style="color: #000000;">We</span><span style="color: #DD0000;">im</span><span style="color: #FFCC00;">ar</span> establishment - the SPD, [? if z_party_name != "CVP": <span style="color: #000000;">Center</span>?][? if z_party_name == "CVP": <span style="color: #000000;">**CVP**</span>?], and [? if not lvp_formed: <span style="color: #D3C24D;">**[+ ddp_name +]**</span>?][? if lvp_formed: and <span style="color: #FFCC00;">**LVP**</span>?].
+view-if: {!
+    if (Q.kpd_leader == "Weddingers") {
+        if (Q.kpd_relation < 40) {
+            if (Q.spd_votes >= 40) {
+                return false;
+            } else if (Q.weimar_coalition > Q.far_right_coalition) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    } else if (Q.kpd_leader == "Thälmann") {
+        if (Q.kpd_relation < 40) {
+            if (Q.spd_votes >= 30) {
+                return false;
+            } else if (Q.weimar_coalition > Q.center_right_coalition) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    } else if (Q.kpd_leader == "Conciliators") {
+        if (Q.nsdap_votes >= 20) {
+            return false;
+        } else if (Q.far_right_coalition > Q.right_coalition) {
+            return false;
+        } else if (Q.weimar_coalition > Q.right_coalition && Q.kpd_relation < 40) {
+            return true;
+        } else {
+            return false;
+        }
+    } else {
+        return false;
+    }
+!}
+
+Attacking the establishment is popular among <span style="color: #700000;">**KPD**</span>'s left and center, who consider the need for a revolutionary offensive.
+
+@spd
+title: The <span style="color: #c00000;">Social</span>-<span style="color: #7A3C00;">Fascist</span> <span style="color: #c00000;">**SPD**</span>
+view-if: {!
+    if (Q.kpd_leader == "Weddingers") {
+        if (Q.kpd_relation < 40) {
+            if (Q.spd_votes >= 40) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    } else if (Q.kpd_leader == "Thälmann") {
+        if (Q.kpd_relation < 40) {
+            if (Q.spd_votes >= 30) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    } else if (Q.kpd_leader == "Conciliators") {
+        return false;
+    } else if (Q.kpd_leader == "Brandlerites") {
+        return false;
+    }
+!}
+
+Attacking the <span style="color: #c00000;">**SPD**</span> is popular among the <span style="color: #700000;">**KPD**</span>'s left and center, who consider the <span style="color: #c00000;">**SPD**</span> to be the left wing of <span style="color: #7A3C00;">Fascism</span>
+
+@nsdap
+title: The <span style="color: #7A3C00;">**NSDAP**</span> alone
+view-if: {!
+    if (Q.kpd_leader == "Weddingers") {
+        if (Q.kpd_relation < 40) {
+            return false;
+        } else {
+            if (Q.nsdap_votes >= 30) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    } else if (Q.kpd_leader == "Thälmann") {
+        if (Q.kpd_relation < 40) {
+            return false;
+        } else {
+            if (Q.nsdap_votes >= 20) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    } else if (Q.kpd_leader == "Conciliators") {
+        if (Q.nsdap_votes >= 20) {
+            return true;
+        } else {
+            return false;
+        }
+    } else if (Q.kpd_leader == "Brandlerites") {
+        if (Q.nsdap_votes >= 10) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+!}
+
+[? if kpd_nazi_urgency == 0 or nsdap_votes < 10: The <span style="color: #7A3C00;">**NSDAP**</span> is a tiny party right now, with more bark than bite. Many in the <span style="color: #700000;">**KPD**</span> are questioning their leadership's choices. [? if nsdap_votes < 8: Worst still, giving them too much attention might only end up helping them. ?] ?][? if kpd_nazi_urgency > 0 and nsdap_votes >= 10 : The <span style="color: #7A3C00;">Nazis</span> are the most urgent problem for the <span style="color: #700000;">**KPD**</span> to deal with. ?]
+
+@fascists
+title: The <span style="color: #7A3C00;">Fascists</span> - the <span style="color: #c00000;">**SPD**</span> and <span style="color: #7A3C00;">**NSDAP**</span>
+view-if: {!
+    if (Q.kpd_leader == "Weddingers") {
+        if (Q.kpd_relation < 40) {
+            if (Q.spd_votes >= 40) {
+                return false;
+            } else if (Q.weimar_coalition > Q.far_right_coalition) {
+                return false;
+            } else if (Q.spd_votes >= 30) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    } else if (Q.kpd_leader == "Thälmann") {
+        if (Q.kpd_relation < 40) {
+            if (Q.spd_votes >= 30) {
+                return false;
+            } else if (Q.weimar_coalition > Q.center_right_coalition) {
+                return false;
+            } else if (Q.spd_votes >= 20) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    } else if (Q.kpd_leader == "Conciliators") {
+        return false;
+    } else if (Q.kpd_leader == "Brandlerites") {
+        return false;
+    }
+!}
+
+Attacking the <span style="color: #7A3C00;">Fascist</span> parties is popular among the <span style="color: #700000;">**KPD**</span>'s left and center.
+
+@bourgeois
+title: The <span style="color: #000000;">bourgeois</span> parties - the [? if z_party_name != "CVP": <span style="color: #000000;">Center</span>?][? if z_party_name == "CVP": <span style="color: #000000;">**CVP**</span>?], [? if not lvp_formed: <span style="color: #D3C24D;">**[+ ddp_name +]**</span>, and <span style="color: #C0A054;">**DVP**</span>?][? if lvp_formed: and <span style="color: #FFCC00;">**LVP**</span>?]
+view-if: {!
+    if (Q.kpd_leader == "Weddingers") {
+        if (Q.kpd_relation < 40) {
+            if (Q.spd_votes >= 40) {
+                return false;
+            } else if (Q.weimar_coalition > Q.far_right_coalition) {
+                return false;
+            } else if (Q.spd_votes >= 30) {
+                return false;
+            } else {
+                return true;
+            }
+        } else {
+            if (Q.nsdap_votes >= 30) {
+                return false;
+            } else if (Q.far_right_coalition > Q.right_coalition) {
+                return false;
+            } else {
+                return true;
+            }
+        }
+    } else if (Q.kpd_leader == "Thälmann") {
+        if (Q.kpd_relation < 40) {
+            if (Q.spd_votes >= 30) {
+                return false;
+            } else if (Q.weimar_coalition > Q.center_right_coalition) {
+                return false;
+            } else if (Q.spd_votes >= 20) {
+                return false;
+            } else {
+                return true;
+            }
+        } else {
+            if (Q.nsdap_votes >= 20) {
+                return false;
+            } else if (Q.far_right_coalition > Q.center_right_coalition) {
+                return false;
+            } else {
+                return true;
+            }
+        }
+    } else if (Q.kpd_leader == "Conciliators") {
+        if (Q.nsdap_votes >= 20) {
+                return false;
+        } else if (Q.far_right_coalition > Q.right_coalition) {
+                return false;
+        } else if (Q.weimar_coalition > Q.right_coalition && Q.kpd_relation < 40) {
+                return false;
+        } else {
+            return true;
+        }
+    } else if (Q.kpd_leader == "Brandlerites") {
+        if (Q.nsdap_votes >= 10) {
+                return false;
+        } else if (Q.far_right_coalition > Q.center_right_coalition) {
+                return false;
+        } else {
+            return true;
+        }
+    }
+!}
+
+The <span style="color: #700000;">**KPD**</span>'s anti-bourgeois rhetoric is popular among the whole of their party.
+
+@reactionaries
+title: The <span style="color: #7A3C00;">far</span>-[? if dnvp_ideology == "Radical": <span style="color: #3E88B3;">right</span>?][? if dnvp_ideology == "Moderate": <span style="color: #003755;">right</span>?] - the <span style="color: #7A3C00;">**NSDAP**</span> and [? if dnvp_ideology == "Radical": <span style="color: #3E88B3;">**DNVP**</span>?][? if dnvp_ideology == "Moderate": <span style="color: #003755;">**DNF**</span>?].
+view-if: {!
+    if (Q.kpd_leader == "Weddingers") {
+        if (Q.kpd_relation < 40) {
+            return false;
+        } else {
+            if (Q.nsdap_votes >= 30) {
+                return false;
+            } else if (Q.far_right_coalition > Q.right_coalition) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    } else if (Q.kpd_leader == "Thälmann") {
+        if (Q.kpd_relation < 40) {
+            return false;
+        } else {
+            if (Q.nsdap_votes >= 20) {
+                return false;
+            } else if (Q.far_right_coalition > Q.center_right_coalition) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    } else if (Q.kpd_leader == "Conciliators") {
+        if (Q.nsdap_votes >= 20) {
+            return false;
+        } else if (Q.far_right_coalition > Q.right_coalition) {
+            return true;
+        } else {
+            return false;
+        }
+    } else if (Q.kpd_leader == "Brandlerites") {
+        if (Q.nsdap_votes >= 10) {
+            return false;
+        } else if (Q.far_right_coalition > Q.center_right_coalition) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+!}
+
+Attacking the far right is popular among the whole of the <span style="color: #700000;">**KPD**</span>, although their left and center consider the establishment republican parties to be just as dangerous.

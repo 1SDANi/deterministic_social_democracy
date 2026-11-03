@@ -1,0 +1,135 @@
+title: The DNVP's Enemies
+new-page: true
+
+@enemies
+title: Enemies
+view-if: {!
+    if (Q.dnvp_rally_post_timer > 0) {
+        return false;
+    } else if (Q.labor_minister_party == "DNVP" && Q.labor_affairs_post_timer > 0 && Q.strike_term_seen_post_timer > 0) {
+        return false;
+    } else if (Q.dnvp_enemies_post_timer > 0) {
+        return true;
+    } else {
+        return false;
+    }
+!}
+
+The <span style="color: #3E88B3;">**DNVP**</span> will decide on who they will consider their main opponents
+
+- @kpd
+- @left
+- @progressives
+- @workers
+- @revolutionaries
+- @nsdap
+
+@kpd
+title: The <span style="color: #700000;">**KPD**</span>.
+view-if: {!
+    if (Q.dnvp_authoritarian_strength > Q.dnvp_christian_social_strength + Q.dnvp_volkskonservativ_strength) {
+        return false;
+    } else if (Q.dnvp_authoritarian_strength > Q.dnvp_volkskonservativ_strength && Q.dnvp_authoritarian_strength > Q.dnvp_christian_social_strength) {
+        return false;
+    } else if (Q.dnvp_christian_social_strength + Q.dnvp_volkskonservativ_strength > Q.dnvp_authoritarian_strength + Q.dnvp_agrarian_strength) {
+        return false;
+    } else {
+        return true;
+    }
+!}
+
+Attacking the <span style="color: #700000;">**KPD**</span> is supported by the whole of the <span style="color: #3E88B3;">DNVP</span>.
+
+@left
+title: The <span style="color: #9B0000;">Marxist</span> parties - the <span style="color: #700000;">**KPD**</span> [? if sapd_formed:,  <span style="color: #9B0000;">**SAPD**</span>, ?] and <span style="color: #c00000;">**SPD**</span>.
+view-if: {!
+    if (Q.dnvp_authoritarian_strength > Q.dnvp_christian_social_strength + Q.dnvp_volkskonservativ_strength) {
+        return false;
+    } else if (Q.dnvp_authoritarian_strength > Q.dnvp_volkskonservativ_strength && Q.dnvp_authoritarian_strength > Q.dnvp_christian_social_strength) {
+        return true;
+    } else {
+        return false;
+    }
+!}
+
+Attacking the <span style="color: #9B0000;">Marxist</span> <span style="color: #700000;">L</span><span style="color: #9B0000;">e</span><span style="color: #c00000;">f</span><span style="color: #fe9e00;">t</span> is supported by the whole of the <span style="color: #3E88B3;">DNVP</span>.
+
+@progressives
+title: The <span style="color: #700000;">pr</span><span style="color: #9B0000;">og</span><span style="color: #c00000;">re</span><span style="color: #fe9e00;">ss</span><span style="color: #D3C24D;">ive</span> parties - the <span style="color: #700000;">**KPD**</span>, [? if sapd_formed:,  <span style="color: #9B0000;">**SAPD**</span>, ?] <span style="color: #700000;">**SPD**</span>, and [? if not lvp_formed: <span style="color: #D3C24D;">**[+ ddp_name +]**</span>?][? if lvp_formed: and <span style="color: #FFCC00;">**LVP**</span>?].
+view-if: {!
+    if (Q.dnvp_authoritarian_strength > Q.dnvp_christian_social_strength + Q.dnvp_volkskonservativ_strength) {
+        return true;
+    } else {
+        return false;
+    }
+!}
+
+Attacking the <span style="color: #700000;">L</span><span style="color: #9B0000;">e</span><span style="color: #c00000;">f</span><span style="color: #fe9e00;">t</span><span style="color: #D3C24D;">-of-</span><span style="color: #000000;">Center</span> parties is popular among all but the most <span style="color: #0087DC;">nominally</span> <span style="color: #D3C24D;">democratic</span> members of the <span style="color: #3E88B3;">**DNVP**</span>.
+
+@workers
+title: The parties actively courting the working class - the <span style="color: #700000;">**KPD**</span> [? if sapd_formed:,  <span style="color: #9B0000;">**SAPD**</span>, ?] <span style="color: #c00000;">**SPD**</span>, and <span style="color: #7A3C00;">**NSDAP**</span>.
+view-if: {!
+    if (Q.dnvp_authoritarian_strength > Q.dnvp_christian_social_strength + Q.dnvp_volkskonservativ_strength) {
+        return false;
+    } else if (Q.dnvp_authoritarian_strength > Q.dnvp_volkskonservativ_strength && Q.dnvp_authoritarian_strength > Q.dnvp_christian_social_strength) {
+        return false;
+    } else if (Q.dnvp_christian_social_strength + Q.dnvp_volkskonservativ_strength > Q.dnvp_authoritarian_strength + Q.dnvp_agrarian_strength) {
+        if (Q.dnvp_christian_social_strength > Q.dnvp_volkskonservativ_strength) {
+            return true;
+        } else {
+            return false;
+        }
+    } else {
+        return false;
+    }
+!}
+
+While attacking the <span style="color: #9B0000;">Marxist</span> <span style="color: #700000;">L</span><span style="color: #9B0000;">e</span><span style="color: #c00000;">f</span><span style="color: #fe9e00;">t</span> is supported by the whole of the party, the <span style="color: #3E88B3;">DNVP</span>'s authoritarian wing find the party's opposition to their <span style="color: #7A3C00;">**NSDAP**</span> allies discomforting.
+
+@revolutionaries
+title: The <span style="color: #700000;">revolutionary</span> <span style="color: #3E88B3;">parties</span> - the <span style="color: #700000;">**KPD**</span> and <span style="color: #7A3C00;">**NSDAP**</span>.
+view-if: {!
+    if (Q.dnvp_authoritarian_strength > Q.dnvp_christian_social_strength + Q.dnvp_volkskonservativ_strength) {
+        return false;
+    } else if (Q.dnvp_authoritarian_strength > Q.dnvp_volkskonservativ_strength && Q.dnvp_authoritarian_strength > Q.dnvp_christian_social_strength) {
+        return false;
+    } else if (Q.dnvp_christian_social_strength + Q.dnvp_volkskonservativ_strength > Q.dnvp_authoritarian_strength + Q.dnvp_agrarian_strength) {
+        if (Q.dnvp_christian_social_strength > Q.dnvp_volkskonservativ_strength) {
+            return false;
+        } else {
+            if (Q.nsdap_votes >= 30 && Q.dnvp_volkskonservativ_strength > Q.dnvp_authoritarian_strength + Q.dnvp_agrarian_strength + Q.dnvp_christian_social_strength) {
+                return false;
+            } else {
+                return true;
+            }
+        }
+    } else {
+        return false;
+    }
+!}
+
+While attacking the <span style="color: #700000;">**KPD**</span> is supported by the whole of the party, the <span style="color: #3E88B3;">DNVP</span>'s authoritarian wing find the party's opposition to their <span style="color: #7A3C00;">**NSDAP**</span> allies discomforting.
+
+@nsdap
+title: The <span style="color: #7A3C00;">**NSDAP**</span> alone.
+view-if: {!
+    if (Q.dnvp_authoritarian_strength > Q.dnvp_christian_social_strength + Q.dnvp_volkskonservativ_strength) {
+        return false;
+    } else if (Q.dnvp_authoritarian_strength > Q.dnvp_volkskonservativ_strength && Q.dnvp_authoritarian_strength > Q.dnvp_christian_social_strength) {
+        return false;
+    } else if (Q.dnvp_christian_social_strength + Q.dnvp_volkskonservativ_strength > Q.dnvp_authoritarian_strength + Q.dnvp_agrarian_strength) {
+        if (Q.dnvp_christian_social_strength > Q.dnvp_volkskonservativ_strength) {
+            return false;
+        } else {
+            if (Q.nsdap_votes >= 30) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    } else {
+        return false;
+    }
+!}
+
+[? if dnvp_nazi_urgency == 0 or nsdap_votes < 10: The <span style="color: #7A3C00;">**NSDAP**</span> is a tiny party right now, with more bark than bite. Many in the <span style="color: #3E88B3;">**DNVP**</span> are questioning their leadership's choices. [? if nsdap_votes < 8: Worst still, giving them too much attention might only end up helping them. ?] ?][? if nazi_urgency > 0 and nsdap_votes >= 10 : All but the most authoritarian members of the <span style="color: #7A3C00;">**NSDAP**</span> consider the <span style="color: #7A3C00;">Nazis</span> to be the most urgent problem for their party to deal with. The party's agrarian faction questions the lack of opposition to the <span style="color: #700000;">**KPD**</span> and the authoritarian wing is outright incensed at the opposition to their allies.

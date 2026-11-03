@@ -84,6 +84,10 @@ window.labor_balance_spd_action = function() {
     
     Q.workers_spd -= 2;
 
+    if (Q.new_middle_conscious) {
+        Q.new_middle_spd -= 2;
+    }
+
     Q.kpd_relation -= 5;
 
     Q.labor_goal_spd_peoples += 1;
@@ -95,6 +99,10 @@ window.labor_balance_spd_reaction = function() {
     Q.labor_dissent += 2;
     
     Q.workers_spd -= 1;
+
+    if (Q.new_middle_conscious) {
+        Q.new_middle_spd -= 1;
+    }
 
     Q.kpd_relation -= 3;
 };

@@ -2,6 +2,10 @@ window.kpd_media = function() {
     const Q = window.dendryUI?.dendryEngine?.state?.qualities;
 
     console.log('kpd media');
+    
+    Q.kpd_media_timer += 6;
+    Q.kpd_media_post_timer = 1;
+
     if (Q.kpd_leader == "Thälmann") {
         if (Q.kpd_stalinist_strength < 80) {
             window.kpd_media_ideological();

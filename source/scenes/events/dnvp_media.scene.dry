@@ -1,0 +1,191 @@
+title: DNVP Media
+new-page: true
+
+# Adapted from PlacedStone's amazing Germany To Save mod
+
+@media
+title: Media
+view-if: {!
+    if (Q.dnvp_rally_post_timer > 0) {
+        return false;
+    } else if (Q.labor_minister_party == "DNVP" && Q.labor_affairs_post_timer > 0 && Q.strike_term_seen_post_timer > 0) {
+        return false;
+    } else if (Q.dnvp_enemies_post_timer > 0) {
+        return false;
+    } else if (Q.dnvp_media_post_timer > 0) {
+        return true;
+    } else {
+        return false;
+    }
+!}
+
+[? if dnf_formed: The DNVP has support from some of the largest media backers of any political party, something they stand to continue to benefit from. ?]
+[? if not dnf_formed: Since Hugenberg left the party, the DNVP has seen a great loss in its media presence, but it remains one of the most prominent parties in terms of media backing. ?]
+
+- @UniversumFilm
+- @DerTag
+- @BerlinerLokalAnzeiger
+- @BerlinerIllustrierteNachtausgabe
+- @Fundliberals
+- @SelfHelp
+- @Corporatism
+- @AgainstKulturmanchestertum
+
+@UniversumFilm
+title: Universum Film AG's primary influence is broad, spread across every class.
+view-if: {!
+    if (Q.dvp_relation > Q.dvp_dnvp_relation || (Q.ddp_in_government && Q.kpd_in_government)) {
+        return false;
+    } else if (Q.dvp_labor_strength > Q.dvp_nationalist_strength + Q.dvp_industrialist_strength) {
+        return false;
+    } else if (Q.ddp_labor_strength > Q.ddp_regionalist_strength + Q.ddp_business_strength) {
+        return false;
+    } else if (Q.nsdap_votes + Q.kpd_votes + Q.spd_votes >= 50) {
+        return false;
+    } else if (Q.dnvp_authoritarian_strength > Q.dnvp_agrarian_strength && Q.dnvp_authoritarian_strength > Q.dnvp_volkskonservativ_strength && Q.dnvp_authoritarian_strength > Q.dnvp_christian_social_strength) {
+        return true;
+    } else if (Q.dnvp_agrarian_strength > Q.dnvp_authoritarian_strength && Q.dnvp_agrarian_strength > Q.dnvp_christian_social_strength && Q.dnvp_agrarian_strength > Q.dnvp_volkskonservativ_strength) {
+       return false;
+    } else if (Q.dnvp_christian_social_strength > Q.dnvp_authoritarian_strength && Q.dnvp_christian_social_strength > Q.dnvp_volkskonservativ_strength && Q.dnvp_christian_social_strength > Q.dnvp_agrarian_strength) {
+        return false;
+    } else if (Q.dnvp_volkskonservativ_strength > Q.dnvp_agrarian_strength && Q.dnvp_volkskonservativ_strength > Q.dnvp_authoritarian_strength && Q.dnvp_volkskonservativ_strength > Q.dnvp_christian_social_strength) {
+        return false;
+    } else {
+        return true;
+    }
+!}
+
+UFA is mass entertainment, its films filling cinemas across every class. Hugenberg bought it to make right-wing "national" films, but to make money it mostly turns out pictures for a broad audience, and only a few of the national films he wanted have actually succeeded.
+
+@DerTag
+title: Der Tag's primary influence is among the educated, propertied middle class.
+view-if: {!
+    if (Q.dvp_relation > Q.dvp_dnvp_relation || (Q.ddp_in_government && Q.kpd_in_government)) {
+        return false;
+    } else if (Q.dvp_labor_strength > Q.dvp_nationalist_strength + Q.dvp_industrialist_strength) {
+        return true;
+    } else {
+        return false;
+    }
+!}
+
+Der Tag is the Hugenberg-Konzern's flagship quality paper, read by the educated and propertied bourgeoisie.
+
+@BerlinerLokalAnzeiger
+title: The Berliner Lokal-Anzeiger's primary influence is among the salaried lower middle class.
+view-if: {!
+    if (Q.dvp_relation > Q.dvp_dnvp_relation || (Q.ddp_in_government && Q.kpd_in_government)) {
+        return false;
+    } else if (Q.dvp_labor_strength > Q.dvp_nationalist_strength + Q.dvp_industrialist_strength) {
+        return false;
+    } else if (Q.ddp_labor_strength > Q.ddp_regionalist_strength + Q.ddp_business_strength) {
+        return true;
+    } else {
+        return false;
+    }
+!}
+
+Part of the Hugenberg-Konzern and with a quarter of a million daily readers among the lower-level clerks and working men of the cities, the Lokal-Anzeiger is an excellent vehicle to carry the DNVP's message to the lower middle class.
+
+@BerlinerIllustrierteNachtausgabe
+title: The Berliner Illustrierte Nachtausgabe's primary influence is in the urban cities.
+view-if: {!
+    if (Q.dvp_relation > Q.dvp_dnvp_relation || (Q.ddp_in_government && Q.kpd_in_government)) {
+        return false;
+    } else if (Q.dvp_labor_strength > Q.dvp_nationalist_strength + Q.dvp_industrialist_strength) {
+        return false;
+    } else if (Q.ddp_labor_strength > Q.ddp_regionalist_strength + Q.ddp_business_strength) {
+        return false;
+    } else if (Q.nsdap_votes + Q.kpd_votes + Q.spd_votes >= 50) {
+        return true;
+    } else {
+        return false;
+    }
+!}
+
+Part of the Hugenberg-Konzern, the Nachtausgabe is a sensational boulevard paper built on sport, crime and local news, with a nationalist slant.
+
+@Fundliberals
+title: The <span style="color: #3E88B3;">**DNVP**</span> will fund the liberal press
+subtitle: 
+view-if: {!
+    if (Q.dvp_relation > Q.dvp_dnvp_relation || (Q.ddp_in_government && Q.kpd_in_government)) {
+        return true;
+    } else {
+        return false;
+    }
+!}
+
+The VERA holding company and the Alterum and Mutuum credit houses are able to be mobilized in order to allow the Hugenberg-Konzern to occupy stakes in liberal papers and start their realignment.
+
+@SelfHelp
+title: The Politische Wochenschrift will call for national self-help to solve Germany's problems.
+view-if: {!
+    if (Q.dvp_relation > Q.dvp_dnvp_relation || (Q.ddp_in_government && Q.kpd_in_government)) {
+        return false;
+    } else if (Q.dvp_labor_strength > Q.dvp_nationalist_strength + Q.dvp_industrialist_strength) {
+        return false;
+    } else if (Q.ddp_labor_strength > Q.ddp_regionalist_strength + Q.ddp_business_strength) {
+        return false;
+    } else if (Q.nsdap_votes + Q.kpd_votes + Q.spd_votes >= 50) {
+        return false;
+    } else if (Q.dnvp_authoritarian_strength > Q.dnvp_agrarian_strength && Q.dnvp_authoritarian_strength > Q.dnvp_volkskonservativ_strength && Q.dnvp_authoritarian_strength > Q.dnvp_christian_social_strength) {
+        return false;
+    } else if (Q.dnvp_agrarian_strength > Q.dnvp_authoritarian_strength && Q.dnvp_agrarian_strength > Q.dnvp_christian_social_strength && Q.dnvp_agrarian_strength > Q.dnvp_volkskonservativ_strength) {
+        return true;
+    } else {
+        return false;
+    }
+!}
+
+Hermann Ullmann publishes a series of essays and thought experiments attacking the policies of fulfillment, or Erfüllungspolitik, arguing that the German recovery requires national self-help and the rebuilding of cultural-economic ties with southeastern Europe, not reliance on the Western Allies.
+
+@Corporatism
+title: The Politische Wochenschrift will champion a corporatist order in place of class struggle.
+view-if: {!
+    if (Q.dvp_relation > Q.dvp_dnvp_relation || (Q.ddp_in_government && Q.kpd_in_government)) {
+        return false;
+    } else if (Q.dvp_labor_strength > Q.dvp_nationalist_strength + Q.dvp_industrialist_strength) {
+        return false;
+    } else if (Q.ddp_labor_strength > Q.ddp_regionalist_strength + Q.ddp_business_strength) {
+        return false;
+    } else if (Q.nsdap_votes + Q.kpd_votes + Q.spd_votes >= 50) {
+        return false;
+    } else if (Q.dnvp_authoritarian_strength > Q.dnvp_agrarian_strength && Q.dnvp_authoritarian_strength > Q.dnvp_volkskonservativ_strength && Q.dnvp_authoritarian_strength > Q.dnvp_christian_social_strength) {
+        return false;
+    } else if (Q.dnvp_agrarian_strength > Q.dnvp_authoritarian_strength && Q.dnvp_agrarian_strength > Q.dnvp_christian_social_strength && Q.dnvp_agrarian_strength > Q.dnvp_volkskonservativ_strength) {
+       return false;
+    } else if (Q.dnvp_christian_social_strength > Q.dnvp_authoritarian_strength && Q.dnvp_christian_social_strength > Q.dnvp_volkskonservativ_strength && Q.dnvp_christian_social_strength > Q.dnvp_agrarian_strength) {
+        return true;
+    } else {
+        return false;
+    }
+!}
+
+Hermann Ullmann devotes the issue to an analysis of the Berufsstände, the old estates, repurposed for an industrial age. The argument calls for authority centralized externally and Selbstverwaltung (self-administration) devolved internally to non-socialistic commune, corporation, and trade, with the absence of class struggle.
+
+@AgainstKulturmanchestertum
+title: The Politische Wochenschrift will rally against the Kulturmanchestertum.
+view-if: {!
+    if (Q.dvp_relation > Q.dvp_dnvp_relation || (Q.ddp_in_government && Q.kpd_in_government)) {
+        return false;
+    } else if (Q.dvp_labor_strength > Q.dvp_nationalist_strength + Q.dvp_industrialist_strength) {
+        return false;
+    } else if (Q.ddp_labor_strength > Q.ddp_regionalist_strength + Q.ddp_business_strength) {
+        return false;
+    } else if (Q.nsdap_votes + Q.kpd_votes + Q.spd_votes >= 50) {
+        return false;
+    } else if (Q.dnvp_authoritarian_strength > Q.dnvp_agrarian_strength && Q.dnvp_authoritarian_strength > Q.dnvp_volkskonservativ_strength && Q.dnvp_authoritarian_strength > Q.dnvp_christian_social_strength) {
+        return false;
+    } else if (Q.dnvp_agrarian_strength > Q.dnvp_authoritarian_strength && Q.dnvp_agrarian_strength > Q.dnvp_christian_social_strength && Q.dnvp_agrarian_strength > Q.dnvp_volkskonservativ_strength) {
+       return false;
+    } else if (Q.dnvp_christian_social_strength > Q.dnvp_authoritarian_strength && Q.dnvp_christian_social_strength > Q.dnvp_volkskonservativ_strength && Q.dnvp_christian_social_strength > Q.dnvp_agrarian_strength) {
+        return false;
+    } else if (Q.dnvp_volkskonservativ_strength > Q.dnvp_agrarian_strength && Q.dnvp_volkskonservativ_strength > Q.dnvp_authoritarian_strength && Q.dnvp_volkskonservativ_strength > Q.dnvp_christian_social_strength) {
+        return true;
+    } else {
+        return false;
+    }
+!}
+
+Hermann Ullmann publishes a series of essays attacking the libertine Weimar culture. The loose morals surrounding the perception of Berlin and Weimar as a whole are framed as symptoms of Kulturmanchestertum that must be replaced with a return to religion and family.

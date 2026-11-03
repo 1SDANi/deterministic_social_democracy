@@ -2,7 +2,6 @@ title: Campaigning
 new-page: true
 view-if: not rubicon or campaigning_timer <= 0
 on-arrival: month_actions += 1; campaigning_timer += 2 if rubicon
-max-visits: 36
 is-card: true
 card-image: img/flags.jpg
 frequency: 100
@@ -17,6 +16,7 @@ Whether or not we are in an electoral campaign, the party is always trying to br
 - @old_middle: The "old middle class" of small independent businessmen and artisans.
 - @rural: Rural workers and small farmers, who have felt neglected by us in the past.
 - @unemployed: The unemployed.
+- @bdf: We can sponsor *Bund Deutscher Frauenvereine* for an extensive campaign among women.
 - @catholics: Catholics, who typically support the [? if z_party_name != "CVP": <span style="color: #000000;">Center Party</span>?][? if z_party_name == "CVP": <span style="color: #000000;">**CVP**</span>?].
 - @root: We either don't want to or cannot campaign right now.
 - @cancel_advisor_action
@@ -26,9 +26,9 @@ Whether or not we are in an electoral campaign, the party is always trying to br
 subtitle: -1 resources
 choose-if: resources >= 1
 unavailable-subtitle: Not enough resources.
-on-arrival: workers_spd += 6*(1-dissent); workers_spd -= 1 if unemployed >= 20; workers_spd -= 1 if unemployed >= 30; workers_spd += 3*(1-dissent) if wtb_adopted = 1; resources -= 1; workers_spd += 3*(1-dissent) if nationalization_progress >= 1;
+on-arrival: workers_spd += 6*(1-dissent); workers_spd -= 1 if effective_unemployed >= 20; workers_spd -= 1 if effective_unemployed >= 30; workers_spd += 3*(1-dissent) if wtb_adopted = 1; resources -= 1; workers_spd += 3*(1-dissent) if nationalization_progress >= 1;
 
-We have increased our campaigning among the workers. [? if unemployed >= 15: The high levels of unemployment make our campaign more difficult. ?][? if wtb_adopted = 1 : Adopting the WTB plan gives us a new rallying point around which to attract workers. ?]
+We have increased our campaigning among the workers. [? if effective_unemployed >= 15: The high levels of unemployment make our campaign more difficult. ?][? if wtb_adopted = 1 : Adopting the WTB plan gives us a new rallying point around which to attract workers. ?]
 
 @new_middle
 subtitle: -1 resources
@@ -36,7 +36,7 @@ choose-if: resources >= 1
 unavailable-subtitle: Not enough resources.
 on-arrival: new_middle_spd += 6*(1-dissent); new_middle_spd -= 4 if socialism <= 49 and peoples_party == 0; resources -= 1; peoples_party_support += 1;
 
-We have increased our campaigning among the new middle class. [? if socialism <= 49 and peoples_party == 0: The popular antipathy towards <span style="color: #c00000;">socialism</span> among this group makes our campaign more difficult. ?] [? if peoples_party > 0: As a people's party, we have an easier time increasing support among the middle class than before. ?]
+We have increased our campaigning among the new middle class. [? if socialism <= 49 and peoples_party == 0: The popular antipathy towards <span style="color: #c00000;">socialism</span> among this group makes our campaign more difficult. ?] [? if peoples_party > 0: As a people's party, we have an easier time increasing support among the middle class than before. ?] [? if new_middle_conscious == 1: As we have awakened the class consciousness of the new middle class, we have an easier time increasing support amongst them. ?]
 
 @old_middle
 subtitle: -1 resources
@@ -50,17 +50,27 @@ We have increased our campaigning among the old middle class. [? if nationalism 
 subtitle: -1 resources
 choose-if: resources >= 1
 unavailable-subtitle: Not enough resources.
-on-arrival: rural_spd += 5*(1-dissent); rural_spd -= 3*(1-dissent) if peoples_party == 0; resources -= 1; peoples_party_support += 1; rural_spd += 3*(1-dissent) if rural_policy >= 2
+on-arrival: rural_spd += 5*(1-dissent); rural_spd -= 3*(1-dissent) if peoples_party == 0 and rural_conscious == 0; resources -= 1; peoples_party_support += 1; rural_spd += 3*(1-dissent) if rural_policy >= 2 or rural_conscious == 1
 
-We have increased our campaigning among farmers. [? if peoples_party == 0: We have not historically campaigned much among the farmers, and they do not trust us. ?][? if peoples_party > 0: As a people's party, we have an easier time increasing support among farmers than before. ?][? if rural_policy >= 2 : Our rural policies have made it easier for us to build support among farmers. ?]
+We have increased our campaigning among farmers. [? if peoples_party == 0: We have not historically campaigned much among the farmers, and they do not trust us. ?][? if peoples_party > 0: As a people's party, we have an easier time increasing support among farmers than before. ?][? if rural_policy >= 2 : Our rural policies have made it easier for us to build support among farmers. ?][? if rural_conscious == 1: As we have awakened the class consciousness of the peasantry and the rural working class, we have an easier time increasing support amongst them. ?]
+
 
 @unemployed
 subtitle: -1 resources
 choose-if: resources >= 1
 unavailable-subtitle: Not enough resources.
-on-arrival: unemployed_spd += 6*(1-dissent); resources -= 1; unemployed_spd -= 3 if welfare < 0; unemployed_spd -= 2 if unemployed >= 30; unemployed_spd += 6*(1-dissent) if wtb_adopted = 1; unemployed_spd += 3*(1-dissent) if welfare >= 2;
+on-arrival: unemployed_spd += 6*(1-dissent); resources -= 1; unemployed_spd -= 3 if welfare < 0; unemployed_spd -= 2 if effective_unemployed >= 30; unemployed_spd += 6*(1-dissent) if wtb_adopted = 1; unemployed_spd += 3*(1-dissent) if welfare >= 2;
 
 We have increased our campaigning among the unemployed. [? if welfare < 0: The welfare cuts and resultant poverty make our campaign more difficult, since we are associated with the government that enacted these cuts, and our campaign may even backfire. ?][? if wtb_adopted = 1 : Adopting the WTB plan gives us a new rallying point around which to attract support from the unemployed. ?]
+
+@bdf
+view-if: bdf_cooperation
+subtitle: -1 resources.
+choose-if: resources >= 1
+unavailable-subtitle: Not enough resources.
+on-arrival: resources -= 1; workers_spd += 4*(1-dissent); new_middle_spd += 4*(1-dissent); old_middle_spd += 3*(1-dissent); rural_spd += 3*(1-dissent); unemployed_spd += 3*(1-dissent); catholics_spd += 1*(1-dissent);
+
+We have coordinated with BDF to campaign among women across all classes.
 
 @catholics
 subtitle: -1 resources

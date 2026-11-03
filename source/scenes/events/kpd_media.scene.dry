@@ -4,14 +4,16 @@ new-page: true
 @media
 title: Media
 view-if: {!
-    if (Q.kpd_rally_timer <= 0) {
+    if (Q.kpd_rally_post_timer > 0) {
         return false;
-    } else if (Q.labor_minister_party == Q.kpd_name && Q.labor_affairs_post_timer == 0 && Q.strike_term_seen_post_timer == 0) {
+    } else if (Q.labor_minister_party == "KPD" && Q.labor_affairs_post_timer > 0 && Q.strike_term_seen_post_timer > 0) {
         return false;
-    } else if (Q.kpd_media_timer > 0) {
+    } else if (Q.kpd_enemies_post_timer > 0) {
         return false;
-    } else {
+    } else if (Q.kpd_media_post_timer > 0) {
         return true;
+    } else {
+        return false;
     }
 !}
 

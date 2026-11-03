@@ -161,6 +161,10 @@ window.support_labor_spd_action = function() {
 
     Q.workers_spd += 6*(1-Q.dissent);
 
+    if (Q.new_middle_conscious) {
+        Q.new_middle_spd += 5*(1-dissent)
+    }
+
     Q.dvp_relation -= 4;
     Q.ddp_relation -= 2;
 
@@ -182,6 +186,10 @@ window.support_labor_spd_reaction = function() {
     Q.left_dissent -= 3;
 
     Q.workers_spd += 3*(1-Q.dissent);
+
+    if (Q.new_middle_conscious) {
+        Q.new_middle_spd += 2*(1-dissent)
+    }
 
     Q.dvp_relation -= 2;
     Q.ddp_relation -= 1;

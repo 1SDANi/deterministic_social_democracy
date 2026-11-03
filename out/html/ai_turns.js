@@ -48,6 +48,10 @@ window.kpd_turn = function() {
         window.support_labor();
     } else if (Q.kpd_rally_timer <= 0) {
         window.kpd_rally();
+    } else if (Q.kpd_enemies_timer <= 0) {
+        window.kpd_enemies();
+    } else if (Q.kpd_media_timer <= 0) {
+        window.kpd_media();
     }
 };
 
@@ -67,6 +71,10 @@ window.ddp_turn = function() {
         }
     } else if (Q.ddp_rally_timer <= 0) {
         window.ddp_rally();
+    } else if (Q.ddp_enemies_timer <= 0) {
+        window.ddp_enemies();
+    } else if (Q.ddp_media_timer <= 0) {
+        window.ddp_media();
     }
 };
 
@@ -82,8 +90,12 @@ window.z_turn = function() {
         } else if (Q.z_leader == "Bracht" || Q.z_leader == "Kaas" || Q.z_leader == "Brüning") {
             window.support_employers();
         }
-    }  else if (Q.z_rally_timer <= 0) {
+    } else if (Q.z_rally_timer <= 0) {
         window.z_rally();
+    } else if (Q.z_enemies_timer <= 0) {
+        window.z_enemies();
+    } else if (Q.z_media_timer <= 0) {
+        window.z_media();
     }
 }
 
@@ -99,6 +111,10 @@ window.dvp_turn = function() {
         }
     } else if (Q.dvp_rally_timer <= 0) {
         window.dvp_rally();
+    } else if (Q.dvp_enemies_timer <= 0) {
+        window.dvp_enemies();
+    } else if (Q.dvp_media_timer <= 0) {
+        window.dvp_media();
     }
 }
 
@@ -114,5 +130,9 @@ window.dnvp_turn = function() {
         }
     } else if (Q.dnvp_rally_timer <= 0) {
         window.dnvp_rally();
+    } else if (Q.dnvp_enemies_timer <= 0) {
+        window.dnvp_enemies();
+    } else if (Q.dnvp_media_timer <= 0) {
+        window.dnvp_media();
     }
 }

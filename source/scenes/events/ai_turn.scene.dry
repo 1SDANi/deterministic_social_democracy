@@ -25,6 +25,8 @@ view-if: true
 
 - @kpd_rally.rally
 - @kpd_rally.sa_disrupt
+- @kpd_media.media
+- @kpd_enemies.enemies
 - @ai_turn_kpd.labor_affairs
 
 @ddp
@@ -33,6 +35,8 @@ view-if: not lvp_formed
 
 - @ddp_rally.rally
 - @ddp_rally.sa_disrupt
+- @ddp_media.media
+- @ddp_enemies.enemies
 - @ai_turn_ddp.labor_affairs
 
 @z
@@ -41,6 +45,8 @@ view-if: not cvp_formed
 
 - @z_rally.rally
 - @z_rally.sa_disrupt
+- @z_media.media
+- @z_enemies.enemies
 - @ai_turn_z.labor_affairs
 
 @dvp
@@ -49,6 +55,8 @@ view-if: not (lvp_formed or cvp_dvp_formed)
 
 - @dvp_rally.rally
 - @dvp_rally.sa_disrupt
+- @dvp_media.media
+- @dvp_enemies.enemies
 - @ai_turn_dvp.labor_affairs
 
 @dnvp
@@ -57,6 +65,8 @@ view-if: not (cvp_formed or dnf_formed)
 
 - @dnvp_rally.rally
 - @dnvp_rally.rfb_disrupt
+- @dnvp_media.media
+- @dnvp_enemies.enemies
 - @ai_turn_dnvp.labor_affairs
 
 @skip

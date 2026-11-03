@@ -3,10 +3,13 @@ window.ddp_media = function() {
 
     console.log('ddp media');
 
-    var heuss = ddp_regionalist_strength + ddp_business_strength > ddp_labor_strength + ddp_liberal_strength;
-    var quide = (ddp_labor_strength + ddp_liberal_strength > ddp_regionalist_strength + ddp_business_strength) && !(ddp_labor_strength > ddp_regionalist_strength + ddp_business_strength + ddp_liberal_strength);
-    var baumer = ddp_liberal_strength + ddp_regionalist_strength > ddp_business_strength + ddp_labor_strength;
-    var erkelenz = ddp_labor_strength > ddp_regionalist_strength + ddp_business_strength + ddp_liberal_strength;
+    Q.ddp_media_timer += 6;
+    Q.ddp_media_post_timer = 1;
+
+    var heuss = Q.ddp_regionalist_strength + Q.ddp_business_strength > Q.ddp_labor_strength + Q.ddp_liberal_strength;
+    var quide = (Q.ddp_labor_strength + Q.ddp_liberal_strength > Q.ddp_regionalist_strength + Q.ddp_business_strength) && !(Q.ddp_labor_strength > Q.ddp_regionalist_strength + Q.ddp_business_strength + Q.ddp_liberal_strength);
+    var baumer = Q.ddp_liberal_strength + Q.ddp_regionalist_strength > Q.ddp_business_strength + Q.ddp_labor_strength;
+    var erkelenz = Q.ddp_labor_strength > Q.ddp_regionalist_strength + Q.ddp_business_strength + Q.ddp_liberal_strength;
 
     if (Q.ddp_dissent > 0.2) {
         window.ddp_media_debate();
@@ -32,7 +35,7 @@ window.ddp_media = function() {
         window.ddp_media_diehilfe();
     } else if (!Q.ddp_newspaper_founded && (quide || erkelenz) && Q.ddp_resources >= 1) {
         window.ddp_media_echoderjungedemokratie();
-    } else if (!Q.ddp_newspaper_founded && (Bsumer || Erkelenz) && Q.ddp_resources >= 1) {
+    } else if (!Q.ddp_newspaper_founded && (baumer || erkelenz) && Q.ddp_resources >= 1) {
         window.ddp_media_berlinertagblad();
     } else if (Q.ddp_resources >= 1 || ddp_newspaper >= 3) {
         window.ddp_media_bolsterpartymedia();

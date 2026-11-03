@@ -11,7 +11,7 @@ go-to: start_menu_2
 @start_menu_2
 
 - @start_1: Start game
-- @modinfo: Mod Info - Last Updated 2026/05/24
+- @modinfo: Mod Info - Last Updated 2026/08/04
 - @credits: Credits
 - @game_over.achievements
 
@@ -24,7 +24,7 @@ go-to: start if achievement_game_completed; pls_player if not achievement_game_c
 
 Read.
 
-- @modinfo.infotext: Mod Info - Last Updated 2026/01/25
+- @modinfo.infotext: Mod Info - Last Updated 2026/08/04
 
 
 @start
@@ -265,6 +265,10 @@ Q.neorevisionism = 0;
 
 Q.social_patriot = 0;
 
+// class consciousness - have the new middle class become conscious? have the peasants and rural workers become conscious?
+Q.new_middle_conscious = 0;
+Q.rural_conscious = 0;
+
 // crisis_urgency indicates how seriously the SPD is taking the economic crisis - scale from 0 to 10.
 Q.crisis_urgency = 0;
 Q.ddp_crisis_urgency = 0;
@@ -403,6 +407,8 @@ Q.kvp_dnvp_relation = 0;
 Q.dnvp_kpd_relation = 0;
 Q.dnvp_nsdap_relation = 35;
 
+Q.nsdap_kpd_relation = 0;
+
 Q.kpd_leader = "Thälmann";
 Q.z_leader = "Marx";
 Q.z_ideology = "Right";
@@ -517,6 +523,10 @@ Q.rural = 25; // agriculture and forestry employment... but many of those are pr
 // source: https://surface.syr.edu/cgi/viewcontent.cgi?filename=3&article=1016&context=books&type=additional page 43, table 3.3
 Q.unemployed = 8.6;
 Q.catholics = 30;
+// the amount of unemployment each point of workers_aid can absorb
+Q.workers_aid_support = 1;
+Q.workers_aid = 1;
+Q.effective_unemployed = 7.6;
 
 // unemployment: 1929 - 13.3, 1930 - 22.7, 1931 - 34.3, 1932 - 43.8 (same source as above)
 
@@ -847,6 +857,8 @@ Q.in_grand_coalition = 0;
 Q.in_popular_front = 0;
 // left coalition = SPD + KPD + left-splinters
 Q.in_left_front = 0;
+// high school reuinion = SPD + SAPD
+Q.sapd_toleration = 0;
 // emergency government containing the SPD: only president Braun can do this.
 Q.in_emergency_government = 0;
 Q.in_spd_majority = 0;
@@ -863,6 +875,7 @@ Q.in_weimar_coalition_prussia = 1;
 Q.in_grand_coalition_prussia = 0;
 Q.in_popular_front_prussia = 0;
 Q.in_left_front_prussia = 0;
+Q.sapd_toleration_prussia = 0;
 Q.in_spd_majority_prussia = 0;
 Q.in_center_right_coalition_prussia = 0;
 Q.in_minority_weimar_coalition_prussia = 0;
@@ -1002,9 +1015,11 @@ Q.timers = ['advisor_action', 'confronting_nazis', 'crisis_program',
     'fundraising', 'ideology',
     'inter_party_relationships', 'international_relations',
     'iron_front',
-    'media', 'kpd_media', 'ddp_media',
-    'kpd_media_post', 'ddp_media_post',
-    'enemies', 'party_organizations',
+    'media', 'kpd_media', 'ddp_media', 'dvp_media', 'dnvp_media',
+    'kpd_media_post', 'ddp_media_post', 'dvp_media_post', 'dnvp_media_post',
+    'enemies', 'kpd_enemies', 'ddp_enemies', 'z_enemies', 'dvp_enemies', 'dnvp_enemies',
+    'kpd_enemies_post', 'ddp_enemies_post', 'z_enemies_post', 'dvp_enemies_post', 'dnvp_enemies_post',
+    'party_organizations',
     'rally', 'kpd_rally', 'ddp_rally', 'z_rally', 'dvp_rally', 'dnvp_rally',
     'kpd_rally_post', 'ddp_rally_post', 'z_rally_post', 'dvp_rally_post', 'dnvp_rally_post',
     'reichsbanner',
@@ -1033,8 +1048,8 @@ Q.rubicon_timers = ['advisor_action', 'confronting_nazis', 'crisis_program',
     'fundraising', 'ideology',
     'inter_party_relationships', 'international_relations',
     'iron_front',
-    'media', 'kpd_media', 'ddp_media',
-     'kpd_media_post', 'ddp_media_post',
+    'media', 'kpd_media', 'ddp_media', 'dvp_media',
+     'kpd_media_post', 'ddp_media_post', 'dvp_media_post',
     'enemies',
     'party_organizations', 'rally', 'kpd_rally', 'ddp_rally', 'z_rally', 'dvp_rally', 'dnvp_rally',
     'kpd_rally_post', 'ddp_rally_post', 'z_rally_post', 'dvp_rally_post', 'dnvp_rally_post',
@@ -1073,8 +1088,22 @@ Q.kpd_media_timer = 0;
 Q.kpd_media_post_timer = 0;
 Q.ddp_media_timer = 0;
 Q.ddp_media_post_timer = 0;
+Q.dvp_media_timer = 0;
+Q.dvp_media_post_timer = 0;
+Q.dnvp_media_timer = 0;
+Q.dnvp_media_post_timer = 0;
 Q.media_timer = 0;
 Q.enemies_timer = 0;
+Q.kpd_enemies_timer = 0;
+Q.kpd_enemies_post_timer = 0;
+Q.ddp_enemies_timer = 0;
+Q.ddp_enemies_post_timer = 0;
+Q.z_enemies_timer = 0;
+Q.z_enemies_post_timer = 0;
+Q.dvp_enemies_timer = 0;
+Q.dvp_enemies_post_timer = 0;
+Q.dnvp_enemies_timer = 0;
+Q.dnvp_enemies_post_timer = 0;
 Q.party_organizations_timer = 0;
 Q.rally_timer = 0;
 Q.kpd_rally_timer = 0;
@@ -1087,6 +1116,8 @@ Q.dvp_rally_timer = 0;
 Q.dvp_rally_post_timer = 0;
 Q.dnvp_rally_timer = 0;
 Q.dnvp_rally_post_timer = 0;
+Q.kpd_enemies_timer = 0;
+Q.kpd_enemies_post_timer = 0;
 Q.reichsbanner_timer = 0;
 Q.shuffle_leadership_timer = 0;
 Q.streetfighting_timer = 0;
@@ -1260,6 +1291,7 @@ Q.bruning_coalition_dissent = 0;
 Q.dnvp_angry = 0;
 Q.dvp_exist = 1;
 Q.reichsbanner_unpopularity_time = 0;
+Q.workers_aid_unpopularity_time = 0;
 Q.wtb_points = 0;
 Q.hindenburg_grr_time = 0;
 Q.hindenburg_angry_pause_time = 0;
@@ -1805,18 +1837,18 @@ for (var party of Q.parties) {
 
         if (Q.dsu_exist && !Q.nvf_exist) {
             Q.dsu_support = Q.workers_nsdap*Q.workers*((120 - Q.sa_force) / 100);
-            Q.dsu_support += Q.unemployed_nsdap*Q.unemployed*((80 - Q.sa_force) / 100);
+            Q.dsu_support += Q.unemployed_nsdap*Q.effective_unemployed*((80 - Q.sa_force) / 100);
             Q.dsu_support += Q.new_middle_nsdap*Q.new_middle;
         } else if (!Q.dsu_exist && Q.nvf_exist) {
-            Q.nvf_support = Q.unemployed_nsdap*Q.unemployed*((120 - Q.sa_force) / 100);
+            Q.nvf_support = Q.unemployed_nsdap*Q.effective_unemployed*((120 - Q.sa_force) / 100);
             Q.nvf_support += Q.workers_nsdap*Q.workers*((Q.sa_force - 80) / 100);
             Q.nvf_support += Q.new_middle_nsdap*Q.new_middle;
         } else if (Q.dsu_exist && Q.nvf_exist) {
             Q.dsu_support = Q.workers_nsdap*Q.workers*((120 - Q.sa_force) / 100);
-            Q.dsu_support += Q.unemployed_nsdap*Q.unemployed*((80 - Q.sa_force) / 100);
+            Q.dsu_support += Q.unemployed_nsdap*Q.effective_unemployed*((80 - Q.sa_force) / 100);
             Q.dsu_support += Q.new_middle_nsdap*Q.new_middle;
 
-            Q.nvf_support = Q.unemployed_nsdap*Q.unemployed*((120 - Q.sa_force) / 100);
+            Q.nvf_support = Q.unemployed_nsdap*Q.effective_unemployed*((120 - Q.sa_force) / 100);
             Q.nvf_support += Q.workers_nsdap*Q.workers*((Q.sa_force - 80) / 100);
         } else {
             Q.nsdap_hitler_support += Q.workers_nsdap*Q.workers;
@@ -1887,18 +1919,18 @@ for (var party of Q.parties) {
 
         if (Q.dsu_exist && !Q.nvf_exist) {
             Q.dsu_support = Q.workers_nsdap*Q.workers*((120 - Q.sa_force) / 100);
-            Q.dsu_support += Q.unemployed_nsdap*Q.unemployed*((80 - Q.sa_force) / 100);
+            Q.dsu_support += Q.unemployed_nsdap*Q.effective_unemployed*((80 - Q.sa_force) / 100);
             Q.dsu_support += Q.new_middle_nsdap*Q.new_middle;
         } else if (!Q.dsu_exist && Q.nvf_exist) {
-            Q.nvf_support = Q.unemployed_nsdap*Q.unemployed*((120 - Q.sa_force) / 100);
+            Q.nvf_support = Q.unemployed_nsdap*Q.effective_unemployed*((120 - Q.sa_force) / 100);
             Q.nvf_support += Q.workers_nsdap*Q.workers*((Q.sa_force - 80) / 100);
             Q.nvf_support += Q.new_middle_nsdap*Q.new_middle;
         } else if (Q.dsu_exist && Q.nvf_exist) {
             Q.dsu_support = Q.workers_nsdap*Q.workers*((120 - Q.sa_force) / 100);
-            Q.dsu_support += Q.unemployed_nsdap*Q.unemployed*((80 - Q.sa_force) / 100);
+            Q.dsu_support += Q.unemployed_nsdap*Q.effective_unemployed*((80 - Q.sa_force) / 100);
             Q.dsu_support += Q.new_middle_nsdap*Q.new_middle;
 
-            Q.nvf_support = Q.unemployed_nsdap*Q.unemployed*((120 - Q.sa_force) / 100);
+            Q.nvf_support = Q.unemployed_nsdap*Q.effective_unemployed*((120 - Q.sa_force) / 100);
             Q.nvf_support += Q.workers_nsdap*Q.workers*((Q.sa_force - 80) / 100);
         } else {
             Q.nsdap_hitler_support += Q.workers_nsdap*Q.workers;
@@ -1964,18 +1996,18 @@ for (var party of Q.parties) {
 
         if (Q.dsu_exist && !Q.nvf_exist) {
             Q.dsu_support = Q.workers_nsdap*Q.workers*((120 - Q.sa_force) / 100);
-            Q.dsu_support += Q.unemployed_nsdap*Q.unemployed*((80 - Q.sa_force) / 100);
+            Q.dsu_support += Q.unemployed_nsdap*Q.effective_unemployed*((80 - Q.sa_force) / 100);
             Q.dsu_support += Q.new_middle_nsdap*Q.new_middle;
         } else if (!Q.dsu_exist && Q.nvf_exist) {
-            Q.nvf_support = Q.unemployed_nsdap*Q.unemployed*((120 - Q.sa_force) / 100);
+            Q.nvf_support = Q.unemployed_nsdap*Q.effective_unemployed*((120 - Q.sa_force) / 100);
             Q.nvf_support += Q.workers_nsdap*Q.workers*((Q.sa_force - 80) / 100);
             Q.nvf_support += Q.new_middle_nsdap*Q.new_middle;
         } else if (Q.dsu_exist && Q.nvf_exist) {
             Q.dsu_support = Q.workers_nsdap*Q.workers*((120 - Q.sa_force) / 100);
-            Q.dsu_support += Q.unemployed_nsdap*Q.unemployed*((80 - Q.sa_force) / 100);
+            Q.dsu_support += Q.unemployed_nsdap*Q.effective_unemployed*((80 - Q.sa_force) / 100);
             Q.dsu_support += Q.new_middle_nsdap*Q.new_middle;
 
-            Q.nvf_support = Q.unemployed_nsdap*Q.unemployed*((120 - Q.sa_force) / 100);
+            Q.nvf_support = Q.unemployed_nsdap*Q.effective_unemployed*((120 - Q.sa_force) / 100);
             Q.nvf_support += Q.workers_nsdap*Q.workers*((Q.sa_force - 80) / 100);
         } else {
             Q.nsdap_hitler_support += Q.workers_nsdap*Q.workers;

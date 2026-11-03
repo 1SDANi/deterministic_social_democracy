@@ -1,0 +1,188 @@
+title: DVP Media
+new-page: true
+
+# Ripped from WilhelmVon500's amazing Volkspartei mod
+
+@media
+title: Media
+view-if: {!
+    if (Q.dvp_rally_post_timer > 0) {
+        return false;
+    } else if (Q.labor_minister_party == "DVP" && Q.labor_affairs_post_timer > 0 && Q.strike_term_seen_post_timer > 0) {
+        return false;
+    } else if (Q.dvp_enemies_post_timer > 0) {
+        return false;
+    } else if (Q.dvp_media_post_timer > 0) {
+        return true;
+    } else {
+        return false;
+    }
+!}
+
+The DVP has the fewest supportive newspapers of any political party. This has been a significant weakness for them, and they are seeking to remedy this situation.
+
+- @campaign
+- @write_editorials
+- @newspaper
+- @newspaper_2
+- @newspaper_3
+- @radio
+- @radio_2
+- @radio_3
+
+@campaign
+title: The DVP will coordinate their campaign with supportive newspapers.
+view-if: {!
+    if (Q.dvp_dissent > 0.2) {
+        return false;
+    } else if (Q.dvp_newspaper == 0 && Q.dvp_resources >= 3) {
+        return false;
+    } else if (Q.dvp_newspaper > 0 && Q.dvp_newspaper <= 3 && Q.dvp_resources >= 1) {
+        return false;
+    } else if (Q.dvp_newspaper > 3 && Q.dvp_radio == 0 && Q.dvp_resources >= 5) {
+        return false;
+    } else if (Q.dvp_radio > 0 && Q.dvp_radio > 0 && Q.dvp_radio <= 3 && dvp_resources >= 2) {
+        return false;
+    } else if (Q.dvp_radio > 3) {
+        return false;
+    } else if  (Q.dvp_newspaper > 3) {
+        return false;
+    } else {
+        return true;
+    }
+!}
+
+The DVP's campaign media is mostly reaching the middle class who are already saturated with rightist propaganda, but it must be doing *something*, or at least that is what they hope.
+
+@write_editorials
+title: The DVP will have leading party figures write editorials in non-partisan newspapers.
+view-if: {!
+    if (Q.dvp_dissent > 0.2) {
+        return true;
+    } else {
+        return false;
+    }
+!}
+
+This is not particularly effective in drawing voters, but the ability of their factions to debate over print may reduce internal dissent.
+
+@newspaper
+title: The DVP will launch their own newspaper, run by the party.
+subtitle: -3 resources
+view-if: {!
+    if (Q.dvp_dissent > 0.2) {
+        return false;
+    } else if (Q.dvp_newspaper == 0 && Q.dvp_resources >= 3) {
+        return true;
+    } else {
+        return false;
+    }
+!}
+
+The DVP has launched their own newspaper is extremely expensive, but effective in garnering support, especially among the middle class.
+
+@newspaper_2
+title: The DVP will continue building up their newspaper.
+subtitle: -1 resources
+view-if: {!
+    if (Q.dvp_dissent > 0.2) {
+        return false;
+    } else if (Q.dvp_newspaper == 0 && Q.dvp_resources >= 3) {
+        return false;
+    } else if (Q.dvp_newspaper > 0 && Q.dvp_newspaper <= 3 && Q.dvp_resources >= 1) {
+        return true;
+    } else {
+        return false;
+    }
+!}
+
+The paper continues to draw support for the DVP, especially among the middle class.
+
+@newspaper_3
+title: The DVP will continue building up their newspaper.
+subtitle: It is now financially self-sufficient, and does not require any more resources.
+view-if: {!
+    if (Q.dvp_dissent > 0.2) {
+        return false;
+    } else if (Q.dvp_newspaper == 0 && Q.dvp_resources >= 3) {
+        return false;
+    } else if (Q.dvp_newspaper > 0 && Q.dvp_newspaper <= 3 && Q.dvp_resources >= 1) {
+        return false;
+    } else if (Q.dvp_newspaper > 3 && Q.dvp_radio == 0 && Q.dvp_resources >= 5) {
+        return false;
+    } else if (Q.dvp_radio > 0 && Q.dvp_radio > 0 && Q.dvp_radio <= 3 && dvp_resources >= 2) {
+        return false;
+    } else if (Q.dvp_radio > 3) {
+        return false;
+    } else if  (Q.dvp_newspaper > 3) {
+        return true;
+    } else {
+        return false;
+    }
+!}
+
+The paper continues to draw support for the DVP, especially among the middle class.
+
+
+@radio
+title: The DVP will fund a radio station
+subtitle: -5 resources
+view-if: {!
+    if (Q.dvp_dissent > 0.2) {
+        return false;
+    } else if (Q.dvp_newspaper == 0 && Q.dvp_resources >= 3) {
+        return false;
+    } else if (Q.dvp_newspaper > 0 && Q.dvp_newspaper <= 3 && Q.dvp_resources >= 1) {
+        return false;
+    } else if (Q.dvp_newspaper > 3 && Q.dvp_radio == 0 && Q.dvp_resources >= 5) {
+        return true;
+    } else {
+        return false;
+    }
+!}
+
+Their new radio station allows the DVP to connect to people in a more intimate setting than before, spreading the message of their party along with music and other popular content.
+
+@radio_2
+title: The DVP will continue building up their radio network.
+subtitle: -2 resources
+view-if: {!
+    if (Q.dvp_dissent > 0.2) {
+        return false;
+    } else if (Q.dvp_newspaper == 0 && Q.dvp_resources >= 3) {
+        return false;
+    } else if (Q.dvp_newspaper > 0 && Q.dvp_newspaper <= 3 && Q.dvp_resources >= 1) {
+        return false;
+    } else if (Q.dvp_newspaper > 3 && Q.dvp_radio == 0 && Q.dvp_resources >= 5) {
+        return false;
+    } else if (Q.dvp_radio > 0 && Q.dvp_radio > 0 && Q.dvp_radio <= 3 && dvp_resources >= 2) {
+        return true;
+    } else {
+        return false;
+    }
+!}
+
+The DVP's new radio network has a mix of popular and political programming, and is proving a success.
+
+@radio_3
+title: The DVP will continue building up their radio network.
+subtitle: It is now financially self-sufficient, and does not require any more resources.
+view-if: {!
+    if (Q.dvp_dissent > 0.2) {
+        return false;
+    } else if (Q.dvp_newspaper == 0 && Q.dvp_resources >= 3) {
+        return false;
+    } else if (Q.dvp_newspaper > 0 && Q.dvp_newspaper <= 3 && Q.dvp_resources >= 1) {
+        return false;
+    } else if (Q.dvp_newspaper > 3 && Q.dvp_radio == 0 && Q.dvp_resources >= 5) {
+        return false;
+    } else if (Q.dvp_radio > 0 && Q.dvp_radio > 0 && Q.dvp_radio <= 3 && dvp_resources >= 2) {
+        return false;
+    } else if (Q.dvp_radio > 3) {
+        return true;
+    } else {
+        return false;
+    }
+!}
+
+The DVP's radio network has become a successful tool for spreading their message.

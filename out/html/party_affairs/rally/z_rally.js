@@ -2,7 +2,8 @@ window.z_rally = function() {
     const Q = window.dendryUI?.dendryEngine?.state?.qualities;
 
     console.log('z_rally');
-    if ((Q.year == 1928 && Q.month == 1) || (Q.next_election_time - Q.time <= 6)) {
+    
+    if ((Q.year == 1928 && (Q.month - 1) == 1) || (Q.next_election_time - (Q.time - 1) <= 6)) {
         Q.z_rally_timer = 2;
         Q.z_rally_post_timer = 1;
     } else {
@@ -98,22 +99,22 @@ window.z_rally_catholic = function() {
     const Q = window.dendryUI?.dendryEngine?.state?.qualities;
 
     console.log('z_rally_catholic');
-    Q.catholics_z += 1*(1-Q.dissent);
+    Q.catholics_z += 1*(1-Q.z_dissent);
 
     if (Q.prussian_concordat_progress) {
-        Q.catholics_z += 1*(1-Q.dissent);
+        Q.catholics_z += 1*(1-Q.z_dissent);
     }
 
     if (Q.prussian_concordat) {
-        Q.catholics_z += 2*(1-Q.dissent);
+        Q.catholics_z += 2*(1-Q.z_dissent);
     }
 
     if (Q.reichskonkordat_progress) {
-        Q.catholics_z += 2*(1-Q.dissent);
+        Q.catholics_z += 2*(1-Q.z_dissent);
     }
 
     if (Q.reichskonkordat) {
-        Q.catholics_z += 2*(1-Q.dissent);
+        Q.catholics_z += 2*(1-Q.z_dissent);
     }
     
     Q.z_conservative_strength += 3;

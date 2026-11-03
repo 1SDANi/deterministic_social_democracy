@@ -6,7 +6,7 @@ new-page: true
 @rally
 title: Rally
 view-if: {!
-    if (Q.labor_minister_party == "DNVP" && Q.labor_affairs_post_timer == 0 && Q.strike_term_seen_post_timer == 0) {
+    if (Q.labor_minister_party == "DNVP" && Q.labor_affairs_post_timer > 0 && Q.strike_term_seen_post_timer > 0) {
         return false;
     } else if (Q.rfb_force > 25 && !Q.rfb_banned && !Q.return_to_normalcy) {
         return false;
@@ -29,7 +29,7 @@ The DNVP will hold a rally
 @rfb_disrupt
 title: The Communist RFB has disrupted the DNVP rally!
 view-if: {!
-    if (Q.labor_minister_party == "DNVP" && Q.labor_affairs_timer == 0 && Q.strike_term_seen == 0) {
+    if (Q.labor_minister_party == "DNVP" && Q.labor_affairs_timer > 0 && Q.strike_term_seen > 0) {
         return false;
     } else if (Q.rfb_force > 25 && !Q.rfb_banned && !Q.return_to_normalcy && Q.dnvp_rally_post_timer > 0) {
         return true;

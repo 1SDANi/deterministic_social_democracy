@@ -20,7 +20,7 @@ Many in our party are calling for urgent action. The "neorevisionist" faction, l
 
 
 @not_a_big_deal
-on-arrival: nazi_urgency -= 1; left_dissent += 5; neorevisionist_dissent += 15
+on-arrival: nazi_urgency -= 1; left_dissent += 5; neorevisionist_dissent += 15; kpd_nazi_urgency -= 1;
 view-if: mierendorff_advisor = 0 and leber_advisor = 0 and schumacher_advisor = 0
 
 The <span style="color: #7A3C00;">Nazis</span> are just another <span style="color: #7A3C00;">far</span>-<span style="color: #3E88B3;">right</span> movement that will die of its own contradictions sooner or later; we do not need to build a specific policy to combat them.
@@ -32,7 +32,7 @@ go-to: crisis_program
 
 @major_crisis
 view-if: nazi_urgency < 5
-on-arrival: nazi_urgency += 1; neorevisionist_dissent -= 5; neorevisionist_strength += 5
+on-arrival: nazi_urgency += 1; neorevisionist_dissent -= 5; neorevisionist_strength += 5; kpd_nazi_urgency += 1;
 
 The <span style="color: #7A3C00;">Nazis</span> are one of the foremost threats to the German republic. However, we are still formulating a strategy to confront them, and still trying to build up consensus within our party for action. Check back on this later.
 
@@ -66,19 +66,28 @@ What do the three arrows stand for?
 - @all: All of the above.
 
 @unity
+on-arrival: left_dissent -= 5; labor_dissent -= 5; center_dissent -= 5; reformist_dissent -= 5; neorevisionist_dissent -= 5
 go-to: if_end
 
 @anti
+on-arrival: z_relation += 3 if z_ideology == "Left"; z_relation -= 1 if z_ideology == "Right"; ddp_relation += 4 if ddp_ideology == "Left"; ddp_relation += 3 if ddp_ideology == "Moderate"; dvp_relation += 2 if dvp_ideology == "Left"; dvp_relation -= 1 if dvp_ideology == "Moderate"; dvp_relation -= 4 if dvp_ideology == "Right"; lvp_relation += 3 if lvp_ideology == "Left"; lvp_relation -= 3 if lvp_ideology == "Right"; kpd_relation -= 3; kpd_relation -= 2 if kpd_leader != "Conciliators"; kpd_nazi_urgency -= 2;
 go-to: if_end
 
 @orgs
+on-arrival: rb_strength += 100; rb_militancy += 0.02
 go-to: if_end
 
 @wtb
+on-arrival: workers_spd += 3*(1-dissent)/2; unemployed_spd += 3*(1-dissent)/2; rural_spd += 1*(1-dissent)/2; new_middle_spd += 1*(1-dissent)/2; old_middle_spd += 1*(1-dissent)/2; workers_spd += 3*(1-dissent)/2 if wtb_implemented; unemployed_spd += 3*(1-dissent)/2 if wtb_implemented; rural_spd += 2*(1-dissent)/2 if wtb_implemented; new_middle_spd += 2*(1-dissent)/2 if wtb_implemented; old_middle_spd += 2*(1-dissent)/2 if wtb_implemented; wtb_rally += 1
 view-if: wtb_adopted == 1
 go-to: if_end
 
 @all
+on-arrival: left_dissent -= 2; labor_dissent -= 2; center_dissent -= 2; reformist_dissent -= 2; neorevisionist_dissent -= 2; z_relation += 1 if z_ideology == "Left"; ddp_relation += 2 if ddp_ideology == "Left"; ddp_relation += 1 if ddp_ideology == "Moderate"; dvp_relation += 1 if dvp_ideology == "Left"; dvp_relation -= 1 if dvp_ideology == "Right"; lvp_relation += 1 if lvp_ideology == "Left"; lvp_relation -= 1 if lvp_ideology == "Right"; kpd_relation -= 2; kpd_relation -= 1 if kpd_leader != "Conciliators"; rb_strength += 50; rb_militancy += 0.01; kpd_nazi_urgency -= 1;
+go-to: if_end if not wtb_adopted; all_wtb if wtb_adopted
+
+@all_wtb
+on-arrival: workers_spd += 3*(1-dissent)/4; unemployed_spd += 3*(1-dissent)/4; rural_spd += 1*(1-dissent)/4; new_middle_spd += 1*(1-dissent)/4; old_middle_spd += 1*(1-dissent)/4; workers_spd += 3*(1-dissent)/4 if wtb_implemented; unemployed_spd += 3*(1-dissent)/4 if wtb_implemented; rural_spd += 2*(1-dissent)/4 if wtb_implemented; new_middle_spd += 2*(1-dissent)/4 if wtb_implemented; old_middle_spd += 2*(1-dissent)/4 if wtb_implemented
 go-to: if_end
 
 @if_end
